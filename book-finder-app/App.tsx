@@ -1,9 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
 import HomePage from "./src/book-finder/homepage";
 import Messages from "./src/book-finder/scenes/messages";
-import BookInformation from './src/book-finder/components/bookInformation';
-import NavBar from './src/book-finder/components/navBar';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
