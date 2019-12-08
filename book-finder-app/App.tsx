@@ -1,12 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import HomePage from "./src/book-finder/homepage";
+import Messages from "./src/book-finder/scenes/messages";
+import BookInformation from './src/book-finder/components/bookInformation';
+import NavBar from './src/book-finder/components/navBar';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+
+const MainNavigator = createStackNavigator({
+  Home: {screen: HomePage},
+  Messages: {screen: Messages},
+});
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
+
+/*
+export default class App extends React.Component {
+
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text>La mia prima App!</Text>
+        <Text> Test cambio pagina 3 </Text>
+        <BookInformation />
+        <BookInformation />
+        <Button 
+          title="Go to Homepage"
+          onPress={() => this.props.navigator()}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -17,3 +44,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+*/
