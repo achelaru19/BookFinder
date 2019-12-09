@@ -9,7 +9,7 @@ interface Props {
 
 export default class HomePage extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'BookFinder',
   };
   render() {
     const {navigate} = this.props.navigation;

@@ -9,14 +9,12 @@ interface Props {
 
 
 export default class Messages extends React.Component<Props> {
-  static navigationOptions = {
-    title: 'Messages',
-  };
   render() {
     const {navigate} = this.props.navigation;
     return (
         <View>
           <NavBar />
+          <Text>Sono nei messaggi</Text>
         </View>
     );
   }

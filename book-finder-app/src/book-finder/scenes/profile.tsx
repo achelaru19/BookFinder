@@ -7,14 +7,12 @@ interface Props {
 }
 
 export default class Profile extends React.Component<Props> {
-  static navigationOptions = {
-    title: 'Profile',
-  };
   render() {
     const {navigate} = this.props.navigation;
     return (
         <View>
           <NavBar />
+          <Text>Sono nel profilo</Text>
         </View>
     );
   }
