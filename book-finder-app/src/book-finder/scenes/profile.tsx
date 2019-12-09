@@ -1,16 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import HomePage from '../homepage';
-import NavBar from '../components/navBar';
+import NavBar from "../components/navBar";
 
 interface Props {
   navigation: any
 }
 
-
-export default class Messages extends React.Component<Props> {
+export default class Profile extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Messages',
+    title: 'Profile',
   };
   render() {
     const {navigate} = this.props.navigation;

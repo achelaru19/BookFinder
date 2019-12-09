@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import HomePage from '../homepage';
 import NavBar from '../components/navBar';
 
 interface Props {
@@ -8,19 +7,20 @@ interface Props {
 }
 
 
-export default class Messages extends React.Component<Props> {
+export default class Search extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Messages',
+    title: 'Welcome',
   };
   render() {
     const {navigate} = this.props.navigation;
     return (
-        <View>
-          <NavBar />
-        </View>
+      <View>
+        <NavBar/>
+      </View>
     );
   }
   }
+
   
   const styles = StyleSheet.create({
     container: {

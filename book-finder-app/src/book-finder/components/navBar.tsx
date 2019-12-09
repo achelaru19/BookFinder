@@ -1,47 +1,43 @@
-import * as React from 'react';
-import { View, StyleSheet, Dimensions, StatusBar } from 'react-native';
-import { TabView, SceneMap } from 'react-native-tab-view';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Button from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const FirstRoute = () => (
-  <View />
-);
-const SecondRoute = () => (
-  <View />
-);
 
-export default class NavBar extends React.Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: 'home', title: 'Home' },
-      { key: 'mail', title: 'Mail' },
-      { key: 'search', title: 'Search'},
-      { key: 'profile', title: 'Profile'},
-      { key: 'logout', title: 'Logout'},
-    ],
+interface Props {
+  navigation: any
+}
+
+class NavBar extends React.Component<Props> {
+  static navigationOptions = {
+    title: 'BookFinder',
   };
-
   render() {
+    const {navigate} = this.props.navigation;
     return (
-      <TabView
-        navigationState={this.state}
-        renderScene={SceneMap({
-          home: FirstRoute,
-          mail: SecondRoute,
-          search: FirstRoute,
-          profile: SecondRoute,
-          logout: FirstRoute
-        })}
-        onIndexChange={index => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
-        style={styles.container}
-      />
+      <View>
+        <Button
+          icon={<Icon name="rocket" size={30} color="#900" />}
+          title="Home"
+          onPress={() => navigate('Home', {name: 'HomePage'})}
+        />
+        <Button
+          title="Messages"
+          onPress={() => navigate('Messages', {name: 'Messages'})}
+        />
+        <Button
+          title="Search"
+          onPress={() => navigate('Search', {name: 'Search'})}
+        />
+        <Button
+          title="Profile"
+          onPress={() => navigate('Profile', {name: 'Profile'})}
+        />
+      </View> 
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: StatusBar.currentHeight,
-  }
-});
+
+export default withNavigation(NavBar);
