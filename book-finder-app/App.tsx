@@ -17,33 +17,3 @@ const MainNavigator = createStackNavigator({
 const App = createAppContainer(MainNavigator);
 
 export default App;
-
-/*
-export default class App extends React.Component {
-
-  render(){
-    return (
-      <View style={styles.container}>
-        <Text>La mia prima App!</Text>
-        <Text> Test cambio pagina 3 </Text>
-        <BookInformation />
-        <BookInformation />
-        <Button 
-          title="Go to Homepage"
-          onPress={() => this.props.navigator()}
-        />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-*/
