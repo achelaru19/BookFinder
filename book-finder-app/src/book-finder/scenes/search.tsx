@@ -8,6 +8,10 @@ interface Props {
 
 
 export default class Search extends React.Component<Props> {
+  static navigationOptions = {
+    title: 'Search',
+  };
+
   render() {
     const {navigate} = this.props.navigation;
     return (

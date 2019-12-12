@@ -7,6 +7,10 @@ interface Props {
 }
 
 export default class Profile extends React.Component<Props> {
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
   render() {
     const {navigate} = this.props.navigation;
     return (

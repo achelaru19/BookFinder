@@ -3,10 +3,14 @@ import { StyleSheet, Text, View, Button, Image } from 'react-native';
 
 
 interface Props {
+    book: BookShortInfo
+  }
+  
+interface BookShortInfo {
     title: string,
     author: string,
     editor: string
-  }
+  };
 
 export default class BookInformation extends React.Component<Props> {
 
@@ -25,9 +29,9 @@ export default class BookInformation extends React.Component<Props> {
                 />
             </View>
             <View>
-                <Text>Titolo: {this.props.title}</Text>
-                <Text>Autore: {this.props.author}</Text>
-                <Text>Editore: {this.props.editor}</Text>
+                <Text>Titolo: {this.props.book.title}</Text>
+                <Text>Autore: {this.props.book.author}</Text>
+                <Text>Editore: {this.props.book.editor}</Text>
             </View>
         </View>);
     }

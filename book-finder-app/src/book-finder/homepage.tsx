@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 
@@ -27,8 +27,13 @@ export default class HomePage extends React.Component<Props> {
     userID : 3, // somehow else
     booksAroundMe: [{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
     {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
-    {title: 'Titolo3', author: 'Autore 3', editor: 'Editore 3'}] // to be retrieved later in componentDidMount
+    {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
+    {title: 'Titolo4', author: 'Autore 2', editor: 'Editore 2'}, 
+    {title: 'Titolo5', author: 'Autore 1', editor: 'Editore 1'}, 
+    {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
+    {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}] // to be retrieved later in componentDidMount
   }
+
   constructor(props){
     super(props);
   }
@@ -36,11 +41,7 @@ export default class HomePage extends React.Component<Props> {
   componentWillMount(){
     // get userID
     // get booksAroundMe
-    this.setState({
-      booksAroundMe: [{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
-                      {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
-                      {title: 'Titolo3', author: 'Autore 3', editor: 'Editore 3'}]
-    })
+  
     }
 
   render() {
@@ -49,10 +50,9 @@ export default class HomePage extends React.Component<Props> {
     return (
       <View>
         <NavBar/>
-        {this.state.booksAroundMe.forEach(element => {
-          <BookInformation title={element.title} author={element.author} editor={element.editor} />
-        })
-        }
+        <ScrollView>
+          {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+        </ScrollView>
       </View>
     );
   }
