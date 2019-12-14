@@ -10,10 +10,15 @@ interface Props {
 }
 
 class NavBar extends React.Component<Props> {
+
+constructor(props){
+  super(props);
+}
+
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View>
+      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'stretch',}}>
         <IconButton
           icon="home"
           onPress={() => navigate('Home', {name: 'HomePage'})}

@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/book-finder/components/bookInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/components/bookInformation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/homepage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +64,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -79,6 +75,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>

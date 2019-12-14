@@ -16,9 +16,12 @@ export default class Messages extends React.Component<Props> {
   render() {
     const {navigate} = this.props.navigation;
     return (
-        <View>
+        <View style={{flex: 1}}>
           <NavBar />
+          <View style={{flex: 12}}>
           <Text>Sono nei messaggi</Text>
+          <Text>Sono nei messaggi</Text>
+          </View>
         </View>
     );
   }

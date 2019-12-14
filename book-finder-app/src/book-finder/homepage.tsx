@@ -48,11 +48,13 @@ export default class HomePage extends React.Component<Props> {
     const {navigate} = this.props.navigation;
    
     return (
-      <View>
+      <View style={{flex: 1}}>
         <NavBar/>
-        <ScrollView>
-          {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
-        </ScrollView>
+        <View style={{flex: 12}}>
+          <ScrollView style={{flex: 11}}>
+            {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+          </ScrollView>
+        </View>
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import NavBar from '../components/navBar';
 
 interface Props {
@@ -15,9 +15,11 @@ export default class Search extends React.Component<Props> {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View>
+      <View style={{flex: 1}}>
         <NavBar/>
-          <Text>Sono nel search</Text>
+        <View style={{flex: 12}}>
+          <Text>Titolo: </Text> 
+        </View>
       </View>
     );
   }
