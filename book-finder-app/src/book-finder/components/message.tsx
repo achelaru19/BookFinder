@@ -9,6 +9,10 @@ interface Props {
 
 class Message extends React.Component<Props> {
 
+state = {
+    userID: 3
+}
+
 constructor(props){
   super(props);
 }
@@ -16,7 +20,13 @@ constructor(props){
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'stretch',}}>
-        <Text> Messaggio: {this.props.message} </Text>
+         {
+            (this.state.userID == this.props.sender) ?
+                <Text>Io: </Text>
+            : 
+                <Text>Altro: </Text> 
+        } 
+        <Text>{this.props.message} </Text>
       </View> 
     );
   }
