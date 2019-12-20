@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { IconButton } from 'react-native-paper';
+import {Header, Icon} from 'react-native-elements';
 
 
 interface Props {
@@ -18,28 +16,14 @@ constructor(props){
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'stretch',}}>
-        <IconButton
-          icon="home"
-          onPress={() => navigate('Home', {name: 'HomePage'})}
+      <Header 
+        containerStyle={{
+          backgroundColor: '#ff7a59',
+        }}
+          leftComponent={<Icon name="menu" color={'white'}  onPress={() => this.props.navigation.openDrawer()} />}
+          centerComponent={{ text: 'BookFinder', style: { color: '#fff' } }}
+          rightComponent={<Icon name="search" color={'white'}  onPress={() => this.props.navigation.navigate('Search' , {id: 2})} />}
         />
-        <IconButton
-          icon="email"
-          onPress={() => navigate('Messages', {name: 'Messages'})}
-        />
-        <IconButton
-          icon="magnify"
-          onPress={() => navigate('Search', {name: 'Search'})}
-        />
-        <IconButton
-          icon="settings"
-          onPress={() => navigate('Profile', {name: 'Profile'})}
-        />
-        <IconButton
-          icon="logout"
-          onPress={() => navigate('Profile', {name: 'Profile'})}
-        />
-      </View> 
     );
   }
 }

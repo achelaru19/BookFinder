@@ -4,6 +4,7 @@ import NavBar from "../components/navBar";
 
 // IMPORTING TYPES
 import {UserInfo} from "../types/userInfo";
+import { Icon } from 'react-native-elements';
 
 interface Props {
   navigation: any
@@ -11,8 +12,10 @@ interface Props {
 
 export default class Profile extends React.Component<Props> {
   static navigationOptions = {
-    title: 'Settings',
-  };
+    drawerIcon: ({ tintColor }) => (
+        <Icon name="settings" style={{ fontSize: 24, color: tintColor }} />
+    )
+  }
 
   state: UserInfo = {
     id: 3,
