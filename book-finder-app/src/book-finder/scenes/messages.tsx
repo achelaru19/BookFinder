@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import HomePage from '../homepage';
+import { StyleSheet, View } from 'react-native';
 import NavBar from '../components/navBar';
 import Message from '../components/message';
 import { Icon } from 'react-native-elements';

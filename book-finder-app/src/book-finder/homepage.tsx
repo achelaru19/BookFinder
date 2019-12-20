@@ -1,7 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import CircleButton from 'react-native-circle-button';
 
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';

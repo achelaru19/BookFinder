@@ -38,8 +38,6 @@ const CustomDrawerNavigation = (props) => {
 }
 
 
-
-
 const Drawer = createDrawerNavigator({
   Home: {
     screen: HomePage,
