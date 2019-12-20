@@ -1,9 +1,10 @@
 import React from 'react';
-import {Header, Icon} from 'react-native-elements';
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import CircleButton from 'react-native-circle-button';
+
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
-import Search from './scenes/search';
 
 interface Props {
   navigation: any
@@ -62,8 +63,8 @@ export default class HomePage extends React.Component<Props> {
           <ScrollView style={{flex: 11}}>
             {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
           </ScrollView>
-          <View style={styles.addBookButton}>
-            <Button title="+" onPress={()=>console.log("Add book page")} color="#ff7a59" />
+          <View style={styles.addBookButton} onTouchEnd={() => console.log("added book")}>
+            <Text style={styles.plusSign}>+</Text>
           </View>
         </View>
       </View>
@@ -81,11 +82,18 @@ export default class HomePage extends React.Component<Props> {
     },
     addBookButton: {
       position: 'absolute',
-      borderRadius: 1,
+      backgroundColor: '#ff7a59',
       width: 50,
       height: 50,
-      bottom:0,
-      right:30,
+      borderRadius: 100,
+      bottom: 40,
+      right:40,
+    },
+    plusSign: {
+      fontSize: 35, 
+      textAlign: 'center',
+      justifyContent: 'center',
+      color: 'white'
     },
   });
   
