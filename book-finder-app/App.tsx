@@ -44,19 +44,19 @@ const Drawer = createDrawerNavigator({
   Home: {
     screen: HomePage,
     navigationOptions: {
-      title: 'BookFinder'
+      title: 'Home'
     }
   },
   Messages: {
     screen: Messages,
     navigationOptions: {
-      title: 'Messages'
+      title: 'Messaggi'
     }
   },
   Profile: {
     screen: Profile,
     navigationOptions: {
-      title: 'Settings'
+      title: 'Impostazioni'
     }
   },
   Search: {

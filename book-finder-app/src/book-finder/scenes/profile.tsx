@@ -32,7 +32,7 @@ export default class Profile extends React.Component<Props> {
     const {navigate} = this.props.navigation;
     return (
         <View style={{flex: 1}}>
-          <NavBar />
+          <NavBar title="Impostazioni" />
           <View style={{flex: 12}}>
             <Text>Username: {this.state.username}</Text>
             <Text>Nome: {this.state.firstname}</Text>

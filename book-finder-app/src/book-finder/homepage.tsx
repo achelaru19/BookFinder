@@ -57,7 +57,7 @@ export default class HomePage extends React.Component<Props> {
       justifyContent: 'center',
       borderTopWidth: 10,
       alignItems: 'stretch',}}>
-        <NavBar />
+        <NavBar title="BookFinder" />
         <View style={{flex: 12}}>
           <ScrollView style={{flex: 11}}>
             {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}

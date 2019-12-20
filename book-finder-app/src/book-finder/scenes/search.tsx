@@ -18,7 +18,7 @@ export default class Search extends React.Component<Props> {
     const {navigate} = this.props.navigation;
     return (
       <View style={{flex: 1}}>
-        <NavBar/>
+        <NavBar title="Cerca Libro"/>
         <View style={{flex: 12}}>
           <Formik
             initialValues={

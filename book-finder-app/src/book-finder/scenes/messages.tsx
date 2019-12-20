@@ -35,7 +35,7 @@ export default class Messages extends React.Component<Props> {
     const {navigate} = this.props.navigation;
     return (
         <View style={{flex: 1}}>
-          <NavBar />
+          <NavBar title="Messaggi" />
           <View style={{flex: 12}}>
             {this.state.messages.map(mess => 
               <Message sender={mess.sender} message={mess.message} key={'message_' + mess.messageID} />
