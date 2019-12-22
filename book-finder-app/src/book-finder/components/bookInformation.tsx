@@ -21,17 +21,21 @@ export default class BookInformation extends React.Component<Props> {
 
     render() {
         return (
-        <View>
-            <View>
+        <View style={{flex: 12, flexDirection: 'row', height: 100, borderBottomWidth: 1, borderColor: 'orange', alignContent: 'center'}}>
+            <View style={{flex: 3, flexDirection: 'column', justifyContent: 'space-evenly'}}>
                 <Image 
-                    style={{width: 50, height: 50}}
+                    style={{width: 80, height: 80}}
                     source={{uri:"https://dictionary.cambridge.org/images/thumb/book_noun_001_01679.jpg?version=5.0.63"}}
                 />
             </View>
-            <View>
+            <View style={{flex: 7, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'flex-start'}}>
                 <Text>Titolo: {this.props.book.title}</Text>
                 <Text>Autore: {this.props.book.author}</Text>
                 <Text>Editore: {this.props.book.editor}</Text>
+            </View>
+            <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly'}}>
+                <Text>Prezzo</Text>
+                <Text>10,00&euro;</Text>
             </View>
         </View>);
     }
