@@ -62,7 +62,7 @@ export default class HomePage extends React.Component<Props> {
           <ScrollView style={{flex: 11}}>
             {this.state.booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
           </ScrollView>
-          <View style={styles.addBookButton} onTouchEnd={() => console.log("added book")}>
+          <View style={styles.addBookButton} onTouchEnd={() => this.props.navigation.navigate('AddBook')}>
             <Text style={styles.plusSign}>+</Text>
           </View>
         </View>
