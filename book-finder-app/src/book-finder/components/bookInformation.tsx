@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 
 interface Props {
@@ -35,7 +35,7 @@ export default class BookInformation extends React.Component<Props> {
             </View>
             <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly'}}>
                 <Text>Prezzo</Text>
-                <Text>10,00&euro;</Text>
+                <Text>9,99&euro;</Text>
             </View>
         </View>);
     }
