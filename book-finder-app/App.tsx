@@ -7,6 +7,7 @@ import Messages from './src/book-finder/scenes/messages';
 import Settings from './src/book-finder/scenes/settings';
 import Search from './src/book-finder/scenes/search';
 import AddBook from './src/book-finder/scenes/addBook';
+import WishList from './src/book-finder/scenes/wishList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get("window");
@@ -14,7 +15,7 @@ const { width } = Dimensions.get("window");
 const CustomDrawerNavigation = (props) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ height: 250, backgroundColor: '#ff7a59', opacity: 0.9 }}>
+      <View style={{ height: 250, backgroundColor: '#90001F', opacity: 0.9 }}>
         <View style={{ height: 225, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }} >
            <Image source={require('./src/book-finder/assets/images/student-logo.png')} style={{ height: 150, width: 150, borderRadius: 60, marginTop: 30 , backgroundColor: '#fff' }} />
         </View>
@@ -67,7 +68,13 @@ const Drawer = createDrawerNavigator({
     navigationOptions: {
       title: 'AddBook'
     }
-  }
+  },
+  WishList: {
+    screen: WishList,
+    navigationOptions: {
+      title: 'Lista Desideri'
+    }
+  },
 },
 {
   drawerPosition: 'left',

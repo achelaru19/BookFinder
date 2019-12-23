@@ -81,7 +81,7 @@ export default class HomePage extends React.Component<Props> {
     },
     addBookButton: {
       position: 'absolute',
-      backgroundColor: '#ff7a59',
+      backgroundColor: '#90001F',
       width: 50,
       height: 50,
       borderRadius: 100,

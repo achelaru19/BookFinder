@@ -120,7 +120,7 @@ export default class Search extends React.Component<Props> {
     searchButton: {
       flex: 1,
       borderRadius: 30,
-      backgroundColor: '#ff7a59',
+      backgroundColor: '#90001F',
       maxHeight: 50,
       alignItems: 'center',
       justifyContent: 'center'

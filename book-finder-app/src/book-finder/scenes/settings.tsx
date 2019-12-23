@@ -74,10 +74,10 @@ export default class Settings extends React.Component<Props> {
             </View>
             <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
               <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change password page")}>
-                <Text style={{fontFamily: 'Cardo', fontSize: 20}}>Cambia Password</Text>
+                <Text style={{fontFamily: 'Cardo', color: 'white', fontSize: 20}}>Cambia Password</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change University page")}>
-                <Text style={{fontFamily: 'Cardo', fontSize: 20}}>Modifica Informazioni</Text>
+                <Text style={{fontFamily: 'Cardo', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -117,7 +117,8 @@ export default class Settings extends React.Component<Props> {
     buttonBox: {
       flex: 1,
       borderRadius: 30,
-      backgroundColor: '#ff7a59',
+      backgroundColor: '#BF002A',
+      color: 'white',
       width: 280,
       maxHeight: 50,
       alignItems: 'center',

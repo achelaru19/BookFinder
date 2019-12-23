@@ -32,7 +32,7 @@ async componentDidMount() {
       this.state.fontLoaded ? 
       <Header 
         containerStyle={{
-          backgroundColor: '#ff7a59',
+          backgroundColor: '#90001F',
         }}
           leftComponent={<Icon name="menu" color={'white'}  onPress={() => this.props.navigation.openDrawer()} />}
           centerComponent={{ text: this.props.title, style: { color: '#fff', fontFamily: 'Cardo', fontSize: 30 } }}
