@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
 import HomePage from './src/book-finder/homepage';
 import Messages from './src/book-finder/scenes/messages';
-import Profile from './src/book-finder/scenes/profile';
+import Settings from './src/book-finder/scenes/settings';
 import Search from './src/book-finder/scenes/search';
 import AddBook from './src/book-finder/scenes/addBook';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -50,8 +50,8 @@ const Drawer = createDrawerNavigator({
       title: 'Messaggi'
     }
   },
-  Profile: {
-    screen: Profile,
+  Settings: {
+    screen: Settings,
     navigationOptions: {
       title: 'Impostazioni'
     }

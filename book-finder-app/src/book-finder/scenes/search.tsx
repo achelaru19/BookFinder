@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 
@@ -83,8 +83,10 @@ export default class Search extends React.Component<Props> {
                   style={styles.inputContainer}
                 />
                 </View>
-                <View style={{flex:1, justifyContent: 'flex-end'}}>
-                  <Button onPress={() => handleSubmit} title="Cerca" />
+                <View style={{flex:1, justifyContent: 'center'}}>
+                  <TouchableOpacity style={styles.searchButton} onPress={() => handleSubmit}>
+                    <Text>Cerca</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
@@ -116,7 +118,12 @@ export default class Search extends React.Component<Props> {
       marginLeft: 7
     },
     searchButton: {
-
+      flex: 1,
+      borderRadius: 30,
+      backgroundColor: '#ff7a59',
+      maxHeight: 50,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
   });
   
