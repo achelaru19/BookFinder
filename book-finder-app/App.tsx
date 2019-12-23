@@ -51,6 +51,12 @@ const Drawer = createDrawerNavigator({
       title: 'Messaggi'
     }
   },
+  WishList: {
+    screen: WishList,
+    navigationOptions: {
+      title: 'Lista Desideri'
+    }
+  },
   Settings: {
     screen: Settings,
     navigationOptions: {
@@ -67,12 +73,6 @@ const Drawer = createDrawerNavigator({
     screen: AddBook,
     navigationOptions: {
       title: 'AddBook'
-    }
-  },
-  WishList: {
-    screen: WishList,
-    navigationOptions: {
-      title: 'Lista Desideri'
     }
   },
 },

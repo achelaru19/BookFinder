@@ -16,7 +16,7 @@ export default function WishList () {
       'Cardo-Bold': require('../assets/fonts/Cardo-Bold.ttf'),
     });
     setLoadedFont(true);
-  })
+  }, []);
 
     return fontLoaded ? (
         <View style={{flex: 1}}>

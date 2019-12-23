@@ -1,48 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { withNavigation } from 'react-navigation';
 import {Header, Icon} from 'react-native-elements';
+import { useNavigation } from 'react-navigation-hooks';
 import * as Font from 'expo-font';
 
+function NavBar(props){
 
-interface Props {
-  navigation: any
-  title: string
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    Font.loadAsync({
+      'Cardo': require('../assets/fonts/Cardo-Regular.ttf'),
+    });
+    setFontLoaded(true);
+  }, []);
+
+  const navigation = useNavigation();
+  return (
+    fontLoaded ? (
+    <Header 
+      containerStyle={{
+        backgroundColor: '#90001F',
+      }}
+        leftComponent={<Icon name="menu" color={'white'}  onPress={() => navigation.openDrawer()} />}
+        centerComponent={{ text: props.title, style: { color: '#fff', fontFamily: 'Cardo', fontSize: 30 } }}
+        rightComponent={<Icon name="search" color={'white'}  onPress={() => navigation.navigate('Search' , {id: 2})} />}
+      />
+    ) : null
+  );
 }
 
-class NavBar extends React.Component<Props> {
-
-constructor(props){
-  super(props);
-}
-
-state = {
-  fontLoaded: false
-};
-
-async componentDidMount() {
-  await Font.loadAsync({
-    'Cardo': require('../assets/fonts/Cardo-Regular.ttf'),
-  });
-  this.setState({ fontLoaded: true });
-}
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-
-      this.state.fontLoaded ? 
-      <Header 
-        containerStyle={{
-          backgroundColor: '#90001F',
-        }}
-          leftComponent={<Icon name="menu" color={'white'}  onPress={() => this.props.navigation.openDrawer()} />}
-          centerComponent={{ text: this.props.title, style: { color: '#fff', fontFamily: 'Cardo', fontSize: 30 } }}
-          rightComponent={<Icon name="search" color={'white'}  onPress={() => this.props.navigation.navigate('Search' , {id: 2})} />}
-        />
-        :
-        null
-    );
-  }
-}
 
 
 export default withNavigation(NavBar);
