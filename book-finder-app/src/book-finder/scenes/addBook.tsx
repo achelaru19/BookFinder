@@ -4,6 +4,7 @@ import {RNCamera} from 'react-native-camera';
 import { Formik } from 'formik';
 import { Icon } from 'react-native-elements';
 import NavBar from '../components/navBar';
+import BarcodeScan from '../components/barcodeScan';
 
 interface Props {
   navigation: any
@@ -21,58 +22,16 @@ export default class AddBook extends React.Component<Props> {
     drawerLabel: () => null
   };
 
-  state = {
-    torchMode: 'off',
-    cameraType: 'back',
-  };
-    camera: RNCamera;
-
-  constructor(props){
-    super(props);
-    this.handleTourch = this.handleTourch.bind(this);
-    
-  }
-
-  
-  barcodeReceived(e) {
-    console.log('Barcode: ' + e.data);
-    console.log('Type: ' + e.type);
-  }
-
 
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <View style={{flex: 1}}>
         <NavBar title="Aggiungi un libro"/>
+
         <View>
             <Text>Ottieni le informazioni con il codice a barre </Text> 
             <Icon name="camera-alt" reverse={true} />
-            <RNCamera
-            ref={ref => {
-                this.camera = ref;
-              }}
-              style={styles.preview}
-              type={RNCamera.Constants.Type.back}
-              flashMode={RNCamera.Constants.FlashMode.on}
-              androidCameraPermissionOptions={{
-                title: 'Permission to use camera',
-                message: 'We need your permission to use your camera',
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
-              }}
-              onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                console.log(barcodes);
-              }}
-            />
-            {
-            //<View style={styles.bottomOverlay}>
-            //<TouchableOpacity onPress={() => this.handleTourch(this.state.torchOn)}>
-            //<Image style={styles.cameraIcon}
-            //source={this.state.torchOn === true ? require('../../images/flasher_on.png') : require('../../images/flasher_off.png')} />
-            //</TouchableOpacity>
-            //</View>
-            }
+            <BarcodeScan />
         </View>
         <View style={{flex: 12}}>
           <Formik
