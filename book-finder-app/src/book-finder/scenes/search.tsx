@@ -1,88 +1,115 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
+import * as Font from 'expo-font';
+import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import { AppLoading } from 'expo';
 
 export default function Search() {
-  return (
-    <View style={{flex: 1}}>
-      <NavBar title="Cerca Libro"/>
-      <View style={{flex: 12, flexDirection: "column"}}>
-        <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={{fontSize: 17, backgroundColor: 'white', borderRadius: 30, fontFamily: 'Cardo'}}>Aggiungi pi&ugrave; informazioni per una ricerca migliore</Text>
-        </View>
-        <View style={{flex: 11}}>
-        <Formik
-          initialValues={
-            { title: '',
-              author: '',
-              editor: '',
-              isbn: '',
-              subject: ''
 
-          }
-          }
-          onSubmit={values => console.log(values)}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
-              <View style={{flex:1, justifyContent: 'space-around'}}>
-              <Text style={styles.labelText}>Titolo: </Text>
-              <TextInput
-                onChangeText={handleChange('title')}
-                onBlur={handleBlur('title')}
-                value={values.title}
-                style={styles.inputContainer}
-              />
+  const [fontLoaded, setFontLoaded] = useState(false);
+  
+  useEffect(() => {
+    Font.loadAsync({
+      'Cardo-Regular': require('../assets/fonts/Cardo-Regular.ttf'),
+    });
+    setFontLoaded(true);
+  }, []);
+
+  if(!fontLoaded)
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setFontLoaded)} 
+      />
+    );
+  else 
+    return (
+      (<View style={{flex: 1}}>
+        <NavBar title="Cerca Libro"/>
+        <View style={{flex: 12, flexDirection: "column"}}>
+          <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
+              Aggiungi pi&ugrave; informazioni
+            </Text>
+            <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
+              per una ricerca migliore
+            </Text>
+          </View>
+          <View style={{flex: 11}}>
+          <Formik
+            initialValues={
+              { title: '',
+                author: '',
+                editor: '',
+                isbn: '',
+                subject: ''
+
+            }
+            }
+            onSubmit={values => console.log(values)}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
+                <View style={{flex:1, justifyContent: 'space-around'}}>
+                <Text style={styles.labelText}>Titolo: </Text>
+                <TextInput
+                  onChangeText={handleChange('title')}
+                  onBlur={handleBlur('title')}
+                  value={values.title}
+                  style={styles.inputContainer}
+                />
+                </View>
+                <View style={{flex:1, justifyContent: 'space-around'}}>
+                  <Text style={styles.labelText}>Autore: </Text>
+                <TextInput
+                  onChangeText={handleChange('author')}
+                  onBlur={handleBlur('author')}
+                  value={values.author}
+                  style={styles.inputContainer}
+                />
+                </View>
+                <View style={{flex:1, justifyContent: 'space-around'}}>
+                <Text style={styles.labelText}>Editore: </Text>
+                <TextInput
+                  onChangeText={handleChange('editor')}
+                  onBlur={handleBlur('editor')}
+                  value={values.editor}
+                  style={styles.inputContainer}
+                />
+                </View>
+                <View style={{flex:1, justifyContent: 'space-around'}}>
+                  <Text style={styles.labelText}>ISBN: </Text>
+                <TextInput
+                  onChangeText={handleChange('isbn')}
+                  onBlur={handleBlur('isbn')}
+                  value={values.isbn}
+                  style={styles.inputContainer}
+                />
+                </View>
+                <View style={{flex:1, justifyContent: 'space-around'}}>
+                  <Text style={styles.labelText}>Corso: </Text>
+                <TextInput
+                  onChangeText={handleChange('subject')}
+                  onBlur={handleBlur('subject')}
+                  value={values.subject}
+                  style={styles.inputContainer}
+                />
+                </View>
+                <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                  <TouchableOpacity style={styles.searchButton} onPress={() => handleSubmit}>
+                    <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View style={{flex:1, justifyContent: 'space-around'}}>
-                <Text style={styles.labelText}>Autore: </Text>
-              <TextInput
-                onChangeText={handleChange('author')}
-                onBlur={handleBlur('author')}
-                value={values.author}
-                style={styles.inputContainer}
-              />
-              </View>
-              <View style={{flex:1, justifyContent: 'space-around'}}>
-              <Text style={styles.labelText}>Editore: </Text>
-              <TextInput
-                onChangeText={handleChange('editor')}
-                onBlur={handleBlur('editor')}
-                value={values.editor}
-                style={styles.inputContainer}
-              />
-              </View>
-              <View style={{flex:1, justifyContent: 'space-around'}}>
-                <Text style={styles.labelText}>ISBN: </Text>
-              <TextInput
-                onChangeText={handleChange('isbn')}
-                onBlur={handleBlur('isbn')}
-                value={values.isbn}
-                style={styles.inputContainer}
-              />
-              </View>
-              <View style={{flex:1, justifyContent: 'space-around'}}>
-                <Text style={styles.labelText}>Corso: </Text>
-              <TextInput
-                onChangeText={handleChange('subject')}
-                onBlur={handleBlur('subject')}
-                value={values.subject}
-                style={styles.inputContainer}
-              />
-              </View>
-              <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity style={styles.searchButton} onPress={() => handleSubmit}>
-                  <Text style={{color: 'white', fontFamily: 'Cardo', fontSize: 25}}>Cerca</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
-        </Formik> 
-        </View> 
+            )}
+          </Formik> 
+          </View> 
+        </View>
       </View>
-    </View>
-  );
+    ));
 }
 
 

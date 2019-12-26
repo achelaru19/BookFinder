@@ -5,8 +5,14 @@ import { useNavigation } from 'react-navigation-hooks';
 
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './utils/fontLoader';
 
 export default function HomePage() {
+  
+
+    const [fontLoaded, setFontLoaded] = useState(false);
     const [userID, setUserID] = useState(3);
     const [booksAroundMe, setBooksAroundMe] = useState([{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
                                                         {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
@@ -19,26 +25,37 @@ export default function HomePage() {
   useEffect(() => {
     // get userID
     // get booksAroundMe
-  
-    }, []);
+
+    
+  }, []);
 
   const { navigate } = useNavigation();
-  return (
-    <View style={{flex: 1,flexDirection: 'column',
-    justifyContent: 'center',
-    borderTopWidth: 10,
-    alignItems: 'stretch',}}>
-      <NavBar title="BookFinder" />
-      <View style={{flex: 12}}>
-        <ScrollView style={{flex: 11}}>
-          {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
-        </ScrollView>
-        <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
-          <Text style={styles.plusSign}>+</Text>
+
+  if(!fontLoaded)
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setFontLoaded)} 
+      />
+      );
+  else 
+    return (
+      <View style={{flex: 1,flexDirection: 'column',
+      justifyContent: 'center',
+      borderTopWidth: 10,
+      alignItems: 'stretch',}}>
+        <NavBar title="BookFinder" />
+        <View style={{flex: 12}}>
+          <ScrollView style={{flex: 11}}>
+            {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+          </ScrollView>
+          <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
+            <Text style={styles.plusSign}>+</Text>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
 }
 
 

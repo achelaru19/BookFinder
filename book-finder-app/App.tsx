@@ -2,13 +2,13 @@ import React from 'react';
 import { Text, View, SafeAreaView, ScrollView, Dimensions, Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import HomePage from './src/book-finder/homepage';
 import Messages from './src/book-finder/scenes/messages';
 import Settings from './src/book-finder/scenes/settings';
 import Search from './src/book-finder/scenes/search';
 import AddBook from './src/book-finder/scenes/addBook';
 import WishList from './src/book-finder/scenes/wishList';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get("window");
 
@@ -20,7 +20,7 @@ const CustomDrawerNavigation = (props) => {
            <Image source={require('./src/book-finder/assets/images/student-logo.png')} style={{ height: 150, width: 150, borderRadius: 60, marginTop: 30 , backgroundColor: '#fff' }} />
         </View>
         <View style={{ height: 25, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{fontSize: 20, marginBottom: 20}}>Angel Chelaru</Text>
+          <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>Angel Chelaru</Text>
         </View>
       </View>
       <ScrollView>

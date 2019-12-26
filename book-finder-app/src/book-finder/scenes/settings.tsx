@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import NavBar from "../components/navBar";
 import * as Font from 'expo-font';
 import { Icon } from 'react-native-elements';
+import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import { AppLoading } from 'expo';
 
 export default function Settings() {
   const [id, setID] = useState(3);
@@ -16,14 +18,19 @@ export default function Settings() {
   const [fontLoaded, setFontLoaded] = useState(false);
   
   useEffect(() => {
-    Font.loadAsync({
-      'Cardo': require('../assets/fonts/Cardo-Regular.ttf'),
-      'Cardo-Bold': require('../assets/fonts/Cardo-Bold.ttf'),
-    });
-    setFontLoaded(true);
+
   }, []);
 
-  return (fontLoaded ? (
+  if(!fontLoaded)
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setFontLoaded)} 
+      />
+      );
+  else 
+    return (
       <View style={{flex: 1}}>
         <NavBar title="Impostazioni" />
         <View style={{flex: 9, flexDirection: 'column', alignItems: 'stretch'}}>
@@ -57,15 +64,15 @@ export default function Settings() {
           </View>
           <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
             <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change password page")}>
-              <Text style={{fontFamily: 'Cardo', color: 'white', fontSize: 20}}>Cambia Password</Text>
+              <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Cambia Password</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change University page")}>
-              <Text style={{fontFamily: 'Cardo', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
+              <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-  ) : null);
+  );
 }
   
 Settings.navigationOptions = ({ navigation }) => ({
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#a9a9a9',
-    fontFamily: 'Cardo',
+    fontFamily: 'Cardo-Regular',
     fontSize: 15
     
   },
