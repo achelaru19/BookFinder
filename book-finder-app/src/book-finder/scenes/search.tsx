@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
-import * as Font from 'expo-font';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 
@@ -11,10 +10,7 @@ export default function Search() {
   const [fontLoaded, setFontLoaded] = useState(false);
   
   useEffect(() => {
-    Font.loadAsync({
-      'Cardo-Regular': require('../assets/fonts/Cardo-Regular.ttf'),
-    });
-    setFontLoaded(true);
+
   }, []);
 
   if(!fontLoaded)

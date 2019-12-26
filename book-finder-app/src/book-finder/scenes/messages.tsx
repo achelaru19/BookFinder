@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 import NavBar from '../components/navBar';
 import Message from '../components/message';
-import { Icon } from 'react-native-elements';
 
 
 export default function Messages() {

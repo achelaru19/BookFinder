@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import NavBar from "../components/navBar";
-import * as Font from 'expo-font';
-import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';
+import NavBar from "../components/navBar";
+import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 
 export default function WishList () {
  

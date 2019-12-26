@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
-import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './utils/fontLoader';
 

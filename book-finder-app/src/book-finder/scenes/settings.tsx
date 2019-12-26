@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import NavBar from "../components/navBar";
-import * as Font from 'expo-font';
 import { Icon } from 'react-native-elements';
-import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import NavBar from "../components/navBar";
 
 export default function Settings() {
   const [id, setID] = useState(3);

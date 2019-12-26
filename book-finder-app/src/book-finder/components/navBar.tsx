@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { withNavigation } from 'react-navigation';
 import {Header, Icon} from 'react-native-elements';
 import { useNavigation } from 'react-navigation-hooks';
-import * as Font from 'expo-font';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 
