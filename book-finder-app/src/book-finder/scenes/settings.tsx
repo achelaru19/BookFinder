@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   buttonBox: {
     flex: 1,
     borderRadius: 30,
-    backgroundColor: '#BF002A',
+    backgroundColor: '#90001F',
     color: 'white',
     width: 280,
     maxHeight: 50,
