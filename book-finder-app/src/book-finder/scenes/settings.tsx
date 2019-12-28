@@ -5,6 +5,7 @@ import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import NavBar from "../components/navBar";
+import { useNavigation } from 'react-navigation-hooks';
 
 export default function Settings() {
   const [id, setID] = useState(3);
@@ -27,6 +28,8 @@ export default function Settings() {
     pressModify(false);
     console.log("modificate impostazioni");
   };
+
+  const navigation = useNavigation();
 
   if(!fontLoaded)
     return (
@@ -121,7 +124,7 @@ export default function Settings() {
             }
           </View>
           <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change password page")}>
+            <TouchableOpacity style={styles.buttonBox} onPress={() => navigation.navigate("ChangePassword")}>
               <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Cambia Password</Text>
             </TouchableOpacity>
             {

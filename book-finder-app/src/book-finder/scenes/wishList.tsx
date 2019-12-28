@@ -30,7 +30,7 @@ export default function WishList () {
       }
     ];
 
-    //setWishList(books);
+    setWishList(books);
   }, []);
 
   const navigation = useNavigation();
