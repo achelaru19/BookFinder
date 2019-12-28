@@ -13,6 +13,7 @@ export default function Settings() {
   const [firstname, setFirstname] = useState("Angel");
   const [lastname, setLastname] = useState("Chelaru");
   const [birthdate, setBirthdate] = useState("1996-02-19");
+  const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
   const [email, setEmail] = useState("angel.chelaru@gmail.com");
   const [university, setUniversity] = useState("Politecnico di Milano");
   const [faculty, setFaculty] = useState("Computer Science and Engineering");
@@ -26,6 +27,7 @@ export default function Settings() {
   
   const saveSettings = () => {
     pressModify(false);
+    setBirthdate(birthdatePlaceholder);
     console.log("modificate impostazioni");
   };
 
@@ -80,7 +82,7 @@ export default function Settings() {
             modifyPressed ?
               <DatePicker
                 style={{width: 200}}
-                date={birthdate} //initial date from state
+                date={birthdatePlaceholder} //initial date from state
                 mode="date" //The enum of date, datetime and time
                 placeholder="Imposta data di nascita"
                 format="YYYY-MM-DD"
@@ -99,7 +101,7 @@ export default function Settings() {
                     marginLeft: 36
                   }
                 }}
-                onDateChange={(date) => {setBirthdate(date)}}
+                onDateChange={(date) => {setBirthdayPlaceholder(date)}}
               />
             :
               <Text style={styles.information}>{birthdate}</Text>
