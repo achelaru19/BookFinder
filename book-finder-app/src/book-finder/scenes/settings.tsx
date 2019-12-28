@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import NavBar from "../components/navBar";
@@ -15,10 +16,17 @@ export default function Settings() {
   const [university, setUniversity] = useState("Politecnico di Milano");
   const [faculty, setFaculty] = useState("Computer Science and Engineering");
   const [fontLoaded, setFontLoaded] = useState(false);
-  
+  const [modifyPressed, pressModify] = useState(false);
+
   useEffect(() => {
 
   }, []);
+
+  
+  const saveSettings = () => {
+    pressModify(false);
+    console.log("modificate impostazioni");
+  };
 
   if(!fontLoaded)
     return (
@@ -39,40 +47,100 @@ export default function Settings() {
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Nome </Text>
-            <Text style={styles.information}>{firstname}</Text>
+            {
+            modifyPressed ?
+              <TextInput style={styles.information} value={firstname} />
+            : <Text style={styles.information}>{firstname}</Text>
+            }
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Cognome </Text>
-            <Text style={styles.information}>{lastname}</Text>
+            {
+            modifyPressed ?
+              <TextInput style={styles.information} value={lastname} />
+            :
+              <Text style={styles.information}>{lastname}</Text>
+            }
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Email </Text>
-            <Text style={styles.information}>{email}</Text>
+            {
+            modifyPressed ?
+              <TextInput style={styles.information} value={email} />
+            :
+              <Text style={styles.information}>{email}</Text>
+            }
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Data di nascita </Text>
-            <Text style={styles.information}>{birthdate}</Text>
+            {
+            modifyPressed ?
+              <DatePicker
+                style={{width: 200}}
+                date={birthdate} //initial date from state
+                mode="date" //The enum of date, datetime and time
+                placeholder="Imposta data di nascita"
+                format="YYYY-MM-DD"
+                minDate="1900-01-01"
+                maxDate="2019-01-01"
+                confirmBtnText="Conferma"
+                cancelBtnText="Cancella"
+                customStyles={{
+                  dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                  },
+                  dateInput: {
+                    marginLeft: 36
+                  }
+                }}
+                onDateChange={(date) => {setBirthdate(date)}}
+              />
+            :
+              <Text style={styles.information}>{birthdate}</Text>
+            }
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Universit&agrave; </Text>
-            <Text style={styles.information}>{university}</Text>
+            {
+            modifyPressed ?
+              <TextInput style={styles.information} value={university} />
+            :
+              <Text style={styles.information}>{university}</Text>
+            }
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Facolt&agrave;  </Text>
-            <Text style={styles.information}>{faculty}</Text>
+            {
+            modifyPressed ?
+              <TextInput style={styles.information} value={faculty} />
+            :
+              <Text style={styles.information}>{faculty}</Text>
+            }
           </View>
           <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
             <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change password page")}>
               <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Cambia Password</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => console.log("Go to change University page")}>
-              <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
-            </TouchableOpacity>
+            {
+              modifyPressed ?
+                <TouchableOpacity style={styles.buttonBox} onPress={() => saveSettings()}>
+                  <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Salva Modifiche</Text>
+                </TouchableOpacity>
+              :
+                <TouchableOpacity style={styles.buttonBox} onPress={() => pressModify(true)}>
+                  <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
+                </TouchableOpacity>
+            }
+            
           </View>
         </View>
       </View>
   );
 }
+
   
 Settings.navigationOptions = ({ navigation }) => ({
   drawerIcon: ({ tintColor }) => (

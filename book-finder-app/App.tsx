@@ -9,6 +9,7 @@ import Settings from './src/book-finder/scenes/settings';
 import Search from './src/book-finder/scenes/search';
 import AddBook from './src/book-finder/scenes/addBook';
 import WishList from './src/book-finder/scenes/wishList';
+import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
 
 const { width } = Dimensions.get("window");
 
@@ -75,6 +76,9 @@ const Drawer = createDrawerNavigator({
       title: 'AddBook'
     }
   },
+  AddBookToWishList: {
+    screen: AddBookToWishList
+  }
 },
 {
   drawerPosition: 'left',
