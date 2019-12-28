@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import NavBar from "../components/navBar";
@@ -71,11 +71,11 @@ ChangePassword.navigationOptions = ({ navigation }) => ({
     drawerLabel: () => null
   });
 
-  const styles = {
-      buttonBox: {
+const styles = StyleSheet.create({
+    buttonBox: {
 
-      },
-      button: {
+    },
+    button: {
 
-      }
-  }
+    }
+});
