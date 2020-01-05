@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { AppLoading } from 'expo';
+import { AppLoading, AuthSession } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
+import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 
 export default function WishList () {
   const [fontLoaded, setLoadedFont] = useState(false);
@@ -24,13 +25,13 @@ export default function WishList () {
         'editor': 'CareerCup'
       },
       {
-        'title': 'Fondamenti di Jaca',
-        'author': 'Luke McPrecessor',
+        'title': 'Fondamenti di Java',
+        'author': 'Luke McProcessor',
         'editor': 'Rizzoli'
       }
     ];
 
-    setWishList(books);
+    //setWishList(books);
   }, []);
 
   const navigation = useNavigation();
@@ -48,22 +49,53 @@ export default function WishList () {
       return (
         <View style={{flex: 1}}>
           <NavBar title="Lista Desideri"/>
-          <ScrollView>
-          {booksInWishList.map(book =>
-            <Text key={book.title}>
-              {book.title} {book.author} {book.editor}
-            </Text>
-          )}
-          <Button title="Aggiungi libro alla Lista Desideri" onPress={() => navigation.navigate('AddBookToWishList')} />
-          </ScrollView>
+          <SafeAreaView style={{ flex: 12, flexDirection: 'column', paddingBottom: 5 }}>
+            <View >
+                <SwipeableFlatList
+                    data={booksInWishList}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }, index) => (
+                        <View style={styles.bookContainer} key={'myBook_' + index}>
+                            <Text style={styles.label}>{item.title}</Text>
+                            <Text style={styles.label}>{item.author}</Text>
+                            <Text style={styles.label}>{item.editor}</Text>
+                        </View>
+                    )}
+                    renderRight={({ item }, index) => (
+                        <View style={styles.deleteButton} key={'delete_' + index}>
+                            <Icon name="delete" size={30} onPress={() => console.log("cancella libro")} />
+                        </View>
+                    )}
+                    backgroundColor={'white'}
+                />
+            </View>
+        </SafeAreaView >
+          <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 3}}>
+            <View style={styles.buttonWithElements}>
+              <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList')}>
+                  <Text style={styles.buttonLabel}>Aggiungi libro</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </View>
       );
     else
       return (
           <View style={{flex: 1}}>
               <NavBar title="Lista Desideri"/>
-              <Text>Non ci sono libri nella tua lista desideri</Text>
-              <Button title="Aggiungi libro" onPress={() => navigation.navigate('AddBookToWishList')} />
+              <View style={styles.container}>
+                <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
+                <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
+                <View style={styles.addButton}>
+                  <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList')}>
+                      <Text style={styles.buttonLabel}>Aggiungi libro</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
           </View>
       );
       
@@ -84,5 +116,59 @@ export default function WishList () {
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
+    imageHolder: {
+      width: 200,
+      height: 150
+    },
+    textHolder: {
+      fontSize: 20,
+      fontFamily: 'Cardo-Regular',
+      marginTop: 17
+    },
+    bookContainer: {
+      flex: 3,
+      height: 100,
+      flexDirection: "column",
+      alignContent: 'space-around',
+      borderBottomWidth: 0.5,
+      borderColor: 'black'
+  },
+  label: {
+      flex: 1,
+      fontFamily: "Cardo-Regular",
+      fontSize: 18,
+      paddingLeft: 9
+  },
+  deleteButton: {
+      height: 100,
+      width: 70,
+      backgroundColor: '#CC0000',
+      flexDirection: 'column',
+      justifyContent: 'space-around'
+  },
+  buttonWithElements: {
+    backgroundColor: '#90001F',
+    height: 50,
+    width: Math.round(Dimensions.get('window').width)-10,
+    alignContent: 'flex-end',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderRadius: 20,
+  },
+  addButton: {
+    backgroundColor: '#90001F',
+    height: 50,
+    width: 180,
+    alignContent: 'space-around',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderRadius: 20,
+    marginTop: 17
+  },
+  buttonLabel: {
+    fontFamily: 'Cardo-Regular',
+    fontSize: 20,
+    color: 'white',
+  }
+});
   
