@@ -11,12 +11,17 @@ export default function Settings() {
   const [id, setID] = useState(3);
   const [username, setUsername] = useState("angel.chelaru");
   const [firstname, setFirstname] = useState("Angel");
+  const [firstnamePlaceholder, setFirstnamePlaceholder] = useState(firstname);
   const [lastname, setLastname] = useState("Chelaru");
+  const [lastnamePlaceholder, setLastnamePlaceholde] = useState(lastname);
   const [birthdate, setBirthdate] = useState("1996-02-19");
   const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
   const [email, setEmail] = useState("angel.chelaru@gmail.com");
+  const [emailPlaceholder, setEmailPlaceholder] = useState(email);
   const [university, setUniversity] = useState("Politecnico di Milano");
+  const [universityPlaceholder, setUniversityPlaceholder] = useState(university);
   const [faculty, setFaculty] = useState("Computer Science and Engineering");
+  const [facultyPlaceholder, setFacultyPlaceholder] = useState(faculty);
   const [fontLoaded, setFontLoaded] = useState(false);
   const [modifyPressed, pressModify] = useState(false);
 
@@ -27,7 +32,12 @@ export default function Settings() {
   
   const saveSettings = () => {
     pressModify(false);
+    setFirstname(firstnamePlaceholder);
+    setLastname(lastnamePlaceholder);
+    setEmail(emailPlaceholder);
     setBirthdate(birthdatePlaceholder);
+    setUniversity(universityPlaceholder);
+    setFaculty(facultyPlaceholder);
     console.log("modificate impostazioni");
   };
 
@@ -54,7 +64,7 @@ export default function Settings() {
             <Text style={styles.label}>Nome </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={firstname} />
+              <TextInput style={styles.information} value={firstnamePlaceholder} onChangeText={text => setFirstnamePlaceholder(text)} />
             : <Text style={styles.information}>{firstname}</Text>
             }
           </View>
@@ -62,7 +72,7 @@ export default function Settings() {
             <Text style={styles.label}>Cognome </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={lastname} />
+              <TextInput style={styles.information} value={lastnamePlaceholder} />
             :
               <Text style={styles.information}>{lastname}</Text>
             }
@@ -71,7 +81,7 @@ export default function Settings() {
             <Text style={styles.label}>Email </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={email} />
+              <TextInput style={styles.information} value={emailPlaceholder} />
             :
               <Text style={styles.information}>{email}</Text>
             }
@@ -111,7 +121,7 @@ export default function Settings() {
             <Text style={styles.label}>Universit&agrave; </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={university} />
+              <TextInput style={styles.information} value={universityPlaceholder} />
             :
               <Text style={styles.information}>{university}</Text>
             }
@@ -120,7 +130,7 @@ export default function Settings() {
             <Text style={styles.label}>Facolt&agrave;  </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={faculty} />
+              <TextInput style={styles.information} value={facultyPlaceholder} />
             :
               <Text style={styles.information}>{faculty}</Text>
             }

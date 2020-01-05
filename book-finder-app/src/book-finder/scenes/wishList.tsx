@@ -72,7 +72,7 @@ export default function WishList () {
   
   WishList.navigationOptions = ({ navigation }) => ({
     drawerIcon: ({ tintColor }) => (
-        <Icon name="book" style={{ fontSize: 24, color: tintColor }} />
+        <Icon name="star" style={{ fontSize: 24, color: tintColor }} />
     )
   })
 
