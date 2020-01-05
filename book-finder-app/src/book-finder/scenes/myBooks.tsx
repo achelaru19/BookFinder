@@ -1,76 +1,75 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
-import { useNavigation } from 'react-navigation-hooks';
-import MyBook from '../components/myBook';
-import {SwipeableFlatList} from 'react-native-swipeable-flat-list';
 
-export default function MyBooks () {
+
+export default function MyBooks() {
 
     const [fontLoaded, setLoadedFont] = useState(false);
     const [myBooks, setMyBooks] = useState([]);
 
     useEffect(() => {
         let books = [{
-                title: 'Programmazione Java',
-                author: 'John Green',
-                editor: 'Mondadori'
-            }, 
-            {
-                title: 'Soft Computing',
-                author: 'Samuel Becket',
-                editor: 'Rizzoldi'
-            }, 
-            {
-                title: 'Fisica Generali',
-                author: 'Mazzoldi',
-                editor: 'Pinguin Editor'
-            }, 
-            {
-                title: 'Fondamenti di Crittografia',
-                author: 'Giovanni Stea',
-                editor: 'Morzanti'
-            }, 
-            {
-                title: 'Elettrotecnica',
-                author: 'Antonio Musolino',
-                editor: 'Pisa University Press'
-            }, 
-            {
-                title: 'Chimica General',
-                author: 'Heisenberg',
-                editor: 'Arizona University Press'
-            }, 
-            {
-                title: 'Chimica Generale',
-                author: 'Heisenberg',
-                editor: 'Arizona University Press'
-            }
+            title: 'Programmazione Java',
+            author: 'John Green',
+            editor: 'Mondadori'
+        },
+        {
+            title: 'Soft Computing',
+            author: 'Samuel Becket',
+            editor: 'Rizzoldi'
+        },
+        {
+            title: 'Fisica Generali',
+            author: 'Mazzoldi',
+            editor: 'Pinguin Editor'
+        },
+        {
+            title: 'Fondamenti di Crittografia',
+            author: 'Giovanni Stea',
+            editor: 'Morzanti'
+        },
+        {
+            title: 'Elettrotecnica',
+            author: 'Antonio Musolino',
+            editor: 'Pisa University Press'
+        },
+        {
+            title: 'Chimica General',
+            author: 'Heisenberg',
+            editor: 'Arizona University Press'
+        },
+        {
+            title: 'Chimica Generale',
+            author: 'Heisenberg',
+            editor: 'Arizona University Press'
+        }
         ];
         setMyBooks(books);
     }, []);
 
-    if(!fontLoaded)
+    if (!fontLoaded)
         return (
-        <AppLoading
-            startAsync={loadResourcesAsync}
-            onError={handleLoadingError}
-            onFinish={() => handleFinishLoading(setLoadedFont)} 
-        />
+            <AppLoading
+                startAsync={loadResourcesAsync}
+                onError={handleLoadingError}
+                onFinish={() => handleFinishLoading(setLoadedFont)}
+            />
         );
     else {
         return (
-            <View style={{flex:12}}>
+            <View style={{ flex: 12 }}>
                 <NavBar title="I Miei Libri" />
-                <View style={{flex:11}}>
-                    <SafeAreaView  style={{flex:1, flexDirection: 'column'}}>
+                <View style={{ flex: 11 }}>
+                    <SafeAreaView style={{ flex: 1, flexDirection: 'column' }}>
                         <View>
                             <SwipeableFlatList
                                 data={myBooks}
-                                key={Math.random()*1000000}
+                                keyExtractor={(item, index) => index.toString()}
                                 renderItem={({ item }, index) => (
                                     <View style={styles.bookContainer} key={'myBook_' + index}>
                                         <Text style={styles.label}>{item.title}</Text>
@@ -90,7 +89,7 @@ export default function MyBooks () {
                 </View>
             </View>
         );
-  }
+    }
 };
 
 MyBooks.navigationOptions = ({ navigation }) => ({
@@ -116,14 +115,14 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     },
     label: {
-        flex: 1, 
+        flex: 1,
         fontFamily: "Cardo-Regular",
         fontSize: 18,
         paddingLeft: 9
     },
     deleteButton: {
         height: 100,
-        width: 70, 
+        width: 70,
         backgroundColor: '#CC0000',
         flexDirection: 'column',
         justifyContent: 'space-around'

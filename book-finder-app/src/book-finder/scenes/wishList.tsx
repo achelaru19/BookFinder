@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";

@@ -126,7 +126,9 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 30,
     height: 40,
-    paddingLeft: 15
+    paddingLeft: 15,
+    marginLeft: 3,
+    marginRight: 3
   },
   labelText: {
     fontSize: 20,
