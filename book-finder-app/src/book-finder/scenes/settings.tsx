@@ -13,7 +13,7 @@ export default function Settings() {
   const [firstname, setFirstname] = useState("Angel");
   const [firstnamePlaceholder, setFirstnamePlaceholder] = useState(firstname);
   const [lastname, setLastname] = useState("Chelaru");
-  const [lastnamePlaceholder, setLastnamePlaceholde] = useState(lastname);
+  const [lastnamePlaceholder, setLastnamePlaceholder] = useState(lastname);
   const [birthdate, setBirthdate] = useState("1996-02-19");
   const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
   const [email, setEmail] = useState("angel.chelaru@gmail.com");
@@ -72,7 +72,7 @@ export default function Settings() {
             <Text style={styles.label}>Cognome </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={lastnamePlaceholder} />
+              <TextInput style={styles.information} value={lastnamePlaceholder} onChangeText={text => setLastnamePlaceholder(text)} />
             :
               <Text style={styles.information}>{lastname}</Text>
             }
@@ -81,7 +81,7 @@ export default function Settings() {
             <Text style={styles.label}>Email </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={emailPlaceholder} />
+              <TextInput style={styles.information} value={emailPlaceholder} onChangeText={text => setEmailPlaceholder(text)} />
             :
               <Text style={styles.information}>{email}</Text>
             }
@@ -121,7 +121,7 @@ export default function Settings() {
             <Text style={styles.label}>Universit&agrave; </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={universityPlaceholder} />
+              <TextInput style={styles.information} value={universityPlaceholder} onChangeText={text => setUniversityPlaceholder(text)} />
             :
               <Text style={styles.information}>{university}</Text>
             }
@@ -130,7 +130,7 @@ export default function Settings() {
             <Text style={styles.label}>Facolt&agrave;  </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={facultyPlaceholder} />
+              <TextInput style={styles.information} value={facultyPlaceholder} onChangeText={text => setFacultyPlaceholder(text)} />
             :
               <Text style={styles.information}>{faculty}</Text>
             }
