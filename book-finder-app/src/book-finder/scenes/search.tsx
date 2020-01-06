@@ -4,14 +4,20 @@ import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import { NavigationEvents } from 'react-navigation';
+import { useNavigation } from 'react-navigation-hooks';
 
 export default function Search() {
 
   const [fontLoaded, setFontLoaded] = useState(false);
   
+  const navigation = useNavigation();
+
   useEffect(() => {
 
   }, []);
+
+  const searchForBook = values => {console.log("send"); navigation.navigate('Result', {values})};
 
   if(!fontLoaded)
     return (
@@ -45,9 +51,9 @@ export default function Search() {
 
             }
             }
-            onSubmit={values => console.log(values)}
+            onSubmit={values=> searchForBook(values)}
           >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
+            {({ handleChange, handleBlur, values }) => (
               <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
                 <View style={{flex:1, justifyContent: 'space-around'}}>
                 <Text style={styles.labelText}>Titolo: </Text>
@@ -95,7 +101,7 @@ export default function Search() {
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                  <TouchableOpacity style={styles.searchButton} onPress={() => handleSubmit}>
+                  <TouchableOpacity style={styles.searchButton} onPress={values => searchForBook(values)}>
                     <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
                   </TouchableOpacity>
                 </View>

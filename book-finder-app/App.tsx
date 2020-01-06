@@ -7,6 +7,7 @@ import HomePage from './src/book-finder/homepage';
 import Messages from './src/book-finder/scenes/messages';
 import Settings from './src/book-finder/scenes/settings';
 import Search from './src/book-finder/scenes/search';
+import Result from './src/book-finder/scenes/results';
 import AddBook from './src/book-finder/scenes/addBook';
 import WishList from './src/book-finder/scenes/wishList';
 import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
@@ -74,6 +75,9 @@ const Drawer = createDrawerNavigator({
   },
   Search: {
     screen: Search
+  },
+  Result: {
+    screen: Result
   },
   AddBook: {
     screen: AddBook

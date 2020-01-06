@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
-import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -18,60 +17,79 @@ export default function AddBookToWishList () {
 
     if(!fontLoaded)
         return (
-        <AppLoading
-            startAsync={loadResourcesAsync}
-            onError={handleLoadingError}
-            onFinish={() => handleFinishLoading(setLoadedFont)} 
-        />
+            <AppLoading
+                startAsync={loadResourcesAsync}
+                onError={handleLoadingError}
+                onFinish={() => handleFinishLoading(setLoadedFont)} 
+            />
         );
     else {
         return (
             <View style={{flex: 1}}>
                 <NavBar title="Lista Desideri"/>
-                <Text>Aggiungi un libro nella tua Lista Desideri per ricevere una notifica appena qualcuno lo aggiunge</Text>
-                <View>
+                <View style={styles.heading}>
+                    <Text style={styles.headingText}>Aggiungi un libro nella tua Lista Desideri per ricevere una notifica appena qualcuno lo aggiunge</Text>
+                </View>
+                <View style={styles.container}>
                     <View>
-                    <Text>Titolo: </Text>
-                    <TextInput
-                        onChangeText={() => setTitle(this.value)}
-                        value={title}
-                    />
+                        <Text style={styles.label}>Titolo</Text>
+                        <View style={styles.inputBox}>
+                            <TextInput
+                                onChangeText={text => setTitle(text)}
+                                value={title}
+                            />
+                        </View>
                     </View>
                     <View>
-                    <Text>Autore: </Text>
-                    <TextInput
-                        onChangeText={() => setAuthor(this.value)}
-                        value={author}
-                    />
+                        <Text style={styles.label}>Autore</Text>
+                        <View style={styles.inputBox}>
+                            <TextInput
+                                onChangeText={text => setAuthor(text)}
+                                value={author}
+                            />
+                        </View>
                     </View>
                     <View>
-                    <Text>Editore: </Text>
-                    <TextInput
-                        onChangeText={() => setEditor(this.value)}
-                        value={editor}
-                    />
+                        <Text style={styles.label}>Editore</Text>
+                        <View style={styles.inputBox}>
+                            <TextInput
+                                onChangeText={text => setEditor(text)}
+                                value={editor}
+                            />
+                        </View>
                     </View>
                     <View>
-                    <Text>ISBN: </Text>
-                    <TextInput
-                        onChangeText={() => setISBN(this.value)}
-                        value={isbn}
-                    />
+                        <Text style={styles.label}>ISBN</Text>
+                        <View style={styles.inputBox}>
+                            <TextInput
+                                onChangeText={text => setISBN(text)}
+                                value={isbn}
+                            />
+                        </View>
                     </View>
                     <View>
-                        <Text>Materia: </Text>
+                        <Text style={styles.label}>Materia</Text>
+                        <View style={styles.inputBox}>
+                            <TextInput
+                            onChangeText={text => setSubject(text)}
+                            value={subject}
+                            />
+                        </View>
+                    </View>
+                    <View>
+                        <Text style={styles.label}>Professore</Text>
+                        <View style={styles.inputBox}>
                         <TextInput
-                        onChangeText={() => setSubject(this.value)}
-                        value={subject}
-                        />
-                    </View>
-                    <View>
-                        <Text>Professore: </Text>
-                        <TextInput
-                        onChangeText={() => setTeacher(this.value)}
+                        onChangeText={text => setTeacher(text)}
                         value={teacher}
                         />
+                        </View>
                     </View>
+                </View>
+                <View style={styles.buttonBox}>
+                    <TouchableOpacity onPress={() => console.log("add book to wishlist")}>
+                        <Text style={styles.buttonText}>Aggiungi Libro</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -87,8 +105,43 @@ export default function AddBookToWishList () {
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
     },
+    heading: {
+        flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    headingText: {
+        fontSize: 18,
+        fontFamily: "Cardo-Regular",
+    },
+    inputBox: {
+        borderWidth: 0.5,
+        borderColor: 'black',
+        borderRadius: 30,
+        marginHorizontal: 5,
+        height: 30,
+        paddingLeft: 10
+    },
+    label: {
+        fontSize: 20,
+        fontFamily: "Cardo-Regular",
+        marginLeft: 12,
+        marginTop: 5
+    },
+    buttonBox: {
+        backgroundColor: '#90001F',
+        marginHorizontal: 10,
+        marginBottom: 10,
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        borderRadius: 20
+    },
+    buttonText: {
+        fontFamily: 'Cardo-Regular',
+        color: 'white',
+        fontSize: 20
+    }
   });
   
