@@ -13,6 +13,9 @@ import WishList from './src/book-finder/scenes/wishList';
 import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
 import ChangePassword from './src/book-finder/scenes/changePassword';
 import MyBooks from './src/book-finder/scenes/myBooks';
+import Login from './src/book-finder/scenes/login';
+import { useNavigation } from 'react-navigation-hooks';
+import { AppLoading } from 'expo';
 
 const { width } = Dimensions.get("window");
 
@@ -87,6 +90,9 @@ const Drawer = createDrawerNavigator({
   },
   ChangePassword: {
     screen: ChangePassword
+  },
+  Login: {
+    screen: Login
   }
 },
 {

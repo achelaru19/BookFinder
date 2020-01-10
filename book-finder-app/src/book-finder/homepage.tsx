@@ -10,15 +10,19 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './u
 export default function HomePage() {
   
 
-    const [fontLoaded, setFontLoaded] = useState(false);
-    const [userID, setUserID] = useState(3);
-    const [booksAroundMe, setBooksAroundMe] = useState([{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                        {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                        {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                        {title: 'Titolo4', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                        {title: 'Titolo5', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                        {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                        {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}]); 
+  const [fontLoaded, setFontLoaded] = useState(false);
+  const [userID, setUserID] = useState(3);
+  const [booksAroundMe, setBooksAroundMe] = useState([{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
+                                                      {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
+                                                      {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
+                                                      {title: 'Titolo4', author: 'Autore 2', editor: 'Editore 2'}, 
+                                                      {title: 'Titolo5', author: 'Autore 1', editor: 'Editore 1'}, 
+                                                      {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
+                                                      {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}]); 
+
+
+  const { navigate } = useNavigation();
+
 
   useEffect(() => {
     // get userID
@@ -27,7 +31,7 @@ export default function HomePage() {
     
   }, []);
 
-  const { navigate } = useNavigation();
+
 
   if(!fontLoaded)
     return (

@@ -1,0 +1,26 @@
+import firebase from 'firebase';
+import * as FirebaseValues from '../consts/constants';
+
+class FirebaseSDK {
+  constructor() {
+    if (!firebase.apps.length) {
+      //avoid re-initializing
+      firebase.initializeApp({
+        apiKey: FirebaseValues.API_KEY,
+        authDomain: FirebaseValues.AUTH_DOMAIN,
+        databaseURL: FirebaseValues.DB_URL,
+        projectId: FirebaseValues.PROJECT_ID,
+        storageBucket: FirebaseValues.STORAGE_BUCKET,
+        messagingSenderId: '3'
+      });
+    }
+  }
+  login = async (user, success_callback, failed_callback) => {
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(user.email, user.password)
+      .then(success_callback, failed_callback);
+  };
+}
+const firebaseSDK = new FirebaseSDK();
+export default firebaseSDK;

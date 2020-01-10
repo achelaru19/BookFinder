@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1090773921042",
+    "firebase_url": "https://bookfinder-7cf67.firebaseio.com",
+    "project_id": "bookfinder-7cf67",
+    "storage_bucket": "bookfinder-7cf67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090773921042:android:21570e5374057473b1d7cb",
+        "android_client_info": {
+          "package_name": "com.angelchelaru.bookfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090773921042-qe3oku935r7de3ltksu4rh644nf0f3ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHlamsQdm7p_2FTojDWcfo2CVE_8-nLMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090773921042-qe3oku935r7de3ltksu4rh644nf0f3ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
