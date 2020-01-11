@@ -14,10 +14,8 @@ import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
 import ChangePassword from './src/book-finder/scenes/changePassword';
 import MyBooks from './src/book-finder/scenes/myBooks';
 import Login from './src/book-finder/scenes/login';
-import { useNavigation } from 'react-navigation-hooks';
-import { AppLoading } from 'expo';
-
 const { width } = Dimensions.get("window");
+
 
 const CustomDrawerNavigation = (props) => {
   return (
@@ -36,7 +34,7 @@ const CustomDrawerNavigation = (props) => {
       <View style={{ alignItems: "center", bottom: 20 }}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flexDirection: 'column' }}>
-            <Icon name="arrow-circle-o-right" size={30} onPress={() => console.log("logout")} />
+            <Icon name="arrow-circle-o-right" size={30} onPress={() => console.log('logout')} />
           </View>
         </View>
       </View>
@@ -46,6 +44,9 @@ const CustomDrawerNavigation = (props) => {
 
 
 const Drawer = createDrawerNavigator({
+  Login: {
+    screen: Login
+  },
   Home: {
     screen: HomePage,
     navigationOptions: {
@@ -90,16 +91,14 @@ const Drawer = createDrawerNavigator({
   },
   ChangePassword: {
     screen: ChangePassword
-  },
-  Login: {
-    screen: Login
   }
 },
 {
   drawerPosition: 'left',
   contentComponent: CustomDrawerNavigation,
   drawerType: 'slide',
-  drawerWidth: (width / 3) * 2
+  drawerWidth: (width / 3) * 2,
+  initialRouteName : 'Login'
 });
 
 const App = createAppContainer(Drawer);
