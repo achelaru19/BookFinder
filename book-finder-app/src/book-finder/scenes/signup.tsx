@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -54,7 +54,7 @@ export default function SignUp() {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
-                <View style={{flex: 3, flexDirection: 'column'}}>
+                <View style={{flex: 4, flexDirection: 'column'}}>
                     <Text style={styles.label}>Email:</Text>
                     <TextInput
                         style={styles.nameInput}
@@ -73,8 +73,6 @@ export default function SignUp() {
                         secureTextEntry={true}
                         onChangeText={value => setPassword2(value)}
                     />
-                </View>
-                <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity onPress={onPressSignUp}>
                             <Text style={styles.buttonText}>Registrati</Text>
@@ -84,7 +82,7 @@ export default function SignUp() {
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Login con le tue credenziali</Text>
+                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

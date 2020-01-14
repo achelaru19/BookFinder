@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
@@ -32,7 +32,7 @@ export default function ForgottenPassword() {
 	};
 
 	const resentFailure = () => {
-		alert('Email non inviata');
+		alert(`L'indirizzo email inserito non è stato registrato`);
     };
     
     if(!fontLoaded)
@@ -74,7 +74,7 @@ export default function ForgottenPassword() {
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Login con le tue credenziali</Text>
+                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     text3: {
         fontFamily: 'Cardo-Regular',
         fontSize: 20,
-        marginTop: 55,
+        marginTop: 30,
         justifyContent: 'space-around',
         alignContent: 'stretch'
     },

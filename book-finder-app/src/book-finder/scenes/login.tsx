@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
@@ -81,7 +81,7 @@ export default function Login() {
                 <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity onPress={onPressLogin}>
-                            <Text style={styles.buttonText}>Login</Text>
+                            <Text style={styles.buttonText}>Accedi</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
