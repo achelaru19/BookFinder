@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/login.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +17,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1768">
+            <state relative-caret-position="647">
               <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
             </state>
           </provider>
@@ -67,6 +64,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -78,7 +76,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -139,7 +136,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
+        <state relative-caret-position="647">
           <caret line="104" column="19" selection-start-line="104" selection-start-column="19" selection-end-line="104" selection-end-column="19" />
         </state>
       </provider>

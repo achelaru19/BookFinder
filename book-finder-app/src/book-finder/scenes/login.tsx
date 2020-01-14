@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
-import firebase from 'firebase';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
-import HomePage from '../homepage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
@@ -89,12 +87,12 @@ export default function Login() {
                 </View>
                 <View style={styles.signingOptions}>
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                             <Text style={styles.smallButtons} onPress={() => console.log("Reset password page")}>Password dimenticata?</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                             <Text style={styles.smallButtons} onPress={() => console.log("SignUp page")}>Registrati</Text>
                         </TouchableOpacity>
                     </View>
@@ -107,7 +105,7 @@ export default function Login() {
 
 Login.navigationOptions = ({ navigation }) => ({
     title: 'Login',
-    drawerLabel: () => null
+    //drawerLabel: () => null
 });
 
 const styles = StyleSheet.create({

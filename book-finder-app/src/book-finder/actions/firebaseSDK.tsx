@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import * as FirebaseValues from '../consts/constants';
 
 class FirebaseSDK {
+  
   constructor() {
     if (!firebase.apps.length) {
       //avoid re-initializing
@@ -15,12 +16,28 @@ class FirebaseSDK {
       });
     }
   }
+
   login = async (user, success_callback, failed_callback) => {
     await firebase
       .auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then(success_callback, failed_callback);
   };
+
+  signup = async (user, success_callback, failed_callback) => {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then(success_callback, failed_callback);
+  }
+
+  resetPassword = async (user, success_callback, failed_callback) => {
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(user.email)
+      .then(success_callback, failed_callback);
+  }
 }
+
 const firebaseSDK = new FirebaseSDK();
 export default firebaseSDK;
