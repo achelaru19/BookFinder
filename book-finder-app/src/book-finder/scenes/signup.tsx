@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: '#90001F',
-        marginHorizontal: 40,
+        marginHorizontal: 15,
         borderRadius: 30,
         marginTop: 16,
-        height: 60
+        height: 40
     },
     buttonText: {
         fontFamily: 'Cardo-Regular',
-		fontSize: 36,
+		fontSize: 25,
         textAlign: 'center',
         color: 'white'
     },
@@ -142,14 +142,14 @@ const styles = StyleSheet.create({
 		fontSize: 18
 	},
 	nameInput: {
-		height: 16 * 2,
-        marginHorizontal: 16,
+		height: 40,
+        marginHorizontal: 15,
         marginVertical: 10,
 		paddingHorizontal: 16,
 		borderColor: '#111111',
 		borderWidth: 1,
         fontSize: 16,
-        borderRadius: 5
+        borderRadius: 30
     },
     smallButtons: {
         fontSize: 16,

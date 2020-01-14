@@ -1,53 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 
-export default function Login() {
+export default function ForgottenPassword() {
     
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
 
     const navigation = useNavigation();
 
-	const onPressLogin = async () => {
+	const onPressResetPassword = async () => {
 		const user = {
-			name: username,
-			email: email,
-			password: password
+			email: email
 		};
 
-		const response = firebaseSDK.login(
+		const response = firebaseSDK.resetPassword(
 			user,
-			loginSuccess,
-			loginFailed
+			resetSuccess,
+			resentFailure
 		);
     };
 
-    /*
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            navigation.navigate('Home');
-        } 
-    });
-    */
-
-	const loginSuccess = () => {
-		console.log('login successful, navigate to homepage.');
-		navigation.navigate('Home', {
-			name: username,
-			email: email
-		});
+	const resetSuccess = () => {
+        console.log('login successful, navigate to homepage.');
+        
+		navigation.navigate('Login');
 	};
 
-	const loginFailed = () => {
-		alert('Credenziali errate');
+	const resentFailure = () => {
+		alert('Email non inviata');
     };
     
     if(!fontLoaded)
@@ -64,36 +49,32 @@ export default function Login() {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
+                <View style={{flex: 3, flexDirection: 'row', alignContent: 'stretch'}}>
+                    <View style={{flex: 1, flexDirection: 'row'}}>
+                        <Image style={styles.image} source={require('../assets/images/forgot-password.png')} />
+                    </View>
+                    <View style={{flex: 2, flexDirection: 'column'}}>
+                        <Text style={styles.text1}>Hai dimenticato la password?</Text>
+                        <Text style={styles.text2}>Nessun problema.</Text>
+                        <Text style={styles.text3}>Inserisci la tua email e ti invieremo un link per reimpostarla.</Text>
+                    </View>
+                </View>
                 <View style={{flex: 2, flexDirection: 'column'}}>
-                    <Text style={styles.label}>Email:</Text>
                     <TextInput
-                        style={styles.nameInput}
-                        placeholder="test@gmail.com"
+                        style={styles.emailInput}
+                        placeholder="La tua email"
                         onChangeText={value => setEmail(value)}
                     />
-                    <Text style={styles.label}>Password:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        secureTextEntry={true}
-                        onChangeText={value => setPassword(value)}
-                    />
-                </View>
-                <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={onPressLogin}>
-                            <Text style={styles.buttonText}>Login</Text>
+                        <TouchableOpacity onPress={onPressResetPassword}>
+                            <Text style={styles.buttonText}>Invia</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.signingOptions}>
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('ForgottenPassword')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Reset password page")}>Password dimenticata?</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("SignUp page")}>Registrati</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Login con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -103,14 +84,14 @@ export default function Login() {
 	
 }
 
-Login.navigationOptions = ({ navigation }) => ({
-    title: 'Login',
-    //drawerLabel: () => null
+ForgottenPassword.navigationOptions = ({ navigation }) => ({
+    title: 'ForgottenPassword',
+    drawerLabel: () => null
 });
 
 const styles = StyleSheet.create({
     container: {
-        flex: 6,
+        flex: 7,
         flexDirection: 'column',
         alignContent: 'center',
         justifyContent: 'center',
@@ -129,11 +110,15 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         textAlign: 'center',
         color: '#90001F'
-
+    },
+    image: {
+        maxHeight: 200,
+        maxWidth: 80,
+        marginLeft: 30
     },
     buttonContainer: {
         backgroundColor: '#90001F',
-        marginHorizontal: 15,
+        marginHorizontal: 30,
         borderRadius: 30,
         marginTop: 16,
         height: 40
@@ -144,15 +129,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white'
     },
-	label: {
-        fontFamily: 'Cardo-Bold',
-		marginTop: 5,
-		marginLeft: 16,
-		fontSize: 18
-	},
-	nameInput: {
+	emailInput: {
 		height: 40,
-        marginHorizontal: 15,
+        marginHorizontal: 30,
         marginVertical: 10,
 		paddingHorizontal: 16,
 		borderColor: '#111111',
@@ -170,5 +149,20 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         paddingBottom: 10
-    }
+    },
+    text1: {
+        fontFamily: 'Cardo-Regular',
+        fontSize: 20
+    },
+    text2: {
+        fontFamily: 'Cardo-Bold',
+        fontSize: 20
+    },
+    text3: {
+        fontFamily: 'Cardo-Regular',
+        fontSize: 20,
+        marginTop: 55,
+        justifyContent: 'space-around',
+        alignContent: 'stretch'
+    },
 });

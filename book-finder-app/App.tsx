@@ -15,6 +15,7 @@ import ChangePassword from './src/book-finder/scenes/changePassword';
 import MyBooks from './src/book-finder/scenes/myBooks';
 import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
+import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
 const { width } = Dimensions.get("window");
 
 
@@ -50,6 +51,9 @@ const Drawer = createDrawerNavigator({
   },
   SignUp: {
     screen: SignUp
+  },
+  ForgottenPassword: {
+    screen: ForgottenPassword
   },
   Home: {
     screen: HomePage,
