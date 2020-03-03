@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
+import {getBook} from './actions/firebaseDB';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
@@ -27,11 +28,10 @@ export default function HomePage() {
   useEffect(() => {
     // get userID
     // get booksAroundMe
-
     
   }, []);
 
-
+  
 
   if(!fontLoaded)
     return (
@@ -52,7 +52,7 @@ export default function HomePage() {
           <ScrollView style={{flex: 11}}>
             {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
           </ScrollView>
-          <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
+          <View style={styles.addBookButton} onTouchEnd={/*() =>*/ getBook  /*navigate('AddBook')*/}>
             <Text style={styles.plusSign}>+</Text>
           </View>
         </View>

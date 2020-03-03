@@ -93,10 +93,10 @@ export default function AddBook() {
           : 
             <View style={{flex: 13}}>
               <BarcodeScan pressCamera={() => pressCamera(!hasPressedCamera)} 
-                setTitle={(t) => setTitle(t)}
-                setAuthor={(a) => setAuthor(a)}
-                setEditor={(e) => setEditor(e)}
-                setISBN={(i) => setISBN(i)}
+                setTitle={t => setTitle(t)}
+                setAuthor={a => setAuthor(a)}
+                setEditor={e => setEditor(e)}
+                setISBN={i => setISBN(i)}
               />
             </View>
           }

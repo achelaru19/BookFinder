@@ -39,7 +39,7 @@ export default function Login() {
     */
 
 	const loginSuccess = () => {
-		console.log('login successful, navigate to homepage.');
+        
 		navigation.navigate('Home', {
 			name: username,
 			email: email

@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+import 'firebase/firestore';
+
 import * as FirebaseValues from '../consts/constants';
 
 class FirebaseSDK {
@@ -37,6 +39,9 @@ class FirebaseSDK {
       .sendPasswordResetEmail(user.email)
       .then(success_callback, failed_callback);
   }
+
+  getFirestore = () => firebase.firestore();
+
 }
 
 const firebaseSDK = new FirebaseSDK();
