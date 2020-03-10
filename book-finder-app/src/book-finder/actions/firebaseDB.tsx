@@ -79,6 +79,17 @@ export function addBook(email,  firstname, lastname, title, author, isbn, editor
     });
 };
 
+export function addBookToWishList(email, title, author, isbn, editor) {
+    let docRef = db.collection('wishlist').doc(email);
+
+    let newWishBook = docRef.set({
+        title: title,
+        author: author,
+        isbn: isbn,
+        editor: editor
+    });
+};
+
 export async function getWishList(email) {
     db.collection('wishlist')
     .where('email', '==', email)
