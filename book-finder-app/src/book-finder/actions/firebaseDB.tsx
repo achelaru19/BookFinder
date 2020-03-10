@@ -5,8 +5,9 @@ import 'firebase/firestore';
 const db = firebaseSDK.getFirebase().firestore();
 
 
-export async function getBooks() {
-    db.collection('users')
+export async function getSellingBooks(email) {
+    db.collection('books')
+        .where('emailSeller', '==', email)
         .get()
         .then((snapshot) => {
             snapshot.forEach((doc) => {
@@ -18,7 +19,8 @@ export async function getBooks() {
         });
 };
 
-export async function getBooksAroundMe(){
+export async function getBooksAroundUser(email){
+    // TO BE DEFINED
     db.collection('books')
     .where('email', '==', email)
     .get()
