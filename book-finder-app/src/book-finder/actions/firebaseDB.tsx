@@ -33,7 +33,6 @@ export async function getBooksAroundUser(email){
         console.log('Error getting documents', err);
     });
 }
-}
 
 export async function getUser(email) {
     db.collection('users')
