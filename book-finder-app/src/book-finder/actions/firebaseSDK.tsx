@@ -1,6 +1,4 @@
 import firebase from 'firebase';
-import 'firebase/firestore';
-
 import * as FirebaseValues from '../consts/constants';
 
 class FirebaseSDK {
@@ -40,7 +38,7 @@ class FirebaseSDK {
       .then(success_callback, failed_callback);
   }
 
-  getFirestore = () => firebase.firestore();
+  getFirebase = () => firebase;
 
 }
 
