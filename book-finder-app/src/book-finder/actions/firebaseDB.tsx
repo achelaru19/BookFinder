@@ -62,16 +62,16 @@ export async function addUser(email, firstname, lastname, birthdate, university,
 }
 
 
-export function addBook(email,  firstname, lastname, title, author, isbn, editor, price) {
-    let docRef = db.collection('books').doc(email);
-
+export async function addBook(email,  firstname, lastname, title, author, isbn, editor, price) {
+    let docRef = db.collection('books').doc();
+    let now = new Date(Date.now());
     let newBook = docRef.set({
         title: title,
         author: author,
         isbn: isbn,
         editor: editor,
         price: price,
-        inputTime: null,
+        inputTime: now.toISOString(),
         sold: false,
         sellerName: firstname + ' ' + lastname,
         sellerEmail: email
@@ -79,24 +79,27 @@ export function addBook(email,  firstname, lastname, title, author, isbn, editor
 };
 
 export function addBookToWishList(email, title, author, isbn, editor) {
-    let docRef = db.collection('wishlist').doc(email);
+    let docRef = db.collection('wishlist').doc();
 
     let newWishBook = docRef.set({
         title: title,
         author: author,
         isbn: isbn,
-        editor: editor
+        editor: editor,
+        email: email
     });
 };
 
-export async function getWishList(email) {
+export async function getWishList(email, callback_function) {
     db.collection('wishlist')
     .where('email', '==', email)
     .get()
     .then((snapshot) => {
+        let books = [];
         snapshot.forEach((doc) => {
-        console.log(doc.id, '=>', doc.data());
+            books.push(doc.data());
         });
+        callback_function(books);
     })
     .catch((err) => {
         console.log('Error getting documents', err);

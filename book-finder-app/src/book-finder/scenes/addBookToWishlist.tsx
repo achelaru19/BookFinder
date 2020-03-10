@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
+import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -14,6 +15,7 @@ export default function AddBookToWishList () {
     const [subject, setSubject] = useState('');
     const [teacher, setTeacher] = useState('');
     const [booksInWishList, setWishList] = useState(null);
+    const email = "angel.chelaru@gmail.com";
 
     if(!fontLoaded)
         return (
@@ -87,7 +89,7 @@ export default function AddBookToWishList () {
                     </View>
                 </View>
                 <View style={styles.buttonBox}>
-                    <TouchableOpacity onPress={() => console.log("add book to wishlist")}>
+                    <TouchableOpacity onPress={() => addBookToWishList(email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>

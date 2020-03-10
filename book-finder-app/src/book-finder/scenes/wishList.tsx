@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { AppLoading, AuthSession } from 'expo';
+import {getWishList} from '../actions/firebaseDB';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,25 +14,7 @@ export default function WishList () {
   const [booksInWishList, setWishList] = useState(null);
 
   useEffect(() => {
-    let books = [
-      {
-        'title': 'Fisica Generale',
-        'author': 'Pozzoli',
-        'editor': 'Mondadori'
-      },
-      {
-        'title': 'Cracking the Coding Interview',
-        'author': 'Gayle Laakmann McDowell',
-        'editor': 'CareerCup'
-      },
-      {
-        'title': 'Fondamenti di Java',
-        'author': 'Luke McProcessor',
-        'editor': 'Rizzoli'
-      }
-    ];
-
-    //setWishList(books);
+    getWishList("angel.chelaru@gmail.com", (books) => setWishList(books));
   }, []);
 
   const navigation = useNavigation();
@@ -45,7 +28,7 @@ export default function WishList () {
       />
       );
   else {
-    if(booksInWishList != null) 
+    if(booksInWishList != null) {
       return (
         <View style={{flex: 1}}>
           <NavBar title="Lista Desideri"/>
@@ -81,6 +64,7 @@ export default function WishList () {
           </View>
         </View>
       );
+    }
     else
       return (
           <View style={{flex: 1}}>

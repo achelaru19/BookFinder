@@ -52,7 +52,7 @@ export default function HomePage() {
           <ScrollView style={{flex: 11}}>
             {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
           </ScrollView>
-          <View style={styles.addBookButton} onTouchEnd={() => getUser("angel.chelaru@gmail.com")  /*navigate('AddBook')*/}>
+          <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
             <Text style={styles.plusSign}>+</Text>
           </View>
         </View>

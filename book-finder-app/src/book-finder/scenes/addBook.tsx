@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
+import {addBook} from '../actions/firebaseDB';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -15,6 +16,7 @@ export default function AddBook() {
   const [subject, setSubject] = useState('');
   const [teacher, setTeacher] = useState('');
   const [hasPressedCamera, pressCamera] = useState(false);
+  const [email, setEmail] = useState('angel.chelaru@gmail.com')
   
   return (
     <View style={styles.container}>
@@ -85,7 +87,7 @@ export default function AddBook() {
                 />
               </View>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity style={styles.addButton} onPress={() => console.log("Aggiungi libro")}>
+                <TouchableOpacity style={styles.addButton} onPress={() => addBook(email, 'Angel', 'Chelaru', title, author, isbn, editor, 6.0)}>
                   <Text style={styles.buttonText}>Aggiungi</Text>
                 </TouchableOpacity>
               </View>
