@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
+import {getSellingBooks} from '../actions/firebaseDB';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 
 
@@ -13,43 +14,7 @@ export default function MyBooks() {
     const [myBooks, setMyBooks] = useState([]);
 
     useEffect(() => {
-        let books = [{
-            title: 'Programmazione Java',
-            author: 'John Green',
-            editor: 'Mondadori'
-        },
-        {
-            title: 'Soft Computing',
-            author: 'Samuel Becket',
-            editor: 'Rizzoldi'
-        },
-        {
-            title: 'Fisica Generali',
-            author: 'Mazzoldi',
-            editor: 'Pinguin Editor'
-        },
-        {
-            title: 'Fondamenti di Crittografia',
-            author: 'Giovanni Stea',
-            editor: 'Morzanti'
-        },
-        {
-            title: 'Elettrotecnica',
-            author: 'Antonio Musolino',
-            editor: 'Pisa University Press'
-        },
-        {
-            title: 'Chimica General',
-            author: 'Heisenberg',
-            editor: 'Arizona University Press'
-        },
-        {
-            title: 'Chimica Generale',
-            author: 'Heisenberg',
-            editor: 'Arizona University Press'
-        }
-        ];
-        setMyBooks(books);
+        getSellingBooks('angel.chelaru@gmail.com', (books) => setMyBooks(books));
     }, []);
 
     if (!fontLoaded)

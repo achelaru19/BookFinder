@@ -4,6 +4,8 @@ import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import { useNavigation } from 'react-navigation-hooks';
+
 
 
 export default function AddBookToWishList () {
@@ -12,10 +14,13 @@ export default function AddBookToWishList () {
     const [author, setAuthor] = useState('');
     const [editor, setEditor] = useState('');
     const [isbn, setISBN] = useState('');
-    const [subject, setSubject] = useState('');
-    const [teacher, setTeacher] = useState('');
-    const [booksInWishList, setWishList] = useState(null);
     const email = "angel.chelaru@gmail.com";
+
+    const {navigate} = useNavigation();
+    const addBookFunction = (email, title, author, isbn, editor) => {
+        addBookToWishList(email, title, author, isbn, editor);
+        navigate("WishList");
+    }
 
     if(!fontLoaded)
         return (
@@ -69,27 +74,9 @@ export default function AddBookToWishList () {
                             />
                         </View>
                     </View>
-                    <View>
-                        <Text style={styles.label}>Materia</Text>
-                        <View style={styles.inputBox}>
-                            <TextInput
-                            onChangeText={text => setSubject(text)}
-                            value={subject}
-                            />
-                        </View>
-                    </View>
-                    <View>
-                        <Text style={styles.label}>Professore</Text>
-                        <View style={styles.inputBox}>
-                        <TextInput
-                        onChangeText={text => setTeacher(text)}
-                        value={teacher}
-                        />
-                        </View>
-                    </View>
                 </View>
                 <View style={styles.buttonBox}>
-                    <TouchableOpacity onPress={() => addBookToWishList(email, title, author, isbn, editor)}>
+                    <TouchableOpacity onPress={() => addBookFunction(email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>

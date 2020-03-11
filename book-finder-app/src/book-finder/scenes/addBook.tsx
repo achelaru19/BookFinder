@@ -6,6 +6,7 @@ import {addBook} from '../actions/firebaseDB';
 import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from 'react-navigation-hooks';
 
 export default function AddBook() {
 
@@ -18,6 +19,8 @@ export default function AddBook() {
   const [hasPressedCamera, pressCamera] = useState(false);
   const [email, setEmail] = useState('angel.chelaru@gmail.com')
   
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <NavBar title="Aggiungi un libro"/>
