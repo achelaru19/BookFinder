@@ -12,30 +12,29 @@ import useForceUpdate from 'use-force-update';
 
 export default function WishList () {
   const [fontLoaded, setLoadedFont] = useState(false);
-  const [booksInWishList, setWishList] = useState(null);
+  const [booksInWishList, setWishList] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation();
   const forceUpdate = useForceUpdate();
   
-  const updateWishList = () => {
-    console.log("update");
+  
+  useEffect(() => {
     function getEmail() {
       return "angel.chelaru@gmail.com"
     }
     getWishList(getEmail(), (books) => setWishList(books));
-  }
-  
-  useEffect(() => {
-   updateWishList();
   }, []);
 
-  const removeBookFromWishList = (email, title, author, editor, isbn, index) => {
+  const removeBookFromWishList = useCallback((email, title, author, editor, isbn) => {
     removeFromWishList(email, title, author, editor, isbn);
-    console.log(index);
-    console.log(booksInWishList);
-    booksInWishList.forEach(element => {
-      delete element.index;
-    });
-    
+    function removeBook(value, index, arr){
+      return (value.title != title || value.author != author || value.editor != editor || value.isbn != isbn)
+    }
+    setWishList(booksInWishList.filter(removeBook));
+  },[]);
+
+  const addBookToArray = (book) => {
+    booksInWishList.push(book);
     setWishList(booksInWishList);
   };
 
@@ -66,7 +65,7 @@ export default function WishList () {
                 )}
                 renderRight={({ item }, index) => (
                     <View style={styles.deleteButton} key={'delete_' + index}>
-                        <Icon name="delete" size={30} onPress={() => removeBookFromWishList("angel.chelaru@gmail.com", item.title, item.author, item.editor, item.isbn, index)} />
+                        <Icon name="delete" size={30} onPress={() => removeBookFromWishList("angel.chelaru@gmail.com", item.title, item.author, item.editor, item.isbn)} />
                     </View>
                 )}
                 backgroundColor={'white'}
@@ -76,7 +75,7 @@ export default function WishList () {
           <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 3}}>
             <View style={styles.buttonWithElements}>
               <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList')}>
+                <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': (book) => addBookToArray(book)})}>
                   <Text style={styles.buttonLabel}>Aggiungi libro</Text>
                 </TouchableOpacity>
               </View>
@@ -93,7 +92,7 @@ export default function WishList () {
                 <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
                 <View style={styles.addButton}>
                   <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': (book) => addBookToArray(book)})}>
                       <Text style={styles.buttonLabel}>Aggiungi libro</Text>
                     </TouchableOpacity>
                   </View>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
@@ -6,6 +6,7 @@ import {getUser} from './actions/firebaseDB';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
+import { useGlobal } from 'reactn';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './utils/fontLoader';
 
 export default function HomePage() {
@@ -20,15 +21,17 @@ export default function HomePage() {
                                                       {title: 'Titolo5', author: 'Autore 1', editor: 'Editore 1'}, 
                                                       {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
                                                       {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}]); 
-
+                                                      
+  //@ts-ignore
+  const [user, setUser] = useGlobal('user');
 
   const { navigate } = useNavigation();
-
 
   useEffect(() => {
     // get userID
     // get booksAroundMe
-    
+    console.log('homepage efffect')
+    console.log(user.email);
   }, []);
 
   

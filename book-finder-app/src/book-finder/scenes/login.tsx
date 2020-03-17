@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import { setGlobal } from 'reactn';
+import { getUser } from '../actions/firebaseDB';
 
 export default function Login() {
     
@@ -13,6 +15,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
+    const [user, setUser] = useState(null);
 
     const navigation = useNavigation();
 
@@ -39,7 +42,10 @@ export default function Login() {
     */
 
 	const loginSuccess = () => {
-        
+        getUser(email, (user) => setUser(user));
+        console.log(user);
+        console.log("now setting it global");
+        setGlobal({user: user});
 		navigation.navigate('Home', {
 			name: username,
 			email: email

@@ -16,10 +16,19 @@ export default function AddBookToWishList () {
     const [isbn, setISBN] = useState('');
     const email = "angel.chelaru@gmail.com";
 
-    const {navigate} = useNavigation();
+    const navigation = useNavigation();
+    const addBook = navigation.getParam('addBook');
     const addBookFunction = (email, title, author, isbn, editor) => {
         addBookToWishList(email, title, author, isbn, editor);
-        navigate("WishList");
+        const newBook = {
+            'title': title,
+            'author': author,
+            'editor': editor,
+            'isbn': isbn,
+            'email': email
+        }
+        addBook(newBook);
+        navigation.navigate("WishList");
     }
 
     if(!fontLoaded)

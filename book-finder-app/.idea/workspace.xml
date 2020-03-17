@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/addBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/addBook.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/addBookToWishlist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/addBookToWishlist.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/wishList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/wishList.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +64,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -82,6 +76,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">

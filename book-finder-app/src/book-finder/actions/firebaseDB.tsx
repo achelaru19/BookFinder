@@ -36,13 +36,13 @@ export async function getBooksAroundUser(email){
     });
 }
 
-export async function getUser(email) {
+export function getUser(email, callback_function) {
     db.collection('users')
     .where('email', '==', email)
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
-        console.log(doc.id, '=>', doc.data());
+            callback_function(doc.data());
         });
     })
     .catch((err) => {
@@ -92,7 +92,7 @@ export async function addBookToWishList(email, title, author, isbn, editor) {
     });
 };
 
-export function getWishList(email, callback_function) {
+export async function getWishList(email, callback_function) {
     db.collection('wishlist')
     .where('email', '==', email)
     .get()
@@ -101,7 +101,9 @@ export function getWishList(email, callback_function) {
         snapshot.forEach((doc) => {
             books.push(doc.data());
         });
-        if (books.length == 0) callback_function(null);
+        console.log("FireBase db");
+        console.log(books);
+        if (books.length == 0) callback_function([]);
         else callback_function(books);
     })
     .catch((err) => {
