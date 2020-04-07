@@ -11,6 +11,7 @@ export const UserProvider = props => {
   const [user, setUser] = useState({});
 
   return (
+    //@ts-ignore
     <UserContext.Provider value={[user, setUser]}>
       {props.children}
     </UserContext.Provider>

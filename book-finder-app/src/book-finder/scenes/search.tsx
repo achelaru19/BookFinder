@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
@@ -6,20 +6,25 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import { AppLoading } from 'expo';
 import { NavigationEvents } from 'react-navigation';
 import { useNavigation } from 'react-navigation-hooks';
+import { UserContext } from '../consts/context';
 
-export default function Search(props) {
+export default function Search() {
 
   const [fontLoaded, setFontLoaded] = useState(false);
+  //@ts-ignore
+  const [user] = useContext(UserContext);
   
   const navigation = useNavigation();
-  const user = navigation.getParam('user');
 
   useEffect(() => {
     console.log('search')
     console.log(user);
   }, []);
 
-  const searchForBook = values => {console.log("send"); navigation.navigate('Result', {values})};
+  const searchForBook = values => {
+    //navigation.navigate('Result', {parameters: values});
+    console.log(values.text);
+  };
 
   if(!fontLoaded)
     return (

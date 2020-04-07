@@ -10,8 +10,7 @@ function NavBar(props){
   const [fontLoaded, setFontLoaded] = useState(false);
   
   useEffect(() => {
-    console.log("navbar");
-    console.log(props.user)
+    
   }, []);
 
   const navigation = useNavigation();
@@ -31,7 +30,7 @@ function NavBar(props){
       }}
         leftComponent={<Icon name="menu" color={'white'}  onPress={() => navigation.openDrawer()} />}
         centerComponent={{ text: props.title, style: { color: '#fff', fontFamily: 'Cardo-Regular', fontSize: 30 } }}
-        rightComponent={<Icon name="search" color={'white'}  onPress={() => navigation.navigate('Search' , {user: props.user})} />}
+        rightComponent={<Icon name="search" color={'white'}  onPress={() => navigation.navigate('Search')} />}
       />
   );
 }

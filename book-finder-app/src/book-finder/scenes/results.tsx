@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 import BookInformation from '../components/bookInformation';
+import { useNavigation } from 'react-navigation-hooks';
+import { UserContext } from '../consts/context';
 
-export default function Result() {
+export default function Result(props) {
 
     const [fontLoaded, setFontLoaded] = useState(false);
     const [books, setBooks] = useState(null); 
+    //@ts-ignore
+    const [user] = useContext(UserContext);
+    
+    const navigation = useNavigation();
+    const parameters = navigation.state.params.parameters;
+
 
     useEffect(() => {
-        // get books with props
+        console.log("RESULT PAGE")
+        console.log(parameters);
+        console.log(user);
 
         let book = [
             {title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
