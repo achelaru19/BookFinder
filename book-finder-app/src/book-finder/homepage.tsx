@@ -6,14 +6,23 @@ import {getUser} from './actions/firebaseDB';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
-import { useGlobal } from 'reactn';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './utils/fontLoader';
+import { DrawerItems } from 'react-navigation-drawer';
+import { UserContext } from './consts/context';
+
+interface User {
+  email: string;
+  firstname: string;
+  lastname: string;
+  university: string;
+  faculty: string;
+  birthdate: string;
+}
 
 export default function HomePage() {
   
 
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [userID, setUserID] = useState(3);
   const [booksAroundMe, setBooksAroundMe] = useState([{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
                                                       {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
                                                       {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
@@ -22,21 +31,35 @@ export default function HomePage() {
                                                       {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
                                                       {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}]); 
                                                       
-  //@ts-ignore
-  const [user, setUser] = useGlobal('user');
+  const [user, setUser] = useState(null);
+  // @ts-ignore
+  const [globalUser, setGlobalUser] = useContext(UserContext);
+  const [isUserSet, userHasBeenSet] = useState(false);
 
   const { navigate } = useNavigation();
+  const navigation = useNavigation();
+  
+  const email = navigation.getParam('email');
+
+  const updateUser = (u) => {
+    setUser(u);
+    userHasBeenSet(true);
+    console.log("updateuser");
+  }
 
   useEffect(() => {
     // get userID
     // get booksAroundMe
-    console.log('homepage efffect')
-    console.log(user.email);
+    getUser(email, u => updateUser(u));
+    console.log("in effect homepage");
+    console.log(user);
+
   }, []);
 
+  const seeUser = () => console.log(user);
   
 
-  if(!fontLoaded)
+  if(!fontLoaded || !isUserSet)
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -44,31 +67,36 @@ export default function HomePage() {
         onFinish={() => handleFinishLoading(setFontLoaded)} 
       />
       );
-  else 
+  else {
+    console.log("dentro return");
+    console.log(user);
+    setGlobalUser(user);
     return (
-      <View style={{flex: 1,flexDirection: 'column',
-      justifyContent: 'center',
-      borderTopWidth: 10,
-      alignItems: 'stretch',}}>
-        <NavBar title="BookFinder" />
-        <View style={{flex: 12}}>
-          <ScrollView style={{flex: 11}}>
-            {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
-          </ScrollView>
-          <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
-            <Text style={styles.plusSign}>+</Text>
+          <View style={{flex: 1,flexDirection: 'column',
+          justifyContent: 'center',
+          borderTopWidth: 10,
+          alignItems: 'stretch',}}>
+            <NavBar title="BookFinder" user={user}/>
+            <View style={{flex: 12}}>
+              <ScrollView style={{flex: 11}}>
+                {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+              </ScrollView>
+              <View style={styles.addBookButton} onTouchEnd={() => seeUser() /*navigate('AddBook')*/}>
+                <Text style={styles.plusSign}>+</Text>
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
-    );
+      );
+    }
 }
 
 
-HomePage.navigationOptions = ({ navigation }) => ({
+HomePage.navigationOptions = ({ navigation }, screenProps) => ({
   drawerIcon: ({ tintColor }) => (
       <Icon name="home" style={{ fontSize: 24, color: tintColor }} />
-  ) 
+  )
 });
+
 
 const styles = StyleSheet.create({
   container: {

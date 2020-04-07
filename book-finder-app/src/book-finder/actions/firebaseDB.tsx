@@ -42,7 +42,10 @@ export function getUser(email, callback_function) {
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
-            callback_function(doc.data());
+            console.log("data");
+            const userReturned = doc.data();
+            console.log(userReturned);
+            callback_function(userReturned);
         });
     })
     .catch((err) => {

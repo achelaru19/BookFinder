@@ -5,6 +5,7 @@ import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { useNavigation } from 'react-navigation-hooks';
+import { useGlobal } from 'reactn';
 
 
 
@@ -14,7 +15,8 @@ export default function AddBookToWishList () {
     const [author, setAuthor] = useState('');
     const [editor, setEditor] = useState('');
     const [isbn, setISBN] = useState('');
-    const email = "angel.chelaru@gmail.com";
+    //@ts-ignore
+    const [user, setUser] = useGlobal('user');
 
     const navigation = useNavigation();
     const addBook = navigation.getParam('addBook');
@@ -85,7 +87,7 @@ export default function AddBookToWishList () {
                     </View>
                 </View>
                 <View style={styles.buttonBox}>
-                    <TouchableOpacity onPress={() => addBookFunction(email, title, author, isbn, editor)}>
+                    <TouchableOpacity onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>

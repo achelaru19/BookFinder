@@ -7,14 +7,16 @@ import { AppLoading } from 'expo';
 import { NavigationEvents } from 'react-navigation';
 import { useNavigation } from 'react-navigation-hooks';
 
-export default function Search() {
+export default function Search(props) {
 
   const [fontLoaded, setFontLoaded] = useState(false);
   
   const navigation = useNavigation();
+  const user = navigation.getParam('user');
 
   useEffect(() => {
-
+    console.log('search')
+    console.log(user);
   }, []);
 
   const searchForBook = values => {console.log("send"); navigation.navigate('Result', {values})};
@@ -119,6 +121,11 @@ Search.navigationOptions = ({ navigation }) => ({
   title: 'Search',
   drawerLabel: () => null
 });
+
+Search.screenProps = {
+  firstname: 'Gianni',
+  lastname: 'Rossi'
+}
 
 const styles = StyleSheet.create({
   container: {

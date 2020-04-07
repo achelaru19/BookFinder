@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';
@@ -9,20 +9,20 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 import useForceUpdate from 'use-force-update';
+import { UserContext } from '../consts/context';
 
 export default function WishList () {
   const [fontLoaded, setLoadedFont] = useState(false);
   const [booksInWishList, setWishList] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
+  //@ts-ignore
+  const [user] = useContext(UserContext);
   const navigation = useNavigation();
   const forceUpdate = useForceUpdate();
   
   
   useEffect(() => {
-    function getEmail() {
-      return "angel.chelaru@gmail.com"
-    }
-    getWishList(getEmail(), (books) => setWishList(books));
+    //console.log(user.email);
+    getWishList(user.email, (books) => setWishList(books));
   }, []);
 
   const removeBookFromWishList = useCallback((email, title, author, editor, isbn) => {
@@ -65,7 +65,7 @@ export default function WishList () {
                 )}
                 renderRight={({ item }, index) => (
                     <View style={styles.deleteButton} key={'delete_' + index}>
-                        <Icon name="delete" size={30} onPress={() => removeBookFromWishList("angel.chelaru@gmail.com", item.title, item.author, item.editor, item.isbn)} />
+                        <Icon name="delete" size={30} onPress={() => removeBookFromWishList(user.email, item.title, item.author, item.editor, item.isbn)} />
                     </View>
                 )}
                 backgroundColor={'white'}

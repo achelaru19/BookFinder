@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, ScrollView, Dimensions, Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
@@ -16,10 +16,14 @@ import MyBooks from './src/book-finder/scenes/myBooks';
 import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
 import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
+import { UserContext, UserProvider } from './src/book-finder/consts/context';
 const { width } = Dimensions.get("window");
 
 
 const CustomDrawerNavigation = (props) => {
+    
+  //@ts-ignore
+  const [user, setUser] = useContext(UserContext);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ height: 250, backgroundColor: '#90001F', opacity: 0.9 }}>
@@ -27,7 +31,7 @@ const CustomDrawerNavigation = (props) => {
            <Image source={require('./src/book-finder/assets/images/student-logo.png')} style={{ height: 150, width: 150, borderRadius: 60, marginTop: 30 , backgroundColor: '#fff' }} />
         </View>
         <View style={{ height: 25, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>Angel Chelaru</Text>
+  <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>{user.firstname} {user.lastname}</Text>
         </View>
       </View>
       <ScrollView>
@@ -44,6 +48,7 @@ const CustomDrawerNavigation = (props) => {
   );
 }
 
+console.disableYellowBox = true;
 
 const Drawer = createDrawerNavigator({
   Login: {
@@ -103,11 +108,17 @@ const Drawer = createDrawerNavigator({
 },
 {
   drawerPosition: 'left',
-  contentComponent: CustomDrawerNavigation,
+  contentComponent: props => <CustomDrawerNavigation {...props}/>,
   drawerType: 'slide',
   drawerWidth: (width / 3) * 2,
   initialRouteName : 'Login'
 });
 
-const App = createAppContainer(Drawer);
+const AppNavigation = createAppContainer(Drawer);
+
+const App = () =>  (
+  <UserProvider>
+    <AppNavigation />
+  </UserProvider>
+);
 export default App;

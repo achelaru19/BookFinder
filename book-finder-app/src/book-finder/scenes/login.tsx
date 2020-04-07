@@ -5,8 +5,6 @@ import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
-import { setGlobal } from 'reactn';
-import { getUser } from '../actions/firebaseDB';
 
 export default function Login() {
     
@@ -15,7 +13,6 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
-    const [user, setUser] = useState(null);
 
     const navigation = useNavigation();
 
@@ -41,15 +38,10 @@ export default function Login() {
     });
     */
 
-	const loginSuccess = () => {
-        getUser(email, (user) => setUser(user));
-        console.log(user);
-        console.log("now setting it global");
-        setGlobal({user: user});
-		navigation.navigate('Home', {
-			name: username,
-			email: email
-		});
+	const loginSuccess = async () => {
+        navigation.navigate('Home', {
+            email: email
+        });
 	};
 
 	const loginFailed = () => {
@@ -111,7 +103,7 @@ export default function Login() {
 
 Login.navigationOptions = ({ navigation }) => ({
     title: 'Login',
-    //drawerLabel: () => null
+    drawerLabel: () => null
 });
 
 const styles = StyleSheet.create({
