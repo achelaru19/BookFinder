@@ -23,7 +23,7 @@ export default function Search() {
 
   const searchForBook = values => {
     //navigation.navigate('Result', {parameters: values});
-    console.log(values.text);
+    console.log(values);
   };
 
   if(!fontLoaded)

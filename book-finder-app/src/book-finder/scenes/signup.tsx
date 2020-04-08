@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
+import {addUser} from '../actions/firebaseDB';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -11,6 +12,11 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [birthdate, setBirthdate] = useState('');
+    const [university, setUniversity] = useState('');
+    const [faculty, setFaculty] = useState('');
     const [fontLoaded, setFontLoaded] = useState(false);
 
     const navigation = useNavigation();
@@ -30,10 +36,8 @@ export default function SignUp() {
 
 	const signUpSuccess = () => {
         console.log('login successful, navigate to homepage.');
-        
-		navigation.navigate('Home', {
-			email: email
-		});
+        addUser(email, firstname, lastname, birthdate, university, faculty);
+		navigation.navigate('Login');
 	};
 
 	const signUpFailure = () => {

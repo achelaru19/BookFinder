@@ -18,7 +18,7 @@
     "firebase": "^7.6.2",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0",
-    "firebase-tools": "^7.14.0",
+    "firebase-tools": "^8.0.2",
     "formik": "^2.0.8",
     "global": "^4.4.0",
     "native-base": "^2.13.8",
@@ -46,6 +46,7 @@
     "react-navigation-hooks": "^1.1.0",
     "react-navigation-stack": "^1.10.3",
     "reactn": "^2.2.6",
+    "tslint": "^6.1.1",
     "use-force-update": "^1.0.7",
     "uuid": "^3.3.3"
   },
