@@ -5,7 +5,7 @@ import {addUser} from '../actions/firebaseDB';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
-import RNPickerSelect from 'react-native-picker-select';
+import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import {universities, faculties} from '../consts/constants';
 
@@ -16,7 +16,7 @@ export default function SignUp() {
     const [password2, setPassword2] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
-    const [birthdate, setBirthdate] = useState('');
+    const [birthdate, setBirthdate] = useState("01-01-1995");
     const [university, setUniversity] = useState('');
     const [faculty, setFaculty] = useState('');
     const [fontLoaded, setFontLoaded] = useState(false);
@@ -74,6 +74,32 @@ export default function SignUp() {
                         placeholder="Rossi"
                         onChangeText={value => setLastname(value)}
                     />
+                    <Text style={styles.label}>Data di nascita:</Text>
+                    <View style={styles.nameInput}>
+                        <DatePicker
+                            style={{width: 200}}
+                            date={birthdate} //initial date from state
+                            mode="date" //The enum of date, datetime and time
+                            placeholder="Imposta data di nascita"
+                            format="DD-MM-YYYY"
+                            minDate="01-01-1900"
+                            maxDate="01-01-2019"
+                            confirmBtnText="Conferma"
+                            cancelBtnText="Cancella"
+                            customStyles={{
+                            dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                            },
+                            dateInput: {
+                                marginLeft: 36
+                            }
+                            }}
+                            onDateChange={(date) => {setBirthdate(date)}}
+                        />
+                    </View>
                     <Text style={styles.label}>Email:</Text>
                     <TextInput
                         style={styles.nameInput}

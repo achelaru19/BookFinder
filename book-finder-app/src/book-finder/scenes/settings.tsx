@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
@@ -6,30 +6,32 @@ import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import NavBar from "../components/navBar";
 import { useNavigation } from 'react-navigation-hooks';
+import { UserContext } from '../consts/context';
 
 export default function Settings() {
-  const [id, setID] = useState(3);
-  const [username, setUsername] = useState("angel.chelaru");
-  const [firstname, setFirstname] = useState("Angel");
+  //@ts-ignore
+  const [user] = useContext(UserContext);
+  const [firstname, setFirstname] = useState(user.firstname);
   const [firstnamePlaceholder, setFirstnamePlaceholder] = useState(firstname);
-  const [lastname, setLastname] = useState("Chelaru");
+  const [lastname, setLastname] = useState(user.lastname);
   const [lastnamePlaceholder, setLastnamePlaceholder] = useState(lastname);
-  const [birthdate, setBirthdate] = useState("1996-02-19");
+  const [birthdate, setBirthdate] = useState(user.birthdate);
   const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
-  const [email, setEmail] = useState("angel.chelaru@gmail.com");
+  const [email, setEmail] = useState(user.email);
   const [emailPlaceholder, setEmailPlaceholder] = useState(email);
-  const [university, setUniversity] = useState("Politecnico di Milano");
+  const [university, setUniversity] = useState(user.university);
   const [universityPlaceholder, setUniversityPlaceholder] = useState(university);
-  const [faculty, setFaculty] = useState("Computer Science and Engineering");
+  const [faculty, setFaculty] = useState(user.faculty);
   const [facultyPlaceholder, setFacultyPlaceholder] = useState(faculty);
   const [fontLoaded, setFontLoaded] = useState(false);
   const [modifyPressed, pressModify] = useState(false);
 
   useEffect(() => {
-
+    console.log(birthdate);
   }, []);
 
   
+  console.log(birthdate);
   const saveSettings = () => {
     pressModify(false);
     setFirstname(firstnamePlaceholder);
@@ -38,6 +40,8 @@ export default function Settings() {
     setBirthdate(birthdatePlaceholder);
     setUniversity(universityPlaceholder);
     setFaculty(facultyPlaceholder);
+    
+  console.log(birthdate);
     console.log("modificate impostazioni");
   };
 
@@ -57,8 +61,8 @@ export default function Settings() {
         <NavBar title="Impostazioni" />
         <View style={{flex: 9, flexDirection: 'column', alignItems: 'stretch'}}>
           <View style={styles.box}>
-            <Text style={styles.label}>Username</Text>
-            <Text style={styles.information}>{username}</Text>
+            <Text style={styles.label}>Email</Text>
+            <Text style={styles.information}>{email}</Text>
           </View>
           <View style={styles.box}>
             <Text style={styles.label}>Nome </Text>
@@ -78,15 +82,6 @@ export default function Settings() {
             }
           </View>
           <View style={styles.box}>
-            <Text style={styles.label}>Email </Text>
-            {
-            modifyPressed ?
-              <TextInput style={styles.information} value={emailPlaceholder} onChangeText={text => setEmailPlaceholder(text)} />
-            :
-              <Text style={styles.information}>{email}</Text>
-            }
-          </View>
-          <View style={styles.box}>
             <Text style={styles.label}>Data di nascita </Text>
             {
             modifyPressed ?
@@ -95,9 +90,9 @@ export default function Settings() {
                 date={birthdatePlaceholder} //initial date from state
                 mode="date" //The enum of date, datetime and time
                 placeholder="Imposta data di nascita"
-                format="YYYY-MM-DD"
-                minDate="1900-01-01"
-                maxDate="2019-01-01"
+                format="DD-MM-YYYY"
+                minDate="01-01-1900"
+                maxDate="01-01-2019"
                 confirmBtnText="Conferma"
                 cancelBtnText="Cancella"
                 customStyles={{
@@ -136,7 +131,7 @@ export default function Settings() {
             }
           </View>
           <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => navigation.navigate("ChangePassword")}>
+            <TouchableOpacity style={styles.buttonBox} onPress={() => console.log(user)}>
               <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Cambia Password</Text>
             </TouchableOpacity>
             {
