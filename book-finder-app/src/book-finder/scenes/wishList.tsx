@@ -47,7 +47,7 @@ export default function WishList () {
       />
     );
   else {
-    if(booksInWishList != null) 
+    if(booksInWishList != null && booksInWishList.length > 0) 
       return (
         <View style={{flex: 1}}>
           <NavBar title="Lista Desideri"/>

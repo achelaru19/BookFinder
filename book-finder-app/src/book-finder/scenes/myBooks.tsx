@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
@@ -6,15 +6,18 @@ import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
 import {getSellingBooks} from '../actions/firebaseDB';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import { UserContext } from '../consts/context';
 
 
 export default function MyBooks() {
 
     const [fontLoaded, setLoadedFont] = useState(false);
     const [myBooks, setMyBooks] = useState([]);
+    //@ts-ignore
+    const [user] = useContext(UserContext);
 
     useEffect(() => {
-        getSellingBooks('angel.chelaru@gmail.com', (books) => setMyBooks(books));
+        getSellingBooks(user.email, (books) => setMyBooks(books));
     }, []);
 
     if (!fontLoaded)

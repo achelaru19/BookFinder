@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Picker, SafeAreaView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import {addUser} from '../actions/firebaseDB';
 import { useNavigation } from 'react-navigation-hooks';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
+import RNPickerSelect from 'react-native-picker-select';
 import { AppLoading } from 'expo';
+import {universities, faculties} from '../consts/constants';
 
 export default function SignUp() {
     
@@ -54,17 +56,48 @@ export default function SignUp() {
         );
     else 
         return (
-            <View style={styles.container}>
+            <SafeAreaView  style={styles.container}>
+                <ScrollView>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
                 <View style={{flex: 4, flexDirection: 'column'}}>
+                    <Text style={styles.label}>Nome:</Text>
+                    <TextInput
+                        style={styles.nameInput}
+                        placeholder="Marco"
+                        onChangeText={value => setFirstname(value)}
+                    />
+                    <Text style={styles.label}>Cognome:</Text>
+                    <TextInput
+                        style={styles.nameInput}
+                        placeholder="Rossi"
+                        onChangeText={value => setLastname(value)}
+                    />
                     <Text style={styles.label}>Email:</Text>
                     <TextInput
                         style={styles.nameInput}
                         placeholder="test@gmail.com"
                         onChangeText={value => setEmail(value)}
                     />
+                     <Text style={styles.label}>Università:</Text>
+                     <View style={styles.pickerInput}>
+                     <Picker style={styles.picker} selectedValue={university} onValueChange={val => {if(val != '-') setUniversity(val)}}>
+                        <Picker.Item label={"Seleziona una università"} value="-" />
+                        {universities.map(uni => 
+                            <Picker.Item label={uni} value={uni} />
+                        )}
+                    </Picker>
+                    </View>
+                     <Text style={styles.label}>Facoltà:</Text>
+                     <View style={styles.pickerInput}>
+                            <Picker style={styles.picker} selectedValue={faculty} onValueChange={val => {if(val != '-') setFaculty(val)}}> 
+                                <Picker.Item label={"Seleziona una facoltà"} value="-" />
+                                {faculties.map(fac => 
+                                    <Picker.Item label={fac} value={fac} />
+                                )}
+                            </Picker>
+                    </View>
                     <Text style={styles.label}>Password:</Text>
                     <TextInput
                         style={styles.nameInput}
@@ -90,7 +123,8 @@ export default function SignUp() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+                </ScrollView>
+            </SafeAreaView>
         );
    
 	
@@ -163,5 +197,20 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         paddingBottom: 10
+    },
+    pickerInput: {
+        height: 40,
+        marginHorizontal: 15,
+        marginTop: 8,
+        paddingHorizontal: 16,
+		borderColor: '#111111',
+		borderWidth: 1,
+        fontSize: 16,
+        borderRadius: 30,
+        fontFamily: 'Cardo-Bold'
+    },
+    picker: {
+        paddingBottom: 40,
+        height: 20
     }
 });

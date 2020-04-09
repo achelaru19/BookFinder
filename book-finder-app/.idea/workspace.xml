@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/components/navBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/components/navBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/homepage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/homepage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/addBookToWishlist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/addBookToWishlist.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/messages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/messages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/wishList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/wishList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +66,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -86,8 +79,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
