@@ -56,7 +56,6 @@ export default function HomePage() {
 
   }, []);
 
-  const seeUser = () => console.log(user);
   
 
   if(!fontLoaded || !isUserSet)
@@ -81,7 +80,7 @@ export default function HomePage() {
               <ScrollView style={{flex: 11}}>
                 {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
               </ScrollView>
-              <View style={styles.addBookButton} onTouchEnd={() => seeUser() /*navigate('AddBook')*/}>
+              <View style={styles.addBookButton} onTouchEnd={() => navigate('AddBook')}>
                 <Text style={styles.plusSign}>+</Text>
               </View>
             </View>

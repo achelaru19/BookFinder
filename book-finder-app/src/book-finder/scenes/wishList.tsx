@@ -14,28 +14,25 @@ import { UserContext } from '../consts/context';
 export default function WishList () {
   const [fontLoaded, setLoadedFont] = useState(false);
   const [booksInWishList, setWishList] = useState([]);
+  const [counter, setCounter] = useState(0);
   //@ts-ignore
   const [user] = useContext(UserContext);
   const navigation = useNavigation();
   const forceUpdate = useForceUpdate();
   
+  const increaseCounter = () => setCounter(counter + 1);
+  const decreaseCounter = () => setCounter(counter - 1);
   
   useEffect(() => {
-    //console.log(user.email);
     getWishList(user.email, (books) => setWishList(books));
-  }, []);
+    
+  }, [counter]);
 
-  const removeBookFromWishList = useCallback((email, title, author, editor, isbn) => {
+  const removeBookFromWishList = (email, title, author, editor, isbn) => {
     removeFromWishList(email, title, author, editor, isbn);
-    function removeBook(value, index, arr){
-      return (value.title != title || value.author != author || value.editor != editor || value.isbn != isbn)
-    }
-    setWishList(booksInWishList.filter(removeBook));
-  },[]);
-
-  const addBookToArray = (book) => {
-    booksInWishList.push(book);
-    setWishList(booksInWishList);
+    const newBooks = booksInWishList.filter(val => !(val.title == title && val.author == author && val.editor == editor && val.isbn == isbn));
+    setWishList(newBooks);
+    //decreaseCounter();
   };
 
   if(!fontLoaded)
@@ -75,7 +72,7 @@ export default function WishList () {
           <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 3}}>
             <View style={styles.buttonWithElements}>
               <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': (book) => addBookToArray(book)})}>
+                <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': () => increaseCounter()})}>
                   <Text style={styles.buttonLabel}>Aggiungi libro</Text>
                 </TouchableOpacity>
               </View>
@@ -92,7 +89,7 @@ export default function WishList () {
                 <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
                 <View style={styles.addButton}>
                   <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': (book) => addBookToArray(book)})}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': () => increaseCounter()})}>
                       <Text style={styles.buttonLabel}>Aggiungi libro</Text>
                     </TouchableOpacity>
                   </View>

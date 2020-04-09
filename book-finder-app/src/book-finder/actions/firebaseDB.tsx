@@ -104,8 +104,6 @@ export async function getWishList(email, callback_function) {
         snapshot.forEach((doc) => {
             books.push(doc.data());
         });
-        console.log("FireBase db");
-        console.log(books);
         if (books.length == 0) callback_function([]);
         else callback_function(books);
     })
@@ -114,7 +112,7 @@ export async function getWishList(email, callback_function) {
     });
 }
 
-export function removeFromWishList(email, title, author, editor, isbn) {
+export async function removeFromWishList(email, title, author, editor, isbn) {
     
     db.collection('wishlist')
     .where('email', '==', email)

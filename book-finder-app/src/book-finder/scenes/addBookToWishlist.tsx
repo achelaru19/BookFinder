@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
@@ -6,6 +6,7 @@ import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { useNavigation } from 'react-navigation-hooks';
 import { useGlobal } from 'reactn';
+import { UserContext } from '../consts/context';
 
 
 
@@ -16,7 +17,7 @@ export default function AddBookToWishList () {
     const [editor, setEditor] = useState('');
     const [isbn, setISBN] = useState('');
     //@ts-ignore
-    const [user, setUser] = useGlobal('user');
+    const [user, setUser] = useContext(UserContext);
 
     const navigation = useNavigation();
     const addBook = navigation.getParam('addBook');
@@ -29,7 +30,7 @@ export default function AddBookToWishList () {
             'isbn': isbn,
             'email': email
         }
-        addBook(newBook);
+        addBook();
         navigation.navigate("WishList");
     }
 
