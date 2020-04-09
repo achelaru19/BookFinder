@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker } from 'react-native';
 import { Icon } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
@@ -7,6 +7,8 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import NavBar from "../components/navBar";
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { updateUser } from '../actions/firebaseDB';
+import {universities, faculties} from '../consts/constants';
 
 export default function Settings() {
   //@ts-ignore
@@ -18,7 +20,6 @@ export default function Settings() {
   const [birthdate, setBirthdate] = useState(user.birthdate);
   const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
   const [email, setEmail] = useState(user.email);
-  const [emailPlaceholder, setEmailPlaceholder] = useState(email);
   const [university, setUniversity] = useState(user.university);
   const [universityPlaceholder, setUniversityPlaceholder] = useState(university);
   const [faculty, setFaculty] = useState(user.faculty);
@@ -26,23 +27,16 @@ export default function Settings() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [modifyPressed, pressModify] = useState(false);
 
-  useEffect(() => {
-    console.log(birthdate);
-  }, []);
-
   
   console.log(birthdate);
   const saveSettings = () => {
     pressModify(false);
     setFirstname(firstnamePlaceholder);
     setLastname(lastnamePlaceholder);
-    setEmail(emailPlaceholder);
     setBirthdate(birthdatePlaceholder);
     setUniversity(universityPlaceholder);
     setFaculty(facultyPlaceholder);
-    
-  console.log(birthdate);
-    console.log("modificate impostazioni");
+    updateUser(email, firstnamePlaceholder, lastnamePlaceholder, birthdatePlaceholder, universityPlaceholder, facultyPlaceholder);
   };
 
   const navigation = useNavigation();
@@ -59,7 +53,7 @@ export default function Settings() {
     return (
       <View style={{flex: 1}}>
         <NavBar title="Impostazioni" />
-        <View style={{flex: 9, flexDirection: 'column', alignItems: 'stretch'}}>
+        <View style={{flex: 3, flexDirection: 'column', alignItems: 'stretch'}}>
           <View style={styles.box}>
             <Text style={styles.label}>Email</Text>
             <Text style={styles.information}>{email}</Text>
@@ -87,7 +81,7 @@ export default function Settings() {
             modifyPressed ?
               <DatePicker
                 style={{width: 200}}
-                date={birthdatePlaceholder} //initial date from state
+                date={birthdate} //initial date from state
                 mode="date" //The enum of date, datetime and time
                 placeholder="Imposta data di nascita"
                 format="DD-MM-YYYY"
@@ -116,7 +110,14 @@ export default function Settings() {
             <Text style={styles.label}>Universit&agrave; </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={universityPlaceholder} onChangeText={text => setUniversityPlaceholder(text)} />
+              <View style={styles.pickerInput}>
+                <Picker style={styles.picker} selectedValue={universityPlaceholder} onValueChange={val => {if(val != '-') setUniversityPlaceholder(val)}}>
+                  <Picker.Item label={"Seleziona una università"} value="-" />
+                  {universities.map(uni => 
+                      <Picker.Item label={uni} value={uni} />
+                  )}
+                </Picker>
+              </View>
             :
               <Text style={styles.information}>{university}</Text>
             }
@@ -125,15 +126,19 @@ export default function Settings() {
             <Text style={styles.label}>Facolt&agrave;  </Text>
             {
             modifyPressed ?
-              <TextInput style={styles.information} value={facultyPlaceholder} onChangeText={text => setFacultyPlaceholder(text)} />
+              <View style={styles.pickerInput}>
+                <Picker style={styles.picker} selectedValue={facultyPlaceholder} onValueChange={val => {if(val != '-') setFacultyPlaceholder(val)}}> 
+                  <Picker.Item label={"Seleziona una facoltà"} value="-" />
+                  {faculties.map(fac => 
+                      <Picker.Item label={fac} value={fac} />
+                  )}
+                </Picker>
+              </View>
             :
               <Text style={styles.information}>{faculty}</Text>
             }
           </View>
-          <View style={{flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around'}}>
-            <TouchableOpacity style={styles.buttonBox} onPress={() => console.log(user)}>
-              <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Cambia Password</Text>
-            </TouchableOpacity>
+          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
             {
               modifyPressed ?
                 <TouchableOpacity style={styles.buttonBox} onPress={() => saveSettings()}>
@@ -191,9 +196,23 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#90001F',
     color: 'white',
-    width: 280,
-    maxHeight: 50,
+    marginHorizontal: 10,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  pickerInput: {
+    height: 40,
+    marginRight: 10,
+		borderColor: '#111111',
+		borderWidth: 1,
+    paddingHorizontal: 0,
+    fontSize: 16,
+    borderRadius: 10,
+    fontFamily: 'Cardo-Bold'
+  },
+  picker: {
+    paddingBottom: 40,
+    height: 20
   }
 });

@@ -66,6 +66,18 @@ export async function addUser(email, firstname, lastname, birthdate, university,
     });
 }
 
+export async function updateUser(email, firstname, lastname, birthdate, university, faculty) {
+    let docRef = db.collection('users').doc(email);
+
+    let newUser = docRef.set({
+        email: email,
+        firstname: firstname,
+        lastname: lastname,
+        birthdate: birthdate,
+        university: university,
+        faculty: faculty
+    });
+}
 
 export async function addBook(email,  firstname, lastname, title, author, isbn, editor, price) {
     let docRef = db.collection('books').doc();
