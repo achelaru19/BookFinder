@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 import { Formik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
+import { UserContext } from '../consts/context';
 
 export default function AddBook() {
 
@@ -14,10 +15,10 @@ export default function AddBook() {
   const [author, setAuthor] = useState('');
   const [editor, setEditor] = useState('');
   const [isbn, setISBN] = useState('');
-  const [subject, setSubject] = useState('');
-  const [teacher, setTeacher] = useState('');
+  const [price, setPrice] = useState('0.0');
   const [hasPressedCamera, pressCamera] = useState(false);
-  const [email, setEmail] = useState('angel.chelaru@gmail.com')
+  //@ts-ignore
+  const [user] = useContext(UserContext);
   
   const navigation = useNavigation();
 
@@ -40,8 +41,8 @@ export default function AddBook() {
           </View>
         </View>
             {!hasPressedCamera ? 
-            <View style={{flex:8, flexDirection: 'column', justifyContent: 'space-evenly'}}>
-              <View style={{flex:0.8}}>
+            <View style={{flex:9, flexDirection: 'column', justifyContent: 'space-evenly'}}>
+              <View style={{flex:1}}>
                 <Text style={styles.label}>Titolo</Text>
                 <TextInput
                   onChangeText={value => setTitle(value)}
@@ -49,7 +50,7 @@ export default function AddBook() {
                   style={styles.inputBox}
                 />
               </View>
-              <View style={{flex:0.8}}>
+              <View style={{flex:1}}>
                 <Text style={styles.label}>Autore</Text>
                 <TextInput
                   onChangeText={value => setAuthor(value)}
@@ -57,7 +58,7 @@ export default function AddBook() {
                   style={styles.inputBox}
                 />
               </View>
-              <View style={{flex:0.8}}>
+              <View style={{flex:1}}>
                 <Text style={styles.label}>Editore</Text>
                 <TextInput
                   onChangeText={value=> setEditor(value)}
@@ -65,32 +66,26 @@ export default function AddBook() {
                   style={styles.inputBox}
                 />
               </View>
-              <View style={{flex:0.8}}>
+              <View style={{flex:1}}>
                 <Text style={styles.label}>ISBN</Text>
                 <TextInput
                   onChangeText={value => setISBN(value)}
                   value={isbn}
                   style={styles.inputBox}
+                  keyboardType={'numeric'}
                 />
               </View>
-              <View style={{flex:0.8}}>
-                <Text style={styles.label}>Materia</Text>
+              <View style={{flex:1}}>
+                <Text style={styles.label}>Prezzo</Text>
                 <TextInput
-                  onChangeText={value => setSubject(value)}
-                  value={subject}
+                  onChangeText={value => setPrice(value)}
+                  value={price}
                   style={styles.inputBox}
-                />
-              </View>
-              <View style={{flex:0.8}}>
-                <Text style={styles.label}>Professore</Text>
-                <TextInput
-                  onChangeText={value=> setTeacher(value)}
-                  value={teacher}
-                  style={styles.inputBox}
+                  keyboardType={'numeric'}
                 />
               </View>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity style={styles.addButton} onPress={() => addBook(email, 'Angel', 'Chelaru', title, author, isbn, editor, 6.0)}>
+                <TouchableOpacity style={styles.addButton} onPress={() => addBook(user, title, author, isbn, editor, price)}>
                   <Text style={styles.buttonText}>Aggiungi</Text>
                 </TouchableOpacity>
               </View>
@@ -123,9 +118,10 @@ const styles = StyleSheet.create({
   inputBox: {
     borderWidth: 1,
     borderColor: 'black',
+    marginHorizontal: 10,
     borderRadius: 30,
-    height: 30,
-    paddingLeft: 15
+    height: 40,
+    paddingHorizontal: 15
   },
   labelCamera: {
     fontFamily: 'Cardo-Regular',
@@ -133,8 +129,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: 'Cardo-Bold',
-    fontSize: 15,
-    paddingLeft: 10
+    fontSize: 20,
+    paddingLeft: 20
   },
   buttonText: {
     fontFamily: 'Cardo-Bold',
@@ -147,7 +143,7 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#90001F',
     flexDirection: 'row',
-    width: 150,
+    width: 390,
     maxHeight: 38,
     borderRadius: 40,
     alignContent: 'center',

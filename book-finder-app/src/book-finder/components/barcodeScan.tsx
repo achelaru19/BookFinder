@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import axios from 'axios';
-import { parseString } from "react-native-xml2js"; 
 
 export default function BarcodeScan(props) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -18,25 +16,34 @@ export default function BarcodeScan(props) {
   const handleBarCodeScanned = ({ type, data }) => {
     if(type == 32 || type == 10) {
         setScanned(true);
-        let url = 'https://www.google.com/books/feeds/volumes/?q=ISBN%3C' + data + '%3E';
-        fetch(url)
+        let url = 'http://www.google.com/books/feeds/volumes/?q=isbn:%3C' + data + "%3E";
+        const url2 = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + data + "&key=AIzaSyBXQmkSjmW-R4qHjzocTg2aWJ4gImi3fdM";
+        fetch(url2)
         .then(response => response.text())
         .then((response) => {
-            parseString(response, function (err, result) {
-              
-                console.log(result.getElementsByTagName("entry")[0].childNodes[0].nodeValue)
-            });
+          const json = JSON.parse(response)
+          const items = json["items"]
+          const fisrtElement = items[0];
+          const volumeInfo = fisrtElement["volumeInfo"]
+          const title = volumeInfo['title'];
+          const publisher = volumeInfo['publisher']
+          const authors = volumeInfo['authors'];
+          let authorString = ''
+          const len = authors.length;
+          for(let i = 0; i < len; i++){
+            if(i != 0)
+              authorString = authorString + ', ' + authors[i];
+            else
+              authorString = authors[i];
+          }
+          if(title != undefined) props.setTitle(title);
+          if(authors != undefined) props.setAuthor(authorString);
+          if(publisher != undefined) props.setEditor(publisher);
+          props.setISBN(data);
+          props.pressCamera()
         }).catch((err) => {
             console.log('fetch', err)
         })
-      
-        console.log(data);
-        console.log(type);
-        //props.pressCamera()
-        //props.setTitle(response.title);
-        //props.setAuthor(response.authors[0].name);
-        //props.setEditor(response.publishers[0].name);
-        //props.setISBN(data);
     }
   };
 

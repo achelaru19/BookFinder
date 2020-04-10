@@ -79,7 +79,7 @@ export async function updateUser(email, firstname, lastname, birthdate, universi
     });
 }
 
-export async function addBook(email,  firstname, lastname, title, author, isbn, editor, price) {
+export async function addBook(user, title, author, isbn, editor, price) {
     let docRef = db.collection('books').doc();
     let now = new Date(Date.now());
     let newBook = docRef.set({
@@ -90,8 +90,10 @@ export async function addBook(email,  firstname, lastname, title, author, isbn, 
         price: price,
         inputTime: now.toISOString(),
         sold: false,
-        sellerName: firstname + ' ' + lastname,
-        sellerEmail: email
+        sellerName: user.firstname + ' ' + user.lastname,
+        sellerEmail: user.email,
+        sellerUniversity: user.university,
+        sellerFaculty: user.faculty
     });
 };
 

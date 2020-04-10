@@ -25,8 +25,8 @@ export default function BookInformation(props){
                         <Text style={styles.label}>Titolo: {props.book.title}</Text>
                         <Text style={styles.label}>Autore: {props.book.author}</Text>
                         <Text style={styles.label}>Editore: {props.book.editor}</Text>
-                        <Text style={styles.label}>Corso: Soft Computing</Text>
-                        <Text style={styles.label}>Universit&aacute;: Politecnico di Milano</Text>
+                        <Text style={styles.label}>ISBN: 136545787687645</Text>
+                        <Text style={styles.label}>Universit&agrave;: Politecnico di Milano</Text>
                         <Text style={styles.label}>Venditore: Marco Rossi</Text>
                         <Button title="Contatta" onPress={() => console.log("Contatta venditore")}/>
                     </View>
