@@ -52,7 +52,7 @@ export default function BookInformation(props){
                         <Text style={styles.label}>Editore: {props.book.editor}</Text>
                     </View>
                     <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center'}}>
-                        <Text style={styles.label}>9,99&euro;</Text>
+                        <Text style={styles.label}>{props.book.price}&euro;</Text>
                     </View>
                 </View>
             </TouchableOpacity>

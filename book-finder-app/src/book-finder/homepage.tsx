@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import {getUser} from './actions/firebaseDB';
+import {getUser, getBooksAroundUser} from './actions/firebaseDB';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
@@ -23,13 +23,7 @@ export default function HomePage() {
   
 
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [booksAroundMe, setBooksAroundMe] = useState([{title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                      {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                      {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                      {title: 'Titolo4', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                      {title: 'Titolo5', author: 'Autore 1', editor: 'Editore 1'}, 
-                                                      {title: 'Titolo6', author: 'Autore 2', editor: 'Editore 2'}, 
-                                                      {title: 'Titolo7', author: 'Autore 3', editor: 'Editore 3'}]); 
+  const [booksAroundMe, setBooksAroundMe] = useState([]); 
                                                       
   const [user, setUser] = useState(null);
   // @ts-ignore
@@ -44,16 +38,12 @@ export default function HomePage() {
   const updateUser = (u) => {
     setUser(u);
     userHasBeenSet(true);
-    console.log("updateuser");
+    getBooksAroundUser(user, (b) => setBooksAroundMe(b))
+    console.log(booksAroundMe)
   }
 
   useEffect(() => {
-    // get userID
-    // get booksAroundMe
     getUser(email, u => updateUser(u));
-    console.log("in effect homepage");
-    console.log(user);
-
   }, []);
 
   

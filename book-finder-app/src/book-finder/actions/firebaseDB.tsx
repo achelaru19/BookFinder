@@ -21,15 +21,22 @@ export async function getSellingBooks(email, callback_function) {
         });
 };
 
-export async function getBooksAroundUser(email){
+export async function getBooksAroundUser(user, setBooks){
     // TO BE DEFINED
     db.collection('books')
-    .where('email', '==', email)
+    .orderBy('inputTime')
     .get()
     .then((snapshot) => {
+        console.log("in db books around me")
+        let books = [];
         snapshot.forEach((doc) => {
-        console.log(doc.id, '=>', doc.data());
+            const book = doc.data();
+            if(book.sellerEmail != user.email && book.sellerUniversity == user.university){
+                console.log(book)
+                books.push(book);
+            }
         });
+        setBooks(books);
     })
     .catch((err) => {
         console.log('Error getting documents', err);

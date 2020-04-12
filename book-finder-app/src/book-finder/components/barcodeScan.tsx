@@ -16,9 +16,8 @@ export default function BarcodeScan(props) {
   const handleBarCodeScanned = ({ type, data }) => {
     if(type == 32 || type == 10) {
         setScanned(true);
-        let url = 'http://www.google.com/books/feeds/volumes/?q=isbn:%3C' + data + "%3E";
-        const url2 = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + data + "&key=AIzaSyBXQmkSjmW-R4qHjzocTg2aWJ4gImi3fdM";
-        fetch(url2)
+        const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + data + "&key=AIzaSyBXQmkSjmW-R4qHjzocTg2aWJ4gImi3fdM";
+        fetch(url)
         .then(response => response.text())
         .then((response) => {
           const json = JSON.parse(response)
