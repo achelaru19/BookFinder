@@ -9,6 +9,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 
+interface UserType {
+  firstname: string;
+  lastname: string;
+}
+
 export default function AddBook() {
 
   const [title, setTitle] = useState('');
@@ -17,8 +22,8 @@ export default function AddBook() {
   const [isbn, setISBN] = useState('');
   const [price, setPrice] = useState('0.0');
   const [hasPressedCamera, pressCamera] = useState(false);
-  //@ts-ignore
-  const [user] = useContext(UserContext);
+  
+  const user: UserType = useContext(UserContext);
   
   const navigation = useNavigation();
 

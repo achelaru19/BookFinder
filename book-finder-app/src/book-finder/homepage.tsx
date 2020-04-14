@@ -38,14 +38,17 @@ export default function HomePage() {
   const updateUser = (u) => {
     setUser(u);
     userHasBeenSet(true);
-    getBooksAroundUser(user, (b) => setBooksAroundMe(b))
-    console.log(booksAroundMe)
   }
 
   useEffect(() => {
     getUser(email, u => updateUser(u));
   }, []);
 
+  useEffect(() => {
+    getBooksAroundUser(user, (b) => setBooksAroundMe(b))
+    console.log(booksAroundMe)
+  }, [isUserSet])
+ 
   
 
   if(!fontLoaded || !isUserSet)
@@ -57,8 +60,6 @@ export default function HomePage() {
       />
       );
   else {
-    console.log("dentro return");
-    console.log(user);
     setGlobalUser(user);
     return (
           <View style={{flex: 1,flexDirection: 'column',

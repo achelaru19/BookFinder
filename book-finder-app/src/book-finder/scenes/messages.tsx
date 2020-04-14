@@ -8,18 +8,17 @@ import { UserContext } from '../consts/context';
 
 export default function Messages() {
   const [messages, setMessages] = useState([{messageID:2, sender: 3, message: 'Ciao! mi servirebbe quel libro'}, {messageID: 34, sender: 4, message: 'Come va?'}, {messageID: 12, sender: 2, message: 'Hai anche il libro di Caio?'}]);
+
   // @ts-ignore
   const [user, setUser] = useContext(UserContext);
 
   useEffect(() => {
     
-    console.log("messages page");
-    console.log(user.email);
   })
 
 
   return (
-      <View style={{flex: 1}}>
+      <View style={styles.lastMessageBox}>
         <NavBar title="Messaggi" />
         <View style={{flex: 12}}>
           {messages.map(mess => 
@@ -43,4 +42,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  lastMessageBox: {
+    flex:1,
+    height: 20,
+
+  }
 });

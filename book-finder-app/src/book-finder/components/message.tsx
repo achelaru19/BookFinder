@@ -12,7 +12,7 @@ export default function Message(props) {
 
   return (
     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'stretch',}}>
-      <TouchableOpacity onPress={() => navigation.navigate('Chat', {})}>
+      <TouchableOpacity style={{height: 20, backgroundColor: 'yellow',}} onPress={() => navigation.navigate('Chat', {otherUserEmail: 'angel.chelaru@hotmail.it'})}>
         {
           (userID == props.sender) ?
               <Text>Io: </Text>

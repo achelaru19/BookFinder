@@ -21,6 +21,67 @@ export async function getSellingBooks(email, callback_function) {
         });
 };
 
+export function searchBook(user, title, author, editor, isbn, callback_function) {
+    let books = [];
+    db.collection('books')
+    .where('title', '==', title)
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const book = doc.data();
+            if(book.sellerUniversity == user.university)
+                books.push(book);
+        });
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+
+    db.collection('books')
+    .where('author', '==', author)
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const book = doc.data();
+            if(book.sellerUniversity == user.university)
+                books.push(book);
+        });
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+
+    db.collection('books')
+    .where('editor', '==', editor)
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const book = doc.data();
+            if(book.sellerUniversity == user.university)
+                books.push(book);
+        });
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+
+    db.collection('books')
+    .where('isbn', '==', isbn)
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const book = doc.data();
+            if(book.sellerUniversity == user.university)
+                books.push(book);
+        });
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+
+    callback_function(books);
+}
+
 export async function getBooksAroundUser(user, setBooks){
     // TO BE DEFINED
     db.collection('books')
@@ -29,6 +90,7 @@ export async function getBooksAroundUser(user, setBooks){
     .then((snapshot) => {
         console.log("in db books around me")
         let books = [];
+        console.log(user);
         snapshot.forEach((doc) => {
             const book = doc.data();
             if(book.sellerEmail != user.email && book.sellerUniversity == user.university){

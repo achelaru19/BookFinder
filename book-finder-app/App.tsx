@@ -10,6 +10,7 @@ import Search from './src/book-finder/scenes/search';
 import Result from './src/book-finder/scenes/results';
 import AddBook from './src/book-finder/scenes/addBook';
 import WishList from './src/book-finder/scenes/wishList';
+import Chat from './src/book-finder/scenes/chat';
 import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
 import ChangePassword from './src/book-finder/scenes/changePassword';
 import MyBooks from './src/book-finder/scenes/myBooks';
@@ -88,6 +89,12 @@ const Drawer = createDrawerNavigator({
     screen: Settings,
     navigationOptions: {
       title: 'Impostazioni'
+    }
+  },
+  Chat: {
+    screen: Chat,
+    navigationOptions: {
+      title: 'Chat'
     }
   },
   Search: {
