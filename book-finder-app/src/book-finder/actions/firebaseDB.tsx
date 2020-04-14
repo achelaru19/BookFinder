@@ -22,15 +22,18 @@ export async function getSellingBooks(email, callback_function) {
 };
 
 export function searchBook(user, title, author, editor, isbn, callback_function) {
-    let books = [];
+    let books = new Set();
     db.collection('books')
     .where('title', '==', title)
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
-            if(book.sellerUniversity == user.university)
-                books.push(book);
+            if(book.sellerUniversity == user.university){
+                if(!books.has(book)){
+                    books.add(book);
+                }
+            }
         });
     })
     .catch((err) => {
@@ -43,8 +46,11 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
-            if(book.sellerUniversity == user.university)
-                books.push(book);
+            if(book.sellerUniversity == user.university){
+                if(!books.has(book)){
+                    books.add(book);
+                }
+            }
         });
     })
     .catch((err) => {
@@ -57,8 +63,11 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
-            if(book.sellerUniversity == user.university)
-                books.push(book);
+            if(book.sellerUniversity == user.university){
+                if(!books.has(book)){
+                    books.add(book);
+                }
+            }
         });
     })
     .catch((err) => {
@@ -71,15 +80,18 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
-            if(book.sellerUniversity == user.university)
-                books.push(book);
+            if(book.sellerUniversity == user.university){
+                if(!books.has(book)){
+                    books.add(book);
+                }
+            }
         });
     })
     .catch((err) => {
         console.log('Error getting documents', err);
     });
-
-    callback_function(books);
+    const booksArray = Array.from(books);
+    callback_function(booksArray);
 }
 
 export async function getBooksAroundUser(user, setBooks){
