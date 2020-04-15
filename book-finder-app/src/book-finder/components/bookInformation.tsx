@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import { useNavigation } from 'react-navigation-hooks';
 
 
 export default function BookInformation(props){
 
     const [expanded, setExpanded] = useState(false);
+
+    const {navigate} = useNavigation();
 
     useEffect(() => {
 
@@ -28,10 +31,10 @@ export default function BookInformation(props){
                         <Text style={styles.label}>ISBN: 136545787687645</Text>
                         <Text style={styles.label}>Universit&agrave;: Politecnico di Milano</Text>
                         <Text style={styles.label}>Venditore: Marco Rossi</Text>
-                        <Button title="Contatta" onPress={() => console.log("Contatta venditore")}/>
+                        <Button title="Contatta" onPress={() => navigate("Chat", {otherUserEmail: props.book.sellerEmail})}/>
                     </View>
                     <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center'}}>
-                        <Text style={styles.label}>9,99&euro;</Text>
+                        <Text style={styles.label}>{props.book.price}&euro;</Text>
                     </View>
                 </View>
             </TouchableOpacity> 

@@ -6,34 +6,34 @@ import { AppLoading } from 'expo';
 import BookInformation from '../components/bookInformation';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { searchBook } from '../actions/firebaseDB';
 
 export default function Result(props) {
 
     const [fontLoaded, setFontLoaded] = useState(false);
     const [books, setBooks] = useState(null); 
+    const [booksSet, booksHaveBeenSet] = useState(false);
     //@ts-ignore
     const [user] = useContext(UserContext);
     
     const navigation = useNavigation();
-    const parameters = navigation.state.params.parameters;
+    const parameters = navigation.getParam("parameters");
 
 
     useEffect(() => {
         console.log("RESULT PAGE")
         console.log(parameters);
         console.log(user);
+        searchBook(user, parameters.title, parameters.author, parameters.editor, parameters.isbn, books => setBooks(books))
+        
 
-        let book = [
-            {title: 'Titolo1', author: 'Autore 1', editor: 'Editore 1'}, 
-            {title: 'Titolo2', author: 'Autore 2', editor: 'Editore 2'}, 
-            {title: 'Titolo3', author: 'Autore 1', editor: 'Editore 1'}, 
-            {title: 'Titolo4', author: 'Autore 2', editor: 'Editore 2'}
-        ];
-        setBooks(book);
+    }, [parameters]);
 
-    }, []);
+    useEffect(() =>{
+        console.log(books)
+    }, [books])
 
-    if(!fontLoaded)
+    if(!fontLoaded || books === null)
         return (
         <AppLoading
             startAsync={loadResourcesAsync}
@@ -46,12 +46,14 @@ export default function Result(props) {
             <View style={{flex: 1}}>
                 <NavBar title="Ricerca"/>
                 <View style={{flex: 12}}>
-                <ScrollView style={{flex: 11}}>
-                    {books.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
-                </ScrollView>
+                    <ScrollView style={{flex: 11}}>
+                        {books.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+                    </ScrollView>
+                     
                 </View>
             </View>
         );
+    
 }
 
 Result.navigationOptions = ({ navigation }) => ({

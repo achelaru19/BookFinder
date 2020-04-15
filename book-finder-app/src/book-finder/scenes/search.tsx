@@ -4,7 +4,6 @@ import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
-import { NavigationEvents } from 'react-navigation';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 
@@ -13,6 +12,11 @@ export default function Search() {
   const [fontLoaded, setFontLoaded] = useState(false);
   //@ts-ignore
   const [user] = useContext(UserContext);
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [editor, setEditor] = useState('');
+  const [isbn, setISBN] = useState('');
+
   
   const navigation = useNavigation();
 
@@ -22,8 +26,13 @@ export default function Search() {
   }, []);
 
   const searchForBook = values => {
-    //navigation.navigate('Result', {parameters: values});
-    console.log(values);
+    const params: any = {
+      title: title,
+      editor: editor,
+      author: author,
+      isbn: isbn
+    }
+    navigation.navigate('Result', {parameters: params});
   };
 
   if(!fontLoaded)
@@ -65,36 +74,36 @@ export default function Search() {
                 <View style={{flex:1, justifyContent: 'space-around'}}>
                 <Text style={styles.labelText}>Titolo: </Text>
                 <TextInput
-                  onChangeText={handleChange('title')}
+                  onChangeText={val => setTitle(val)}
                   onBlur={handleBlur('title')}
-                  value={values.title}
+                  value={title}
                   style={styles.inputContainer}
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'space-around'}}>
                   <Text style={styles.labelText}>Autore: </Text>
                 <TextInput
-                  onChangeText={handleChange('author')}
+                  onChangeText={val => setAuthor(val)}
                   onBlur={handleBlur('author')}
-                  value={values.author}
+                  value={author}
                   style={styles.inputContainer}
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'space-around'}}>
                 <Text style={styles.labelText}>Editore: </Text>
                 <TextInput
-                  onChangeText={handleChange('editor')}
+                  onChangeText={val => setEditor(val)}
                   onBlur={handleBlur('editor')}
-                  value={values.editor}
+                  value={editor}
                   style={styles.inputContainer}
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'space-around'}}>
                   <Text style={styles.labelText}>ISBN: </Text>
                 <TextInput
-                  onChangeText={handleChange('isbn')}
+                  onChangeText={val => setISBN(val)}
                   onBlur={handleBlur('isbn')}
-                  value={values.isbn}
+                  value={isbn}
                   style={styles.inputContainer}
                 />
                 </View>

@@ -21,14 +21,17 @@ export async function getSellingBooks(email, callback_function) {
         });
 };
 
-export function searchBook(user, title, author, editor, isbn, callback_function) {
+export async function searchBook(user, title, author, editor, isbn, callback_function) {
     let books = new Set();
-    db.collection('books')
+    console.log("inside book function")
+    console.log(user)
+    await db.collection('books')
     .where('title', '==', title)
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
+            console.log(book)
             if(book.sellerUniversity == user.university){
                 if(!books.has(book)){
                     books.add(book);
@@ -40,7 +43,7 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
         console.log('Error getting documents', err);
     });
 
-    db.collection('books')
+    await db.collection('books')
     .where('author', '==', author)
     .get()
     .then((snapshot) => {
@@ -57,7 +60,7 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
         console.log('Error getting documents', err);
     });
 
-    db.collection('books')
+    await db.collection('books')
     .where('editor', '==', editor)
     .get()
     .then((snapshot) => {
@@ -74,7 +77,7 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
         console.log('Error getting documents', err);
     });
 
-    db.collection('books')
+    await db.collection('books')
     .where('isbn', '==', isbn)
     .get()
     .then((snapshot) => {
@@ -91,6 +94,7 @@ export function searchBook(user, title, author, editor, isbn, callback_function)
         console.log('Error getting documents', err);
     });
     const booksArray = Array.from(books);
+    console.log(booksArray);
     callback_function(booksArray);
 }
 
