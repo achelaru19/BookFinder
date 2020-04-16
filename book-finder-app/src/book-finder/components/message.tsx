@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
+import { UserContext } from '../consts/context';
 
 
 export default function Message(props) {
 
-  const [userID, setUserID] = useState(3);
+  //@ts-ignore
+  const [user] = useContext(UserContext);
 
   const navigation = useNavigation();
 
   return (
     <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'stretch',}}>
-      <TouchableOpacity style={{height: 20, backgroundColor: 'yellow',}} onPress={() => navigation.navigate('Chat', {otherUserEmail: 'angel.chelaru@hotmail.it'})}>
+      <TouchableOpacity style={{height: 20, width: 300}} onPress={() => navigation.navigate('Chat', {otherUserEmail: props.message.conversationWith})}>
         {
-          (userID == props.sender) ?
-              <Text>Io: </Text>
+          (user.email == props.message.lastSender) ?
+            <Text>Tu: {props.message.message}</Text>
           : 
-              <Text>Altro: </Text> 
+            <Text>{props.message.firstName}: {props.message.message}</Text> 
       } 
-      <Text>{props.message} </Text>
       </TouchableOpacity>
+      
     </View> 
   );
   

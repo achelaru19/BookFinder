@@ -5,7 +5,7 @@ import NavBar from '../components/navBar';
 import { View } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
-import { getUser } from '../actions/firebaseDB';
+import { getUser, getMessages } from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 
@@ -23,14 +23,15 @@ export default function Chat() {
     const onSend = (newMessage) => {
         console.log(newMessage);
         setMessages(GiftedChat.append(messages, newMessage));
+        //sendMessage(user.email, otherUserEmail, newMessage);
+        //updateLastMessage(user.email, otherUserEmail, newMessage);
         
-        //setMessages(newMessages);
     };
 
     useEffect(() => {
         console.log(otherUserEmail);
         getUser(otherUserEmail, (u) => setOtherUser(u));
-        console.log(otherUser);
+        getMessages(user.email, otherUserEmail, messages => setMessages(messages));
     }, [])
 
     if(otherUser == null)
@@ -60,3 +61,8 @@ export default function Chat() {
         );
     }
 }
+
+Chat.navigationOptions = ({ navigation }) => ({
+    title: 'Chat',
+    drawerLabel: () => null
+});

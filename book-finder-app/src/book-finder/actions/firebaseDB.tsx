@@ -4,6 +4,47 @@ import 'firebase/firestore';
 
 const db = firebaseSDK.getFirebase().firestore();
 
+export function getLastMessages(email, setLastMessages) {
+    db.collection('last_messages')
+    .doc(email)
+    .collection("messages")
+    .get()
+    .then((snapshot) => {
+        let messages = [];
+        snapshot.forEach((doc) => {
+            messages.push(doc.data());
+        });
+        console.log(messages);
+        setLastMessages(messages);
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+}
+
+export function getMessages(sender, receiver, setMessages) {
+    let emailsCombination = '';
+    if(sender > receiver){
+        emailsCombination = receiver + '_' + sender;
+    } else {
+        emailsCombination = sender + '_' + receiver;
+    }
+    db.collection('messages')
+    .doc(emailsCombination)
+    .collection('messages')
+    .limitToLast(20)
+    .get()
+    .then((snapshot) => {
+        let messages = [];
+        snapshot.forEach((doc) => {
+            messages.push(doc.data());
+        });
+        setMessages(messages);
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+}
 
 export async function getSellingBooks(email, callback_function) {
     db.collection('books')
