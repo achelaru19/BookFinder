@@ -23,7 +23,8 @@ export default function AddBook() {
   const [price, setPrice] = useState('0.0');
   const [hasPressedCamera, pressCamera] = useState(false);
   
-  const user: UserType = useContext(UserContext);
+  //@ts-ignore
+  const [user] = useContext(UserContext);
   
   const navigation = useNavigation();
 

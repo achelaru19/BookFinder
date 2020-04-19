@@ -277,9 +277,8 @@ export async function updateUser(email, firstname, lastname, birthdate, universi
 }
 
 export async function addBook(user, title, author, isbn, editor, price) {
-    let docRef = db.collection('books').doc();
     let now = new Date(Date.now());
-    let newBook = docRef.set({
+    db.collection('books').doc().set({
         title: title,
         author: author,
         isbn: isbn,
