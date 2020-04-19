@@ -98,19 +98,11 @@ export function getMessages(sender, receiver, setMessages) {
                   name: message.user.name,
                 }
               };
-              console.log(gcm)
-            const messageCmposed = {
-                message,
-                user: {
-                    _id: sender,
-                }
-            }
             messages.push(gcm);
-            console.log(doc.data());
         });
         console.log("FUORI FOREACH")
         console.log(messages)
-        setMessages(messages);
+        setMessages(messages.sort((a, b) => { return b.createdAt.localeCompare(a.createdAt)}));
     })
     .catch((err) => {
         console.log('Error getting documents', err);
