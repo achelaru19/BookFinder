@@ -18,13 +18,21 @@ import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
 import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
 import { UserContext, UserProvider } from './src/book-finder/consts/context';
+import { logout } from './src/book-finder/utils/functions';
+import { useNavigation } from 'react-navigation-hooks';
 const { width } = Dimensions.get("window");
 
 
 const CustomDrawerNavigation = (props) => {
-    
   //@ts-ignore
   const [user, setUser] = useContext(UserContext);
+  const {navigate} = useNavigation();
+
+  const loggingOut = () => {
+    logout();
+    navigate("Login");
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ height: 250, backgroundColor: '#90001F', opacity: 0.9 }}>
@@ -41,7 +49,7 @@ const CustomDrawerNavigation = (props) => {
       <View style={{ alignItems: "center", bottom: 20 }}>
         <View style={{ flexDirection: 'row' }}>
           <View style={{ flexDirection: 'column' }}>
-            <Icon name="arrow-circle-o-right" size={30} onPress={() => console.log('logout')} />
+            <Icon name="arrow-circle-o-right" size={30} onPress={() => loggingOut()} />
           </View>
         </View>
       </View>

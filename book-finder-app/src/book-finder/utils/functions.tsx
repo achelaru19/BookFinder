@@ -1,3 +1,6 @@
+import { useNavigation } from "react-navigation-hooks";
+import firebase from 'firebase';
+
 
 export const getInitials = (fullname: string) => {
     const name: string[] = fullname.split(" ");
@@ -10,3 +13,12 @@ export const getInitials = (fullname: string) => {
 
     return initials;
 }
+
+export const logout = async () => {
+    console.log("LOGOUT")
+    try {
+        firebase.auth().signOut();
+    } catch (e) {
+        console.log(e);
+    }
+} 
