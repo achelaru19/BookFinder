@@ -24,7 +24,7 @@ export default function Messages() {
           <NavBar title="Messaggi" />
           <View style={{flex: 12}}>
             {messages.map(mess => 
-              <Message message={mess} key={'message_' + mess.messageID} />
+              <Message message={mess} key={'message_' + mess.conversationWith} />
             )}
           </View>
         </View>

@@ -4,6 +4,60 @@ import 'firebase/firestore';
 
 const db = firebaseSDK.getFirebase().firestore();
 
+const mergeEmails = (email1, email2) => {
+    if(email1 > email2)
+        return email2 + '_' + email1;
+    else 
+        return email1 + '_' + email2;
+}
+
+export function setLastMessageRead(sender, receiver){
+    const senderRef = db.collection('last_messages').doc(sender).collection('messages').doc(receiver);
+    if(senderRef != undefined)
+        senderRef.update({
+            read: true
+        });
+}
+
+// Use their user data structures and not their emails
+export async function addMessage(sender, receiver, message){
+    const combinedEmail = mergeEmails(sender.email, receiver.email);
+    db.collection('messages')
+        .doc(combinedEmail)
+        .collection('messages')
+        .doc()
+        .set({message: message});       
+}
+
+export async function updateLastMessage(sender, receiver, message){
+    const now = new Date(Date.now());
+    db.collection('last_messages')
+    .doc(sender.email)
+    .collection('messages')
+    .doc(receiver.email)
+    .set({
+        conversationWith: receiver.email,
+        lastSender: sender.email,
+        name: receiver.firstname + ' ' + receiver.lastname, 
+        read: true,
+        timestamp: now.toISOString(),
+        message: message
+    });
+    
+    db.collection('last_messages')
+    .doc(receiver.email)
+    .collection('messages')
+    .doc(sender.email)
+    .set({
+        conversationWith: sender.email,
+        lastSender: sender.email,
+        name: sender.firstname + ' ' + sender.lastname, 
+        read: false,
+        timestamp: now.toISOString(),
+        message: message
+    });
+}
+
 export function getLastMessages(email, setLastMessages) {
     db.collection('last_messages')
     .doc(email)
@@ -23,22 +77,39 @@ export function getLastMessages(email, setLastMessages) {
 }
 
 export function getMessages(sender, receiver, setMessages) {
-    let emailsCombination = '';
-    if(sender > receiver){
-        emailsCombination = receiver + '_' + sender;
-    } else {
-        emailsCombination = sender + '_' + receiver;
-    }
+    let emailsCombination = mergeEmails(sender, receiver);
+    console.log(emailsCombination)
     db.collection('messages')
     .doc(emailsCombination)
     .collection('messages')
-    .limitToLast(20)
     .get()
     .then((snapshot) => {
         let messages = [];
+        console.log("inside getMessages")
         snapshot.forEach((doc) => {
-            messages.push(doc.data());
+            const message = doc.data().message;
+            console.log(message)
+            let gcm = {
+                _id: message._id,
+                text: message.text,
+                createdAt: new Date(message.createdAt.seconds * 1000).toISOString(),
+                user: {
+                  _id: message.user._id,
+                  name: message.user.name,
+                }
+              };
+              console.log(gcm)
+            const messageCmposed = {
+                message,
+                user: {
+                    _id: sender,
+                }
+            }
+            messages.push(gcm);
+            console.log(doc.data());
         });
+        console.log("FUORI FOREACH")
+        console.log(messages)
         setMessages(messages);
     })
     .catch((err) => {
