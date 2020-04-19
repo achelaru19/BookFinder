@@ -5,6 +5,8 @@ import NavBar from '../components/navBar';
 import Message from '../components/message';
 import { UserContext } from '../consts/context';
 import { getLastMessages } from '../actions/firebaseDB';
+import { SafeAreaView } from 'react-navigation';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function Messages() {
@@ -12,20 +14,26 @@ export default function Messages() {
 
   // @ts-ignore
   const [user, setUser] = useContext(UserContext);
+  const [counterLastMessangeChanged, changeLastMessage] = useState(0);
 
   useEffect(() => {
     getLastMessages(user.email, messages => setMessages(messages));
+  }, [counterLastMessangeChanged]) 
 
-  }, []) 
+  const increaseLastMessage = () => changeLastMessage(counterLastMessangeChanged + 1);
 
   if(messages.length > 0)
     return (
         <View style={styles.lastMessageBox}>
           <NavBar title="Messaggi" />
-          <View style={{flex: 12}}>
+          <View style={styles.messages}>
+            <SafeAreaView>
+            <ScrollView>
             {messages.map(mess => 
-              <Message message={mess} key={'message_' + mess.conversationWith} />
+              <Message message={mess} changeLastMessage={increaseLastMessage} key={'message_' + mess.conversationWith} />
             )}
+            </ScrollView>
+            </SafeAreaView>
           </View>
         </View>
     );
@@ -49,6 +57,11 @@ const styles = StyleSheet.create({
   lastMessageBox: {
     flex:1,
     height: 20,
+
+  },
+  messages: {
+    flex: 1,
+    flexDirection: 'row',
 
   }
 });
