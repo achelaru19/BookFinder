@@ -47,18 +47,30 @@ export default function Result(props) {
                 </View>
                 );
     }
-    else 
-        return (
-            <View style={{flex: 1}}>
-                <NavBar title="Ricerca"/>
-                <View style={{flex: 12}}>
-                    <ScrollView style={{flex: 11}}>
-                        {books.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
-                    </ScrollView>
-                     
+    else {
+        if(books.length > 0)
+            return (
+                <View style={{flex: 1}}>
+                    <NavBar title="Ricerca"/>
+                    <View style={{flex: 12}}>
+                        <ScrollView style={{flex: 11}}>
+                            {books.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}
+                        </ScrollView>
+                        
+                    </View>
                 </View>
-            </View>
-        );
+            );
+        else
+            return (
+                <View style={{flex: 1}}>
+                    <NavBar title="Ricerca"/>
+                    <View style={{flex: 12}}>
+                        <Text>NESSUN LIBRO TROVATO RICERCA</Text>
+                        
+                    </View>
+                </View>
+            );
+    }
     
 }
 

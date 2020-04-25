@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar from '../components/navBar';
 import Message from '../components/message';
@@ -13,7 +13,7 @@ import { UserType } from '../types/userType';
 
 
 export default function Messages() {
-  const [messages, setMessages] = useState<LastMessageType[]>([]);
+  const [messages, setMessages] = useState<LastMessageType[] | null>(null);
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);
   const [counterLastMessangeChanged, changeLastMessage] = useState(0);
@@ -24,27 +24,40 @@ export default function Messages() {
 
   const increaseLastMessage = () => changeLastMessage(counterLastMessangeChanged + 1);
 
-  if(messages.length > 0)
-    return (
-        <View style={styles.lastMessageBox}>
-          <NavBar title="Messaggi" />
-          <View style={styles.messages}>
-            <SafeAreaView>
-            <ScrollView>
-            {messages.map(mess => 
-              <Message message={mess} changeLastMessage={increaseLastMessage} key={'message_' + mess.conversationWith} />
-            )}
-            </ScrollView>
-            </SafeAreaView>
-          </View>
-        </View>
-    );
-  else
+  if(messages === null){
     return (
       <View style={{flex: 1}}>
         <NavBar title="Messaggi" />
+        <View style={[styles.container, styles.horizontal]}>
+            <ActivityIndicator size="large" color="#90001F" />
+        </View>
       </View>
     );
+  } 
+  else {
+    if(messages.length > 0)
+      return (
+          <View style={styles.lastMessageBox}>
+            <NavBar title="Messaggi" />
+            <View style={styles.messages}>
+              <SafeAreaView>
+              <ScrollView>
+              {messages.map(mess => 
+                <Message message={mess} changeLastMessage={increaseLastMessage} key={'message_' + mess.conversationWith} />
+              )}
+              </ScrollView>
+              </SafeAreaView>
+            </View>
+          </View>
+      );
+    else
+      return (
+        <View style={{flex: 1}}>
+          <NavBar title="Messaggi" />
+          <Text> NON CI SONO MESSAGGI</Text>
+        </View>
+      );
+  }
 }
 
 Messages.navigationOptions = ({ navigation }) => ({
@@ -59,6 +72,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
   },
   lastMessageBox: {
     flex:1,
