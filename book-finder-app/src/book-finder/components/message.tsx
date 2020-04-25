@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
-import { ListItem, Icon } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
-import { UserType } from '../types/userType';
 import { LastMessageType } from '../types/lastMessageType';
 
 interface PropsType {
@@ -15,8 +14,6 @@ interface PropsType {
 }
 
 export default function Message(props: PropsType) {
-  //@ts-ignore
-  const [user] = useContext<UserType>(UserContext);
   const lastMessage = props.message;
 
   const navigation = useNavigation();

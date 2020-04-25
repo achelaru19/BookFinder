@@ -8,15 +8,8 @@ interface PropsType {
 }
 
 export default function BookInformation(props: PropsType){
-
     const [expanded, setExpanded] = useState<boolean>(false);
-
     const {navigate} = useNavigation();
-
-    useEffect(() => {
-
-    }, []);
-        
 
     return (
         expanded ? (

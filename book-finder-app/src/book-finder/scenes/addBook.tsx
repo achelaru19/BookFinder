@@ -8,23 +8,18 @@ import { Formik } from 'formik';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { UserType } from '../types/userType';
 
-interface UserType {
-  firstname: string;
-  lastname: string;
-}
 
 export default function AddBook() {
-
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [editor, setEditor] = useState('');
   const [isbn, setISBN] = useState('');
   const [price, setPrice] = useState('0.0');
   const [hasPressedCamera, pressCamera] = useState(false);
-  
   //@ts-ignore
-  const [user] = useContext(UserContext);
+  const [user] = useContext<UserType>(UserContext);
   
   const navigation = useNavigation();
 

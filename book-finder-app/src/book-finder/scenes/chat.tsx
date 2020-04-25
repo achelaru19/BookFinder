@@ -13,11 +13,9 @@ export default function Chat() {
 
     const otherUserEmail: string = navigation.getParam('otherUserEmail');
     const [messages, setMessages] = useState<IMessage[]>([]);
-    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
     //@ts-ignore
     const [user] = useContext<UserType>(UserContext);
     const [otherUser, setOtherUser] = useState<UserType | null>(null);
-    const [isOtherUserSet, setOtherUserFlag] = useState<boolean>(false);
 
     const onSend = (chatMessage) => {
         addMessage(user, otherUser, chatMessage[0]);

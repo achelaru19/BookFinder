@@ -9,19 +9,12 @@ import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
 
 export default function Login() {
-    
-    const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [fontLoaded, setFontLoaded] = useState<boolean>(false);
-    //@ts-ignore
-    const [user, setUser] = useContext<UserType>(UserContext);
+    const user = useContext<UserType>(UserContext);
     const navigation = useNavigation();
-
-    useEffect(() => { 
-        //setUser(null);
-    }, [])
 
 	const onPressLogin = async () => {
 		const user = {
