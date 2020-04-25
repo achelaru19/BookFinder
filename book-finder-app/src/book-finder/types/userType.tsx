@@ -1,6 +1,4 @@
-export interface UserInfo{
-    id: number,
-    username: string,
+export interface UserType{
     firstname: string,
     lastname: string,
     birthdate: string,

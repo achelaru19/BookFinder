@@ -7,26 +7,22 @@ import BookInformation from '../components/bookInformation';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { searchBook } from '../actions/firebaseDB';
+import { BookType } from '../types/bookType';
+import { UserType } from '../types/userType';
 
 export default function Result(props) {
 
-    const [fontLoaded, setFontLoaded] = useState(false);
-    const [books, setBooks] = useState(null); 
-    const [booksSet, booksHaveBeenSet] = useState(false);
+    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+    const [books, setBooks] = useState<BookType[] | null>(null); 
+    const [booksSet, booksHaveBeenSet] = useState<boolean>(false);
     //@ts-ignore
-    const [user] = useContext(UserContext);
+    const [user] = useContext<UserType>(UserContext);
     
     const navigation = useNavigation();
     const parameters = navigation.getParam("parameters");
 
-
     useEffect(() => {
-        console.log("RESULT PAGE")
-        console.log(parameters);
-        console.log(user);
-        searchBook(user, parameters.title, parameters.author, parameters.editor, parameters.isbn, books => setBooks(books))
-        
-
+        searchBook(user, parameters.title, parameters.author, parameters.editor, parameters.isbn, books => setBooks(books));
     }, [parameters]);
 
     useEffect(() =>{

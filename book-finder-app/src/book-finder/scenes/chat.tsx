@@ -1,4 +1,3 @@
-
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
@@ -6,8 +5,6 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage } from '../actions/firebaseDB';
-import { AppLoading } from 'expo';
-import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 
 export default function Chat() {
     const navigation  = useNavigation();
