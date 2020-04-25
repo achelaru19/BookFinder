@@ -4,6 +4,8 @@ export const DB_URL = 'https://bookfinder-7cf67.firebaseio.com';
 export const PROJECT_ID = 'bookfinder-7cf67';
 export const STORAGE_BUCKET = 'bookfinder-7cf67.appspot.com';
 
+export const TOKEN_GOOGLE_BOOKS = 'AIzaSyBXQmkSjmW-R4qHjzocTg2aWJ4gImi3fdM';
+
 
 export const faculties: string[] = [
     "Agraria",
