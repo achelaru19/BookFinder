@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
-import { ListItem } from 'react-native-elements';
+import { ListItem, Icon } from 'react-native-elements';
 import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
 import { UserType } from '../types/userType';
 import { LastMessageType } from '../types/lastMessageType';
@@ -18,7 +18,6 @@ export default function Message(props: PropsType) {
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);
   const lastMessage = props.message;
-  const lastSender = (user.email == props.message.lastSender) ? 'Tu' : props.message.name;
 
   const navigation = useNavigation();
 
@@ -28,13 +27,24 @@ export default function Message(props: PropsType) {
         style={styles.touchOpacity} 
         onPress={() => navigation.navigate('Chat', { otherUserEmail: lastMessage.conversationWith})
       }>
-      <ListItem
-        leftAvatar={{
-          title: getInitials(lastMessage.name)
-        }}
-        title={lastMessage.name}
-        subtitle={shortenMessageIfTooLong(lastMessage.message)}
-      />
+        { lastMessage.read ?
+          <ListItem
+            leftAvatar={{
+              title: getInitials(lastMessage.name)
+            }}
+            title={lastMessage.name}
+            subtitle={shortenMessageIfTooLong(lastMessage.message)}
+          /> 
+          :
+          <ListItem
+            leftAvatar={{
+              title: getInitials(lastMessage.name)
+            }}
+            title={lastMessage.name}
+            subtitle={shortenMessageIfTooLong(lastMessage.message)}
+            rightIcon={{ name: 'circle', type: 'font-awesome', color: '#90001F'}}
+          /> 
+        }
       </TouchableOpacity>
       
     </View> 
