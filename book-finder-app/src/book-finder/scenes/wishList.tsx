@@ -10,29 +10,27 @@ import { useNavigation } from 'react-navigation-hooks';
 import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 import useForceUpdate from 'use-force-update';
 import { UserContext } from '../consts/context';
+import { WishListBookType } from '../types/wishlistBookType';
+import { UserType } from '../types/userType';
 
 export default function WishList () {
-  const [fontLoaded, setLoadedFont] = useState(false);
-  const [booksInWishList, setWishList] = useState([]);
-  const [counter, setCounter] = useState(0);
+  const [fontLoaded, setLoadedFont] = useState<boolean>(false);
+  const [booksInWishList, setWishList] = useState<WishListBookType[]>([]);
+  const [counter, setCounter] = useState<number>(0);
   //@ts-ignore
-  const [user] = useContext(UserContext);
+  const [user] = useContext<UserType>(UserContext);
   const navigation = useNavigation();
-  const forceUpdate = useForceUpdate();
   
   const increaseCounter = () => setCounter(counter + 1);
-  const decreaseCounter = () => setCounter(counter - 1);
   
   useEffect(() => {
     getWishList(user.email, (books) => setWishList(books));
-    
   }, [counter]);
 
   const removeBookFromWishList = (email, title, author, editor, isbn) => {
     removeFromWishList(email, title, author, editor, isbn);
     const newBooks = booksInWishList.filter(val => !(val.title == title && val.author == author && val.editor == editor && val.isbn == isbn));
     setWishList(newBooks);
-    //decreaseCounter();
   };
 
   if(!fontLoaded)

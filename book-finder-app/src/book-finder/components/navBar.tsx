@@ -5,13 +5,12 @@ import { useNavigation } from 'react-navigation-hooks';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 
-function NavBar(props){
+interface PropsType {
+  title: string;
+}
 
-  const [fontLoaded, setFontLoaded] = useState(false);
-  
-  useEffect(() => {
-    
-  }, []);
+const NavBar = (props: PropsType) => {
+  const [fontLoaded, setFontLoaded] = useState<boolean>(false);
 
   const navigation = useNavigation();
   if(!fontLoaded)

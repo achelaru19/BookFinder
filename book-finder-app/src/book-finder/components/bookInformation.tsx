@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
+import { BookType } from '../types/bookType';
 
+interface PropsType {
+    book: BookType;
+}
 
-export default function BookInformation(props){
+export default function BookInformation(props: PropsType){
 
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState<boolean>(false);
 
     const {navigate} = useNavigation();
 

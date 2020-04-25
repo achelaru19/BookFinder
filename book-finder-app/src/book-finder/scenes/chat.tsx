@@ -1,27 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage } from '../actions/firebaseDB';
+import { MessageType } from '../types/messageType';
+import { UserType } from '../types/userType';
 
 export default function Chat() {
     const navigation  = useNavigation();
 
-    const otherUserEmail = navigation.getParam('otherUserEmail');
-    const [messages, setMessages] = useState([]);
-    const [fontLoaded, setFontLoaded] = useState(false);
+    const otherUserEmail: string = navigation.getParam('otherUserEmail');
+    const [messages, setMessages] = useState<IMessage[]>([]);
+    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
     //@ts-ignore
-    const [user] = useContext(UserContext);
-    const [otherUser, setOtherUser] = useState(null);
-    const [isOtherUserSet, setOtherUserFlag] = useState(false);
+    const [user] = useContext<UserType>(UserContext);
+    const [otherUser, setOtherUser] = useState<UserType | null>(null);
+    const [isOtherUserSet, setOtherUserFlag] = useState<boolean>(false);
 
     const onSend = (chatMessage) => {
-        console.log("NEW MESS")
-        console.log(chatMessage[0])
-        console.log("ALL MESS")
-        console.log(messages);
         addMessage(user, otherUser, chatMessage[0]);
         updateLastMessage(user, otherUser, chatMessage[0].text); 
         setMessages(GiftedChat.append(messages, chatMessage));

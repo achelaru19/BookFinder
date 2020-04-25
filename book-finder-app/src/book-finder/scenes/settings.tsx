@@ -9,26 +9,25 @@ import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { updateUser } from '../actions/firebaseDB';
 import {universities, faculties} from '../consts/constants';
+import { UserType } from '../types/userType';
 
 export default function Settings() {
   //@ts-ignore
-  const [user] = useContext(UserContext);
-  const [firstname, setFirstname] = useState(user.firstname);
-  const [firstnamePlaceholder, setFirstnamePlaceholder] = useState(firstname);
-  const [lastname, setLastname] = useState(user.lastname);
-  const [lastnamePlaceholder, setLastnamePlaceholder] = useState(lastname);
-  const [birthdate, setBirthdate] = useState(user.birthdate);
-  const [birthdatePlaceholder, setBirthdayPlaceholder] = useState(birthdate);
-  const [email, setEmail] = useState(user.email);
-  const [university, setUniversity] = useState(user.university);
-  const [universityPlaceholder, setUniversityPlaceholder] = useState(university);
-  const [faculty, setFaculty] = useState(user.faculty);
-  const [facultyPlaceholder, setFacultyPlaceholder] = useState(faculty);
-  const [fontLoaded, setFontLoaded] = useState(false);
-  const [modifyPressed, pressModify] = useState(false);
+  const [user] = useContext<UserType>(UserContext);
+  const [firstname, setFirstname] = useState<string>(user.firstname);
+  const [firstnamePlaceholder, setFirstnamePlaceholder] = useState<string>(firstname);
+  const [lastname, setLastname] = useState<string>(user.lastname);
+  const [lastnamePlaceholder, setLastnamePlaceholder] = useState<string>(lastname);
+  const [birthdate, setBirthdate] = useState<string>(user.birthdate);
+  const [birthdatePlaceholder, setBirthdayPlaceholder] = useState<string>(birthdate);
+  const [email, setEmail] = useState<string>(user.email);
+  const [university, setUniversity] = useState<string>(user.university);
+  const [universityPlaceholder, setUniversityPlaceholder] = useState<string>(university);
+  const [faculty, setFaculty] = useState<string>(user.faculty);
+  const [facultyPlaceholder, setFacultyPlaceholder] = useState<string>(faculty);
+  const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+  const [modifyPressed, pressModify] = useState<boolean>(false);
 
-  
-  console.log(birthdate);
   const saveSettings = () => {
     pressModify(false);
     setFirstname(firstnamePlaceholder);

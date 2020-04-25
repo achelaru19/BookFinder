@@ -5,19 +5,22 @@ import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { ListItem } from 'react-native-elements';
 import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
+import { UserType } from '../types/userType';
+import { LastMessageType } from '../types/lastMessageType';
 
+interface PropsType {
+  message: LastMessageType;
+  changeLastMessage: () => void;
+  key: string;
+}
 
-
-
-export default function Message(props) {
-
+export default function Message(props: PropsType) {
   //@ts-ignore
-  const [user] = useContext(UserContext);
+  const [user] = useContext<UserType>(UserContext);
   const lastMessage = props.message;
+  const lastSender = (user.email == props.message.lastSender) ? 'Tu' : props.message.name;
 
   const navigation = useNavigation();
-
-  const lastSender = (user.email == props.message.lastSender) ? 'Tu' : props.message.name;
 
   return (
     <View style={styles.container}>

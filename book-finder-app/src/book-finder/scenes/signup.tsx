@@ -10,16 +10,15 @@ import { AppLoading } from 'expo';
 import {universities, faculties} from '../consts/constants';
 
 export default function SignUp() {
-    
-    const [email, setEmail] = useState('');
-    const [password1, setPassword1] = useState('');
-    const [password2, setPassword2] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [birthdate, setBirthdate] = useState("01-01-1995");
-    const [university, setUniversity] = useState('');
-    const [faculty, setFaculty] = useState('');
-    const [fontLoaded, setFontLoaded] = useState(false);
+    const [email, setEmail] = useState<string>('');
+    const [password1, setPassword1] = useState<string>('');
+    const [password2, setPassword2] = useState<string>('');
+    const [firstname, setFirstname] = useState<string>('');
+    const [lastname, setLastname] = useState<string>('');
+    const [birthdate, setBirthdate] = useState<string>("01-01-1995");
+    const [university, setUniversity] = useState<string>('');
+    const [faculty, setFaculty] = useState<string>('');
+    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
 
     const navigation = useNavigation();
 

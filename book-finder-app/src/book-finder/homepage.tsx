@@ -7,33 +7,22 @@ import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './utils/fontLoader';
-import { DrawerItems } from 'react-navigation-drawer';
 import { UserContext } from './consts/context';
-
-interface User {
-  email: string;
-  firstname: string;
-  lastname: string;
-  university: string;
-  faculty: string;
-  birthdate: string;
-}
+import { BookType } from './types/bookType';
+import { UserType } from './types/userType';
 
 export default function HomePage() {
-  
-
-  const [fontLoaded, setFontLoaded] = useState(false);
-  const [booksAroundMe, setBooksAroundMe] = useState([]); 
-                                                      
-  const [user, setUser] = useState(null);
+  const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+  const [booksAroundMe, setBooksAroundMe] = useState<BookType[]>([]);                                            
+  const [user, setUser] = useState<UserType | null>(null);
   // @ts-ignore
-  const [globalUser, setGlobalUser] = useContext(UserContext);
-  const [isUserSet, userHasBeenSet] = useState(false);
+  const [globalUser, setGlobalUser] = useContext<UserType>(UserContext);
+  const [isUserSet, userHasBeenSet] = useState<boolean>(false);
 
   const { navigate } = useNavigation();
   const navigation = useNavigation();
   
-  const email = navigation.getParam('email');
+  const email: string = navigation.getParam('email');
 
   const updateUser = (user) => {
     setUser(user);
@@ -49,8 +38,6 @@ export default function HomePage() {
     console.log(booksAroundMe)
   }, [isUserSet, user])
  
-  
-
   if(!fontLoaded || !isUserSet){
     if(!fontLoaded)
       return (
@@ -77,7 +64,7 @@ export default function HomePage() {
           justifyContent: 'center',
           borderTopWidth: 10,
           alignItems: 'stretch',}}>
-            <NavBar title="BookFinder" user={user}/>
+            <NavBar title="BookFinder"/>
             <View style={{flex: 12}}>
               <ScrollView style={{flex: 11}}>
                 {booksAroundMe.map((book, index) => <BookInformation book={book} key={'book-info-'+index}/>)}

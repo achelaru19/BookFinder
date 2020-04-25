@@ -7,10 +7,12 @@ import { UserContext } from '../consts/context';
 import { getLastMessages } from '../actions/firebaseDB';
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
+import { IMessage } from 'react-native-gifted-chat';
+import { LastMessageType } from '../types/lastMessageType';
 
 
 export default function Messages() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<LastMessageType[]>([]);
 
   // @ts-ignore
   const [user, setUser] = useContext(UserContext);

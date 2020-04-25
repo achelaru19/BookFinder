@@ -1,11 +1,16 @@
 import React, {createContext, useState, useCallback} from 'react';
+import { UserType } from '../types/userType';
 
 const initialUser = {
-  firstname: 'Not',
-  lastname: 'Defined'
+  firstname: 'Not defined',
+  lastname: 'Not defined',
+  birthdate: 'Not defined',
+  email: 'Not defined',
+  university: 'Not defined',
+  faculty: 'Note defined'
 };
 
-export const UserContext = createContext(initialUser);
+export const UserContext = createContext<UserType>(initialUser);
 
 export const UserProvider = props => {
   const [user, setUser] = useState({});

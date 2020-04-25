@@ -6,16 +6,17 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 import { UserContext } from '../consts/context';
+import { UserType } from '../types/userType';
 
 export default function Login() {
     
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [fontLoaded, setFontLoaded] = useState(false);
+    const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [loggedIn, setLoggedIn] = useState<boolean>(false);
+    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
     //@ts-ignore
-    const [user, setUser] = useContext(UserContext);
+    const [user, setUser] = useContext<UserType>(UserContext);
     const navigation = useNavigation();
 
     useEffect(() => { 
@@ -24,7 +25,6 @@ export default function Login() {
 
 	const onPressLogin = async () => {
 		const user = {
-			name: username,
 			email: email,
 			password: password
 		};

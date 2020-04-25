@@ -8,8 +8,8 @@ import { AppLoading } from 'expo';
 
 export default function ForgottenPassword() {
     
-    const [email, setEmail] = useState('');
-    const [fontLoaded, setFontLoaded] = useState(false);
+    const [email, setEmail] = useState<string>('');
+    const [fontLoaded, setFontLoaded] = useState<boolean>(false);
 
     const navigation = useNavigation();
 

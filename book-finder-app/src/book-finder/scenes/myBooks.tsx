@@ -7,14 +7,16 @@ import NavBar from "../components/navBar";
 import {getSellingBooks} from '../actions/firebaseDB';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { UserContext } from '../consts/context';
+import { BookType } from '../types/bookType';
+import { UserType } from '../types/userType';
 
 
 export default function MyBooks() {
 
-    const [fontLoaded, setLoadedFont] = useState(false);
-    const [myBooks, setMyBooks] = useState([]);
+    const [fontLoaded, setLoadedFont] = useState<boolean>(false);
+    const [myBooks, setMyBooks] = useState<BookType[]>([]);
     //@ts-ignore
-    const [user] = useContext(UserContext);
+    const [user] = useContext<UserType>(UserContext);
 
     useEffect(() => {
         getSellingBooks(user.email, (books) => setMyBooks(books));

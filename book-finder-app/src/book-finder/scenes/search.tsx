@@ -6,27 +6,23 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import { AppLoading } from 'expo';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { UserType } from '../types/userType';
+import { SearchBookType } from '../types/searchBookType';
 
 export default function Search() {
 
-  const [fontLoaded, setFontLoaded] = useState(false);
+  const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   //@ts-ignore
-  const [user] = useContext(UserContext);
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [editor, setEditor] = useState('');
-  const [isbn, setISBN] = useState('');
+  const [user] = useContext<UserType>(UserContext);
+  const [title, setTitle] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
+  const [editor, setEditor] = useState<string>('');
+  const [isbn, setISBN] = useState<string>('');
 
-  
   const navigation = useNavigation();
 
-  useEffect(() => {
-    console.log('search')
-    console.log(user);
-  }, []);
-
-  const searchForBook = values => {
-    const params: any = {
+  const searchForBook = () => {
+    const params: SearchBookType = {
       title: title,
       editor: editor,
       author: author,
@@ -67,7 +63,7 @@ export default function Search() {
 
             }
             }
-            onSubmit={values=> searchForBook(values)}
+            onSubmit={() => searchForBook()}
           >
             {({ handleChange, handleBlur, values }) => (
               <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -117,7 +113,7 @@ export default function Search() {
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                  <TouchableOpacity style={styles.searchButton} onPress={values => searchForBook(values)}>
+                  <TouchableOpacity style={styles.searchButton} onPress={() => searchForBook()}>
                     <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
                   </TouchableOpacity>
                 </View>

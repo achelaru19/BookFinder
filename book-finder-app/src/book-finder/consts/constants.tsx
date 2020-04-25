@@ -5,7 +5,7 @@ export const PROJECT_ID = 'bookfinder-7cf67';
 export const STORAGE_BUCKET = 'bookfinder-7cf67.appspot.com';
 
 
-export const faculties = [
+export const faculties: string[] = [
     "Agraria",
     "Architettura",
     "Beni Culturali",
@@ -34,7 +34,7 @@ export const faculties = [
     "Veterinaria",
 ];
 
-export const universities = [
+export const universities: string[] = [
    'Università degli Studi di Roma "La Sapienza"',
    'Università di Bologna',
    'Università degli Studi di Napoli Federico II',
