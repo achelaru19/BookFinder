@@ -4,7 +4,7 @@ import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
 import {addBook} from '../actions/firebaseDB';
 import { Icon } from 'react-native-elements';
-import { Formik } from 'formik';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
@@ -12,16 +12,27 @@ import { UserType } from '../types/userType';
 
 
 export default function AddBook() {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [editor, setEditor] = useState('');
-  const [isbn, setISBN] = useState('');
-  const [price, setPrice] = useState('0.0');
-  const [hasPressedCamera, pressCamera] = useState(false);
+  const [title, setTitle] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
+  const [editor, setEditor] = useState<string>('');
+  const [isbn, setISBN] = useState<string>('');
+  const [price, setPrice] = useState<string>('0.0');
+  const [hasPressedCamera, pressCamera] = useState<boolean>(false);
+  const [bookAdded, setBookAdded] = useState<boolean>(false);
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);
   
   const navigation = useNavigation();
+
+  const addBookFunction = () => {
+    addBook(user, title, author, isbn, editor, price);
+    setBookAdded(true);
+    setTitle('');
+    setAuthor('');
+    setEditor('');
+    setISBN('');
+    setPrice('0.0');
+  }
 
   return (
     <View style={styles.container}>
@@ -86,10 +97,24 @@ export default function AddBook() {
                 />
               </View>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity style={styles.addButton} onPress={() => addBook(user, title, author, isbn, editor, price)}>
+                <TouchableOpacity style={styles.addButton} onPress={addBookFunction}>
                   <Text style={styles.buttonText}>Aggiungi</Text>
                 </TouchableOpacity>
               </View>
+              <AwesomeAlert
+                    show={bookAdded}
+                    showProgress={false}
+                    title="Libro aggiunto"
+                    message="Il libro da te inserito &egrave; stato inserito tra i tuoi libri in vendita"
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    confirmText="OK"
+                    confirmButtonColor="#009071"
+                    onConfirmPressed={() => {
+                        setBookAdded(false);
+                    }}
+                />
           </View>
           : 
             <View style={{flex: 13}}>

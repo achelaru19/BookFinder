@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { useNavigation } from 'react-navigation-hooks';
@@ -11,11 +12,12 @@ import { UserContext } from '../consts/context';
 
 
 export default function AddBookToWishList () {
-    const [fontLoaded, setLoadedFont] = useState(false);
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [editor, setEditor] = useState('');
-    const [isbn, setISBN] = useState('');
+    const [fontLoaded, setLoadedFont] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>('');
+    const [author, setAuthor] = useState<string>('');
+    const [editor, setEditor] = useState<string>('');
+    const [isbn, setISBN] = useState<string>('');
+    const [bookAdded, setBookAdded] = useState<boolean>(false);
     //@ts-ignore
     const [user, setUser] = useContext(UserContext);
 
@@ -23,15 +25,12 @@ export default function AddBookToWishList () {
     const addBook = navigation.getParam('addBook');
     const addBookFunction = (email, title, author, isbn, editor) => {
         addBookToWishList(email, title, author, isbn, editor);
-        const newBook = {
-            'title': title,
-            'author': author,
-            'editor': editor,
-            'isbn': isbn,
-            'email': email
-        }
         addBook();
-        navigation.navigate("WishList");
+        setTitle('');
+        setAuthor('');
+        setEditor('');
+        setISBN('');
+        setBookAdded(true);
     }
 
     if(!fontLoaded)
@@ -92,6 +91,21 @@ export default function AddBookToWishList () {
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>
+                <AwesomeAlert
+                    show={bookAdded}
+                    showProgress={false}
+                    title="Libro aggiunto alla Wish List"
+                    message="Riceverai una notifica non appena qualcuno della tua universit&agrave; aggiunger&agrave; questo libro"
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    confirmText="OK"
+                    confirmButtonColor="#009071"
+                    onConfirmPressed={() => {
+                        setBookAdded(false);
+                        navigation.navigate("WishList");
+                    }}
+                />
             </View>
         );
     }

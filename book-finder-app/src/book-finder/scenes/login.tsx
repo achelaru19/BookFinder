@@ -5,6 +5,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
 
@@ -13,6 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState<string>('');
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+    const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
     const user = useContext<UserType>(UserContext);
     const navigation = useNavigation();
 
@@ -37,7 +39,7 @@ export default function Login() {
 	};
 
 	const loginFailed = () => {
-		alert('Credenziali errate');
+		setWrongCredentials(true);
     };
     
     if(!fontLoaded)
@@ -87,6 +89,20 @@ export default function Login() {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <AwesomeAlert
+                    show={wrongCredentials}
+                    showProgress={false}
+                    title="Credenziali errate"
+                    message="L'email e la password inserite non sono valide"
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    confirmText="OK"
+                    confirmButtonColor="#DD6B55"
+                    onConfirmPressed={() => {
+                        setWrongCredentials(false);
+                    }}
+                />
             </View>
         );
    
