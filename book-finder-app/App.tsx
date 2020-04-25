@@ -12,7 +12,6 @@ import AddBook from './src/book-finder/scenes/addBook';
 import WishList from './src/book-finder/scenes/wishList';
 import Chat from './src/book-finder/scenes/chat';
 import AddBookToWishList from './src/book-finder/scenes/addBookToWishlist';
-import ChangePassword from './src/book-finder/scenes/changePassword';
 import MyBooks from './src/book-finder/scenes/myBooks';
 import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
