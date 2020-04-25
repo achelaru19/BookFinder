@@ -20,17 +20,21 @@ import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
 import { UserContext, UserProvider } from './src/book-finder/consts/context';
 import { logout } from './src/book-finder/utils/functions';
 import { useNavigation } from 'react-navigation-hooks';
+import {shortenNameIfTooLong} from './src/book-finder/utils/functions';
 const { width } = Dimensions.get("window");
+
+
 
 
 const CustomDrawerNavigation = (props) => {
   //@ts-ignore
   const [user, setUser] = useContext(UserContext);
-  const {navigate} = useNavigation();
+  const navigation = useNavigation();
+
 
   const loggingOut = () => {
     logout();
-    navigate("Login");
+    navigation.navigate('Login');
   }
 
   return (
@@ -40,7 +44,7 @@ const CustomDrawerNavigation = (props) => {
            <Image source={require('./src/book-finder/assets/images/student-logo.png')} style={{ height: 150, width: 150, borderRadius: 60, marginTop: 30 , backgroundColor: '#fff' }} />
         </View>
         <View style={{ height: 25, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
-  <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>{user.firstname} {user.lastname}</Text>
+  <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>{shortenNameIfTooLong(user.firstname + " " + user.lastname)}</Text>
         </View>
       </View>
       <ScrollView>

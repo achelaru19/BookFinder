@@ -38,7 +38,11 @@ export default function Messages() {
         </View>
     );
   else
-    return <View />
+    return (
+      <View style={{flex: 1}}>
+        <NavBar title="Messaggi" />
+      </View>
+    );
 }
 
 Messages.navigationOptions = ({ navigation }) => ({

@@ -1,10 +1,11 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import { UserContext } from '../consts/context';
 
 export default function Login() {
     
@@ -13,8 +14,13 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
-
+    //@ts-ignore
+    const [user, setUser] = useContext(UserContext);
     const navigation = useNavigation();
+
+    useEffect(() => { 
+        //setUser(null);
+    }, [])
 
 	const onPressLogin = async () => {
 		const user = {
@@ -30,13 +36,6 @@ export default function Login() {
 		);
     };
 
-    /*
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            navigation.navigate('Home');
-        } 
-    });
-    */
 
 	const loginSuccess = async () => {
         navigation.navigate('Home', {

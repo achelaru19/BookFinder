@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage } from '../actions/firebaseDB';
@@ -41,14 +41,12 @@ export default function Chat() {
 
     if(otherUser == null)
         return (
-            /*<AppLoading
-            startAsync={loadResourcesAsync}
-            onError={handleLoadingError}
-            onFinish={() => handleFinishLoading(setFontLoaded)} 
-            />*/
             <View style={{flex: 1}}>
-                    <Text>W AITING</Text>
-            </View> 
+                <NavBar title={'Chat'}/>
+                <View style={[styles.container, styles.horizontal]}>
+                    <ActivityIndicator size="large" color="#90001F" />
+                </View>
+            </View>
             );
     else {
         return (
@@ -74,3 +72,16 @@ Chat.navigationOptions = ({ navigation }) => ({
     title: 'Chat',
     drawerLabel: () => null
 });
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center"
+    },
+    horizontal: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: 10
+    }
+  });
+  

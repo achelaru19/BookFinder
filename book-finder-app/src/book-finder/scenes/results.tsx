@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
@@ -33,14 +33,24 @@ export default function Result(props) {
         console.log(books)
     }, [books])
 
-    if(!fontLoaded || books === null)
-        return (
-        <AppLoading
-            startAsync={loadResourcesAsync}
-            onError={handleLoadingError}
-            onFinish={() => handleFinishLoading(setFontLoaded)} 
-        />
-        );
+    if(!fontLoaded || books === null){
+        if(!fontLoaded) 
+            return (
+                <AppLoading
+                    startAsync={loadResourcesAsync}
+                    onError={handleLoadingError}
+                    onFinish={() => handleFinishLoading(setFontLoaded)} 
+                />);
+        else 
+            return (
+                <View style={{flex: 1}}>
+                    <NavBar title="Ricerca"/>
+                    <View style={[styles.container, styles.horizontal]}>
+                        <ActivityIndicator size="large" color="#90001F" />
+                    </View>
+                </View>
+                );
+    }
     else 
         return (
             <View style={{flex: 1}}>
@@ -60,3 +70,16 @@ Result.navigationOptions = ({ navigation }) => ({
     title: 'Result',
     drawerLabel: () => null
 });
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center"
+    },
+    horizontal: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: 10
+    }
+  });
+  

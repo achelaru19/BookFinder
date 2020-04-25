@@ -9,10 +9,10 @@ export async function loadResourcesAsync() {
     ]);
   }
   
- export function handleLoadingError(error) {
-    console.warn(error);
-  }
-  
- export function handleFinishLoading(setLoadingComplete) {
-    setLoadingComplete(true);
-  }
+export function handleLoadingError(error) {
+  console.warn(error);
+}
+
+export function handleFinishLoading(setLoadingComplete) {
+  setLoadingComplete(true);
+}

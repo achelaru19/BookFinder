@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { ListItem } from 'react-native-elements';
-import { getInitials } from '../utils/functions';
+import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
 
 
 
@@ -30,7 +30,7 @@ export default function Message(props) {
           title: getInitials(lastMessage.name)
         }}
         title={lastMessage.name}
-        subtitle={lastMessage.message}
+        subtitle={shortenMessageIfTooLong(lastMessage.message)}
       />
       </TouchableOpacity>
       

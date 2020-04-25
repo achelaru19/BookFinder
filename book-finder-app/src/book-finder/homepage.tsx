@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
 import {getUser, getBooksAroundUser} from './actions/firebaseDB';
 import NavBar from './components/navBar';
@@ -35,30 +35,41 @@ export default function HomePage() {
   
   const email = navigation.getParam('email');
 
-  const updateUser = (u) => {
-    setUser(u);
+  const updateUser = (user) => {
+    setUser(user);
     userHasBeenSet(true);
   }
 
   useEffect(() => {
     getUser(email, u => updateUser(u));
-  }, []);
+  }, [email]);
 
   useEffect(() => {
     getBooksAroundUser(user, (b) => setBooksAroundMe(b))
     console.log(booksAroundMe)
-  }, [isUserSet])
+  }, [isUserSet, user])
  
   
 
-  if(!fontLoaded || !isUserSet)
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setFontLoaded)} 
-      />
+  if(!fontLoaded || !isUserSet){
+    if(!fontLoaded)
+      return (
+        <AppLoading
+          startAsync={loadResourcesAsync}
+          onError={handleLoadingError}
+          onFinish={() => handleFinishLoading(setFontLoaded)} 
+        />
       );
+      else
+        return (
+          <View style={{flex: 1}}>
+            <NavBar title={'Book Finder'}/>
+              <View style={[styles.container, styles.horizontal]}>
+                  <ActivityIndicator size="large" color="#90001F" />
+              </View>
+          </View>
+        );
+  }
   else {
     setGlobalUser(user);
     return (
@@ -94,6 +105,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
   },
   addBookButton: {
     position: 'absolute',
