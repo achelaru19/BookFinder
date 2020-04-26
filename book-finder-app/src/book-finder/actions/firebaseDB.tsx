@@ -1,17 +1,13 @@
 import firebaseSDK from './firebaseSDK';
-import firebase from 'firebase';
-import 'firebase/firestore';
+import { mergeEmails } from '../utils/functions';
+import { makeNoSQLInjectionFree } from '../utils/inputFormatChecks';
 
 const db = firebaseSDK.getFirebase().firestore();
 
-const mergeEmails = (email1, email2) => {
-    if(email1 > email2)
-        return email2 + '_' + email1;
-    else 
-        return email1 + '_' + email2;
-}
-
-export function setLastMessageRead(sender, receiver){
+export function setLastMessageRead(inputSender, inputReceiver){
+    const sender = makeNoSQLInjectionFree(inputSender);
+    const receiver = makeNoSQLInjectionFree(inputReceiver);
+    
     const senderRef = db.collection('last_messages').doc(sender).collection('messages').doc(receiver);
     if(senderRef != undefined)
         senderRef.update({
@@ -20,8 +16,13 @@ export function setLastMessageRead(sender, receiver){
 }
 
 // Use their user data structures and not their emails
-export async function addMessage(sender, receiver, message){
+export async function addMessage(inputSender, inputReceiver, inputMessage){
+    const sender = makeNoSQLInjectionFree(inputSender);
+    const receiver = makeNoSQLInjectionFree(inputReceiver);
+    const message = makeNoSQLInjectionFree(inputMessage);
+
     const combinedEmail = mergeEmails(sender.email, receiver.email);
+
     db.collection('messages')
         .doc(combinedEmail)
         .collection('messages')
@@ -29,7 +30,11 @@ export async function addMessage(sender, receiver, message){
         .set({message: message});       
 }
 
-export async function updateLastMessage(sender, receiver, message){
+export async function updateLastMessage(inputSender, inputReceiver, inputMessage){
+    const sender = makeNoSQLInjectionFree(inputSender);
+    const receiver = makeNoSQLInjectionFree(inputReceiver);
+    const message = makeNoSQLInjectionFree(inputMessage);
+
     const now = new Date(Date.now());
     db.collection('last_messages')
     .doc(sender.email)
@@ -58,7 +63,9 @@ export async function updateLastMessage(sender, receiver, message){
     });
 }
 
-export function getLastMessages(email, setLastMessages) {
+export function getLastMessages(inputEmail, setLastMessages) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+
     db.collection('last_messages')
     .doc(email)
     .collection("messages")
@@ -68,7 +75,6 @@ export function getLastMessages(email, setLastMessages) {
         snapshot.forEach((doc) => {
             messages.push(doc.data());
         });
-        console.log(messages);
         setLastMessages(messages);
     })
     .catch((err) => {
@@ -76,20 +82,21 @@ export function getLastMessages(email, setLastMessages) {
     });
 }
 
-export function getMessages(sender, receiver, setMessages) {
-    let emailsCombination = mergeEmails(sender, receiver);
-    console.log(emailsCombination)
+export function getMessages(inputSender, inputReceiver, setMessages) {
+    const sender = makeNoSQLInjectionFree(inputSender);
+    const receiver = makeNoSQLInjectionFree(inputReceiver);
+
+    const emailsCombination = mergeEmails(sender, receiver);
+
     db.collection('messages')
     .doc(emailsCombination)
     .collection('messages')
     .get()
     .then((snapshot) => {
         let messages = [];
-        console.log("inside getMessages")
         snapshot.forEach((doc) => {
             const message = doc.data().message;
-            console.log(message)
-            let gcm = {
+            const gcm = {
                 _id: message._id,
                 text: message.text,
                 createdAt: new Date(message.createdAt.seconds * 1000).toISOString(),
@@ -100,8 +107,6 @@ export function getMessages(sender, receiver, setMessages) {
               };
             messages.push(gcm);
         });
-        console.log("FUORI FOREACH")
-        console.log(messages)
         setMessages(messages.sort((a, b) => { return b.createdAt.localeCompare(a.createdAt)}));
     })
     .catch((err) => {
@@ -109,7 +114,9 @@ export function getMessages(sender, receiver, setMessages) {
     });
 }
 
-export async function getSellingBooks(email, callback_function) {
+export async function getSellingBooks(inputEmail, callback_function) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+
     db.collection('books')
         .where('sellerEmail', '==', email)
         .get()
@@ -125,17 +132,21 @@ export async function getSellingBooks(email, callback_function) {
         });
 };
 
-export async function searchBook(user, title, author, editor, isbn, callback_function) {
+export async function searchBook(inputUser, inputTitle, inputAuthor, inputEditor, inputISBN, callback_function) {
+    const user = makeNoSQLInjectionFree(inputUser);
+    const title = makeNoSQLInjectionFree(inputTitle);
+    const author = makeNoSQLInjectionFree(inputAuthor);
+    const editor = makeNoSQLInjectionFree(inputEditor);
+    const isbn = makeNoSQLInjectionFree(inputISBN);
+
     let books = new Set();
-    console.log("inside book function")
-    console.log(user)
+
     await db.collection('books')
     .where('title', '==', title)
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
             const book = doc.data();
-            console.log(book)
             if(book.sellerUniversity == user.university){
                 if(!books.has(book)){
                     books.add(book);
@@ -197,24 +208,21 @@ export async function searchBook(user, title, author, editor, isbn, callback_fun
     .catch((err) => {
         console.log('Error getting documents', err);
     });
+
     const booksArray = Array.from(books);
-    console.log(booksArray);
     callback_function(booksArray);
 }
 
 export async function getBooksAroundUser(user, setBooks){
-    // TO BE DEFINED
     db.collection('books')
     .orderBy('inputTime')
     .get()
     .then((snapshot) => {
         console.log("in db books around me")
         let books = [];
-        console.log(user);
         snapshot.forEach((doc) => {
             const book = doc.data();
             if(book.sellerEmail != user.email && book.sellerUniversity == user.university){
-                console.log(book)
                 books.push(book);
             }
         });
@@ -225,15 +233,15 @@ export async function getBooksAroundUser(user, setBooks){
     });
 }
 
-export function getUser(email, callback_function) {
+export function getUser(inputEmail, callback_function) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+
     db.collection('users')
     .where('email', '==', email)
     .get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
-            console.log("data");
             const userReturned = doc.data();
-            console.log(userReturned);
             callback_function(userReturned);
         });
     })
@@ -242,10 +250,17 @@ export function getUser(email, callback_function) {
     });
 }
 
-export async function addUser(email, firstname, lastname, birthdate, university, faculty) {
-    let docRef = db.collection('users').doc(email);
+export async function addUser(inputEmail, inputFirstname, inputLastname, inputBirthdate, inputUniversity, inputFaculty) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    const firstname = makeNoSQLInjectionFree(inputFirstname);
+    const lastname = makeNoSQLInjectionFree(inputLastname);
+    const birthdate = makeNoSQLInjectionFree(inputBirthdate);
+    const university = makeNoSQLInjectionFree(inputUniversity);
+    const faculty = makeNoSQLInjectionFree(inputFaculty);
 
-    let newUser = docRef.set({
+    db.collection('users')
+    .doc(email)
+    .set({
         email: email,
         firstname: firstname,
         lastname: lastname,
@@ -255,10 +270,17 @@ export async function addUser(email, firstname, lastname, birthdate, university,
     });
 }
 
-export async function updateUser(email, firstname, lastname, birthdate, university, faculty) {
-    let docRef = db.collection('users').doc(email);
+export async function updateUser(inputEmail, inputFirstname, inputLastname, inputBirthdate, inputUniversity, inputFaculty) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    const firstname = makeNoSQLInjectionFree(inputFirstname);
+    const lastname = makeNoSQLInjectionFree(inputLastname);
+    const birthdate = makeNoSQLInjectionFree(inputBirthdate);
+    const university = makeNoSQLInjectionFree(inputUniversity);
+    const faculty = makeNoSQLInjectionFree(inputFaculty);
 
-    let newUser = docRef.set({
+    db.collection('users')
+    .doc(email)
+    .set({
         email: email,
         firstname: firstname,
         lastname: lastname,
@@ -268,9 +290,18 @@ export async function updateUser(email, firstname, lastname, birthdate, universi
     });
 }
 
-export async function addBook(user, title, author, isbn, editor, price) {
+export async function addBook(inputUser, inputTitle, inputAuthor, inputISBN, inputEditor, inputPrice) {
+    const user = makeNoSQLInjectionFree(inputUser);
+    const title = makeNoSQLInjectionFree(inputTitle);
+    const author = makeNoSQLInjectionFree(inputAuthor);
+    const editor = makeNoSQLInjectionFree(inputEditor);
+    const isbn = makeNoSQLInjectionFree(inputISBN);
+    const price = makeNoSQLInjectionFree(inputPrice);
+
     let now = new Date(Date.now());
-    db.collection('books').doc().set({
+    db.collection('books')
+    .doc()
+    .set({
         title: title,
         author: author,
         isbn: isbn,
@@ -285,10 +316,16 @@ export async function addBook(user, title, author, isbn, editor, price) {
     });
 };
 
-export async function addBookToWishList(email, title, author, isbn, editor) {
-    let docRef = db.collection('wishlist').doc();
+export async function addBookToWishList(inputEmail, inputTitle, inputAuthor, inputISBN, inputEditor) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    const title = makeNoSQLInjectionFree(inputTitle);
+    const author = makeNoSQLInjectionFree(inputAuthor);
+    const editor = makeNoSQLInjectionFree(inputEditor);
+    const isbn = makeNoSQLInjectionFree(inputISBN);
 
-    let newWishBook = docRef.set({
+    db.collection('wishlist')
+    .doc()
+    .set({
         title: title,
         author: author,
         isbn: isbn,
@@ -297,7 +334,9 @@ export async function addBookToWishList(email, title, author, isbn, editor) {
     });
 };
 
-export async function getWishList(email, callback_function) {
+export async function getWishList(inputEmail, callback_function) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    
     db.collection('wishlist')
     .where('email', '==', email)
     .get()
@@ -314,8 +353,13 @@ export async function getWishList(email, callback_function) {
     });
 }
 
-export async function removeFromWishList(email, title, author, editor, isbn) {
-    
+export async function removeFromWishList(inputEmail, inputTitle, inputAuthor, inputEditor, inputISBN) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    const title = makeNoSQLInjectionFree(inputTitle);
+    const author = makeNoSQLInjectionFree(inputAuthor);
+    const editor = makeNoSQLInjectionFree(inputEditor);
+    const isbn = makeNoSQLInjectionFree(inputISBN);
+
     db.collection('wishlist')
     .where('email', '==', email)
     .where('title', '==', title)

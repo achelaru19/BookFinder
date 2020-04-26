@@ -6,7 +6,6 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import NavBar from "../components/navBar";
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { useNavigation } from 'react-navigation-hooks';
-import { useGlobal } from 'reactn';
 import { UserContext } from '../consts/context';
 import { isWishListBookValid } from '../utils/inputFormatChecks';
 

@@ -32,6 +32,13 @@ export const shortenMessageIfTooLong = (message) => {
     return shortenWord(message, 45);
 }
 
+export const mergeEmails = (email1, email2) => {
+    if(email1 > email2)
+        return email2 + '_' + email1;
+    else 
+        return email1 + '_' + email2;
+}
+
 export async function searchBookDetails(isbn, setISBN, pressCamera, setScanned, setTitle, setEditor, setAuthor) {
     const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + "&key=" + TOKEN_GOOGLE_BOOKS;
     fetch(url)

@@ -81,7 +81,7 @@ export const isValidNewBook =(title, author, editor, isbn, price) => {
 }
 
 export const isSearchValid = (title, author, editor, isbn) => {
-    return isWishListBookValid(title, author, editor, isbn);
+    return (isNotEmpty(title) || isNotEmpty(author) || isNotEmpty(editor) || isNotEmpty(isbn) || isISBN(isbn));
 }
 
 export const areSettingsValid = (firstname, lastname, birthdate, university, faculty) => {

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage } from '../actions/firebaseDB';
