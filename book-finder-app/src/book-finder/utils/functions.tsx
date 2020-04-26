@@ -2,18 +2,15 @@ import firebase from 'firebase';
 import {Permissions, Notifications} from 'expo';
 import {TOKEN_GOOGLE_BOOKS} from '../consts/constants';
 
-export const getInitials = (fullname: string) => {
+export const getInitials = (fullname) => {
     const name: string[] = fullname.split(" ");
     let initials: string = '';
     for(let i = 0; i < name.length; i++){
-        console.log(name[i])
         const initial = name[i].charAt(0);
         initials = initials+initial;
     };
-
     return initials;
 }
-
 export const logout = async () => {
     console.log("LOGOUT")
     try {
@@ -66,6 +63,8 @@ export async function searchBookDetails(isbn, setISBN, pressCamera, setScanned, 
     })
 }
 
+
+/*
 export async function registerForPushNotificationsAsync(){
     const {status} = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = status;
@@ -84,3 +83,4 @@ export async function registerForPushNotificationsAsync(){
     // save token in user 
 
 }
+*/

@@ -1,7 +1,7 @@
 /* global it, expect */
-import * as formatChecks from '../utils/inputFormatChecks'
+import * as formatChecks from '../utils/inputFormatChecks';
 
-describe('Checks on isAllDigits function', () => {
+describe('Tests on isAllDigits function', () => {
     it('returns true with 32145', () => {
         expect(formatChecks.isAllDigits("32145")).toBe(true);
     });
@@ -15,7 +15,7 @@ describe('Checks on isAllDigits function', () => {
     });
 });
 
-describe('Checks on isAValidPrice function', () =>{
+describe('Tests on isAValidPrice function', () =>{
     it('returns true with 34.99', () => {
         expect(formatChecks.isAValidPrice('34.99')).toBe(true);
     });
@@ -41,7 +41,7 @@ describe('Checks on isAValidPrice function', () =>{
     });
 });
 
-describe('Checks on isThirteenDigits function', () =>{
+describe('Tests on isThirteenDigits function', () =>{
     it('returns true with 1234567890123', () => {
         expect(formatChecks.isThirteenDigits('1234567890123')).toBe(true);
     });
@@ -56,7 +56,7 @@ describe('Checks on isThirteenDigits function', () =>{
 });
 
 
-describe('Checks on isISBN function', () =>{
+describe('Tests on isISBN function', () =>{
     it('returns true with 1234567890123', () => {
         expect(formatChecks.isISBN('1234567890123')).toBe(true);
     });
@@ -71,7 +71,7 @@ describe('Checks on isISBN function', () =>{
 });
 
 
-describe('Checks on isValidEmail function', () =>{
+describe('Tests on isValidEmail function', () =>{
     it('returns true with myemail@gmail.com', () => {
         expect(formatChecks.isValidEmail('myemail@gmail.com')).toBe(true);
     });
@@ -89,7 +89,7 @@ describe('Checks on isValidEmail function', () =>{
     });
 });
 
-describe('Checks on isNotEmpty', () =>{
+describe('Tests on isNotEmpty', () =>{
     it('returns true with justAString', () => {
         expect(formatChecks.isNotEmpty('justAString')).toBe(true);
     });
@@ -103,7 +103,7 @@ describe('Checks on isNotEmpty', () =>{
     });
 });
 
-describe('Checks on convertIntoRealPrice', () =>{
+describe('Tests on convertIntoRealPrice', () =>{
     it('return 12.30 with 12.3', () => {
         expect(formatChecks.convertIntoRealPrice('12.3')).toBe("12.30");
     });
@@ -129,7 +129,7 @@ describe('Checks on convertIntoRealPrice', () =>{
     });
 });
 
-describe('Checks on makeNoSQLInjectionFree function', () =>{
+describe('Tests on makeNoSQLInjectionFree function', () =>{
     it('throwns an error with admin"--', () => {
         expect(formatChecks.makeNoSQLInjectionFree('admin"--')).toBe(-1);
     });
@@ -143,7 +143,7 @@ describe('Checks on makeNoSQLInjectionFree function', () =>{
     });
 });
 
-describe('Checks on doesntContainsComments function', () =>{
+describe('Tests on doesntContainsComments function', () =>{
     it('returns true with myEmailAddress', () => {
         expect(formatChecks.doesntContainsComments('myEmailAddress')).toBe(true);
     });
@@ -156,3 +156,4 @@ describe('Checks on doesntContainsComments function', () =>{
         expect(formatChecks.doesntContainsComments('admin-adminpass-somethingelse')).toBe(true);
     });
 });
+
