@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, Picker, SafeAreaView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import {addUser} from '../actions/firebaseDB';
@@ -8,6 +8,7 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import {universities, faculties} from '../consts/constants';
+import { isSignupPageValid } from '../utils/inputFormatChecks';
 
 export default function SignUp() {
     const [email, setEmail] = useState<string>('');
@@ -19,6 +20,7 @@ export default function SignUp() {
     const [university, setUniversity] = useState<string>('');
     const [faculty, setFaculty] = useState<string>('');
     const [fontLoaded, setFontLoaded] = useState<boolean>(false);
+    const [buttonDisabled, disableButton] = useState<boolean>(true);
 
     const navigation = useNavigation();
 
@@ -44,6 +46,11 @@ export default function SignUp() {
 	const signUpFailure = () => {
 		alert('Email già esistente');
     };
+
+    useEffect(() => {
+        const notAllCorrect = isSignupPageValid(email, firstname, lastname, password1, password2, birthdate, faculty, university);
+        disableButton(!notAllCorrect);
+    }, [email, firstname, lastname, password1, password2, birthdate, faculty, university]);
     
     if(!fontLoaded)
         return (
@@ -143,7 +150,7 @@ export default function SignUp() {
                 </View>
                 <View style={styles.signingOptions}>
                     <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity disabled={buttonDisabled} onPress={() => navigation.navigate('Login')}>
                             <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>

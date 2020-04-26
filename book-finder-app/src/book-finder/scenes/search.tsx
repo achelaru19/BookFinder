@@ -8,6 +8,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
 import { SearchBookType } from '../types/searchBookType';
+import { isSearchValid } from '../utils/inputFormatChecks';
 
 export default function Search() {
 
@@ -18,6 +19,7 @@ export default function Search() {
   const [author, setAuthor] = useState<string>('');
   const [editor, setEditor] = useState<string>('');
   const [isbn, setISBN] = useState<string>('');
+  const [buttonDisabled, disableButton] = useState<boolean>(true);
 
   const navigation = useNavigation();
 
@@ -30,6 +32,11 @@ export default function Search() {
     }
     navigation.navigate('Result', {parameters: params});
   };
+
+  useEffect(() => {
+    const notAllCorrect = isSearchValid(title, author, editor, isbn);
+    disableButton(!notAllCorrect);
+  }, [title, author, editor, isbn])
 
   if(!fontLoaded)
     return (
@@ -113,7 +120,7 @@ export default function Search() {
                 />
                 </View>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-                  <TouchableOpacity style={styles.searchButton} onPress={() => searchForBook()}>
+                  <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
                     <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
                   </TouchableOpacity>
                 </View>

@@ -22,9 +22,6 @@ import { useNavigation } from 'react-navigation-hooks';
 import {shortenNameIfTooLong} from './src/book-finder/utils/functions';
 const { width } = Dimensions.get("window");
 
-
-
-
 const CustomDrawerNavigation = (props) => {
   //@ts-ignore
   const [user] = useContext(UserContext);

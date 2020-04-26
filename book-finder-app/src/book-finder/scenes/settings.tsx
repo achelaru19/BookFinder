@@ -10,6 +10,7 @@ import { UserContext } from '../consts/context';
 import { updateUser } from '../actions/firebaseDB';
 import {universities, faculties} from '../consts/constants';
 import { UserType } from '../types/userType';
+import { areSettingsValid } from '../utils/inputFormatChecks';
 
 export default function Settings() {
   //@ts-ignore
@@ -27,6 +28,9 @@ export default function Settings() {
   const [facultyPlaceholder, setFacultyPlaceholder] = useState<string>(faculty);
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
   const [modifyPressed, pressModify] = useState<boolean>(false);
+  const [buttonDisabled, disableButton] = useState<boolean>(true);
+
+  const navigation = useNavigation();
 
   const saveSettings = () => {
     pressModify(false);
@@ -38,7 +42,10 @@ export default function Settings() {
     updateUser(email, firstnamePlaceholder, lastnamePlaceholder, birthdatePlaceholder, universityPlaceholder, facultyPlaceholder);
   };
 
-  const navigation = useNavigation();
+  useEffect(() => {
+    const notAllCorrect = areSettingsValid(firstnamePlaceholder, lastnamePlaceholder, birthdatePlaceholder, universityPlaceholder, facultyPlaceholder);
+    disableButton(!notAllCorrect);
+  }, [firstnamePlaceholder, lastnamePlaceholder, birthdatePlaceholder, universityPlaceholder, facultyPlaceholder])
 
   if(!fontLoaded)
     return (
@@ -140,7 +147,7 @@ export default function Settings() {
           <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
             {
               modifyPressed ?
-                <TouchableOpacity style={styles.buttonBox} onPress={() => saveSettings()}>
+                <TouchableOpacity disabled={buttonDisabled} style={styles.buttonBox} onPress={() => saveSettings()}>
                   <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Salva Modifiche</Text>
                 </TouchableOpacity>
               :

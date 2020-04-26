@@ -14,7 +14,6 @@ export default function Result(props) {
 
     const [fontLoaded, setFontLoaded] = useState<boolean>(false);
     const [books, setBooks] = useState<BookType[] | null>(null); 
-    const [booksSet, booksHaveBeenSet] = useState<boolean>(false);
     //@ts-ignore
     const [user] = useContext<UserType>(UserContext);
     

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
@@ -8,6 +8,7 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import { useNavigation } from 'react-navigation-hooks';
 import { useGlobal } from 'reactn';
 import { UserContext } from '../consts/context';
+import { isWishListBookValid } from '../utils/inputFormatChecks';
 
 
 
@@ -18,6 +19,7 @@ export default function AddBookToWishList () {
     const [editor, setEditor] = useState<string>('');
     const [isbn, setISBN] = useState<string>('');
     const [bookAdded, setBookAdded] = useState<boolean>(false);
+    const [buttonDisabled, disableButton] = useState<boolean>(true);
     //@ts-ignore
     const [user, setUser] = useContext(UserContext);
 
@@ -32,6 +34,11 @@ export default function AddBookToWishList () {
         setISBN('');
         setBookAdded(true);
     }
+
+    useEffect(() => {
+        const notAllCorrect = isWishListBookValid(title, author, editor, isbn);
+        disableButton(!notAllCorrect);
+    }, [title, author, editor, isbn])
 
     if(!fontLoaded)
         return (
@@ -87,7 +94,7 @@ export default function AddBookToWishList () {
                     </View>
                 </View>
                 <View style={styles.buttonBox}>
-                    <TouchableOpacity onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
+                    <TouchableOpacity disabled={buttonDisabled} onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>

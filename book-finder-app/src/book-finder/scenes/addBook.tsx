@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
@@ -9,6 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
+import { isValidNewBook } from '../utils/inputFormatChecks';
 
 
 export default function AddBook() {
@@ -19,6 +20,7 @@ export default function AddBook() {
   const [price, setPrice] = useState<string>('0.0');
   const [hasPressedCamera, pressCamera] = useState<boolean>(false);
   const [bookAdded, setBookAdded] = useState<boolean>(false);
+  const [buttonDisabled, disableButton] = useState<boolean>(true);
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);
   
@@ -33,6 +35,11 @@ export default function AddBook() {
     setISBN('');
     setPrice('0.0');
   }
+
+  useEffect(() => {
+    const notAllCorrect = isValidNewBook(title, author, editor, isbn, price);
+    disableButton(!notAllCorrect);
+  }, [title, author, editor, isbn, price])
 
   return (
     <View style={styles.container}>
@@ -97,7 +104,7 @@ export default function AddBook() {
                 />
               </View>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity style={styles.addButton} onPress={addBookFunction}>
+                <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
                   <Text style={styles.buttonText}>Aggiungi</Text>
                 </TouchableOpacity>
               </View>

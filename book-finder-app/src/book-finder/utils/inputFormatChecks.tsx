@@ -41,8 +41,8 @@ export const isAllDigits = (value) => {
 }
 
 export const isAValidPrice = value => {
-    const priceRegExp: RegExp = /^[+0-9]+\.?[+ 0-9]{1,2}$/;
-    return priceRegExp.test(value);
+    const numericalValue = parseFloat(value);
+    return numericalValue != NaN && numericalValue > 0.0;
 }
 
 export const isThirteenDigits = (value) => {
@@ -67,3 +67,29 @@ export const convertIntoRealPrice = value => {
     return parseFloat(value).toFixed(2).toString();
 }
 
+export const isSignupPageValid = (email, firstname, lastname, password1, password2, birthdate, faculty, university) => {
+    return (isNotEmpty(email) && isNotEmpty(firstname) && isNotEmpty(lastname) && isNotEmpty(password1) && isNotEmpty(password2)
+            && isNotEmpty(birthdate) && isNotEmpty(faculty) && isNotEmpty(university));
+}
+
+export const isWishListBookValid = (title, author, editor, isbn) => {
+    return (isNotEmpty(title) && isNotEmpty(author) && isNotEmpty(editor) && isNotEmpty(isbn) && isISBN(isbn));
+}
+
+export const isValidNewBook =(title, author, editor, isbn, price) => {
+    return isWishListBookValid(title, author, editor, isbn) && isAValidPrice(price);
+}
+
+export const isSearchValid = (title, author, editor, isbn) => {
+    return isWishListBookValid(title, author, editor, isbn);
+}
+
+export const areSettingsValid = (firstname, lastname, birthdate, university, faculty) => {
+    console.log("in are settings valid")
+    console.log(firstname)
+    console.log(lastname)
+    console.log(birthdate)
+    console.log(university)
+    console.log(faculty)
+    return isNotEmpty(firstname) && isNotEmpty(lastname) && isNotEmpty(birthdate) && isNotEmpty(faculty) && isNotEmpty(university);
+}

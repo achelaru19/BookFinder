@@ -5,6 +5,7 @@ import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
+import { isValidEmail } from '../utils/inputFormatChecks';
 
 export default function ForgottenPassword() {
     
@@ -66,7 +67,7 @@ export default function ForgottenPassword() {
                         onChangeText={value => setEmail(value)}
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={onPressResetPassword}>
+                        <TouchableOpacity disabled={!isValidEmail(email)} onPress={onPressResetPassword}>
                             <Text style={styles.buttonText}>Invia</Text>
                         </TouchableOpacity>
                     </View>

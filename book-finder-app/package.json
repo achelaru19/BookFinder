@@ -19,6 +19,7 @@
     "@types/node": "^13.13.2",
     "@types/react-navigation": "^3.4.0",
     "axios": "^0.19.0",
+    "babel-loader": "^8.1.0",
     "expo": "^36.0.0",
     "expo-barcode-scanner": "~8.0.0",
     "expo-cli": "^3.11.3",
@@ -60,7 +61,8 @@
     "ts-jest": "^25.4.0",
     "tslint": "^6.1.1",
     "use-force-update": "^1.0.7",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
