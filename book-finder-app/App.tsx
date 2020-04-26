@@ -27,7 +27,7 @@ const { width } = Dimensions.get("window");
 
 const CustomDrawerNavigation = (props) => {
   //@ts-ignore
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const navigation = useNavigation();
 
 
@@ -119,9 +119,6 @@ const Drawer = createDrawerNavigator({
   },
   AddBookToWishList: {
     screen: AddBookToWishList
-  },
-  ChangePassword: {
-    screen: ChangePassword
   }
 },
 {

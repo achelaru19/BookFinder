@@ -112,8 +112,8 @@ describe('Checks on convertIntoRealPrice', () =>{
         expect(formatChecks.convertIntoRealPrice('12.299')).toBe('12.30');
     });
 
-    it('return 12.00 with 12', () => {
-        expect(formatChecks.convertIntoRealPrice('12')).toBe('12.00');
+    it('return 122.00 with 122', () => {
+        expect(formatChecks.convertIntoRealPrice('122')).toBe('122.00');
     });
 
     it('return 12.30 with 12.30', () => {
@@ -124,8 +124,8 @@ describe('Checks on convertIntoRealPrice', () =>{
         expect(formatChecks.convertIntoRealPrice('12.354999999999')).toBe('12.35');
     });
 
-    it('return 12.3560000001 with 12.36', () => {
-        expect(formatChecks.convertIntoRealPrice('12.3560000001')).toBe('12.36');
+    it('return 12.3550000001 with 12.36', () => {
+        expect(formatChecks.convertIntoRealPrice('12.3550000001')).toBe('12.36');
     });
 });
 
