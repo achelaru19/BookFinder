@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3dc4368-0cc7-4724-8c97-68c12f4e85bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/book-finder/utils/functions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/utils/functions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/actions/firebaseDB.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/chat.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/chat.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/book-finder/scenes/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/book-finder/scenes/signup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,16 +14,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+            <state relative-caret-position="205">
+              <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -55,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="980" />
@@ -67,6 +68,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -79,7 +81,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -113,7 +114,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.29610047" />
@@ -139,8 +140,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+        <state relative-caret-position="205">
+          <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
         </state>
       </provider>
     </entry>

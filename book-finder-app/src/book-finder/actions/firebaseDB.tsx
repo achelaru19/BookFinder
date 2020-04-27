@@ -1,4 +1,5 @@
 import firebaseSDK from './firebaseSDK';
+import 'firebase/firestore';
 import { mergeEmails } from '../utils/functions';
 import { makeNoSQLInjectionFree } from '../utils/inputFormatChecks';
 
@@ -7,7 +8,7 @@ const db = firebaseSDK.getFirebase().firestore();
 export function setLastMessageRead(inputSender, inputReceiver){
     const sender = makeNoSQLInjectionFree(inputSender);
     const receiver = makeNoSQLInjectionFree(inputReceiver);
-    
+
     const senderRef = db.collection('last_messages').doc(sender).collection('messages').doc(receiver);
     if(senderRef != undefined)
         senderRef.update({
@@ -377,3 +378,22 @@ export async function removeFromWishList(inputEmail, inputTitle, inputAuthor, in
         console.log('Error getting documents', err);
     });
 }
+
+export async function connectWithChat (inputSender, inputReceiver, callback) {
+    const sender = makeNoSQLInjectionFree(inputSender);
+    const receiver = makeNoSQLInjectionFree(inputReceiver);
+
+    const emailsCombination = mergeEmails(sender, receiver);
+
+    db.collection('messages')
+    .doc(emailsCombination)
+    .collection('messages')
+    .orderBy('createdAt.seconds', "asc")
+    .onSnapshot(snapshot => {
+        console.log("DENTRO CONNECT WITH CHAT")
+        snapshot.forEach((doc) => {
+            console.log(doc.data());
+        });
+        //callback(this.parse(snapshot));
+    });
+  }

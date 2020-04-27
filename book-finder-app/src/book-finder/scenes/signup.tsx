@@ -116,8 +116,8 @@ export default function SignUp() {
                      <View style={styles.pickerInput}>
                      <Picker style={styles.picker} selectedValue={university} onValueChange={val => {if(val != '-') setUniversity(val)}}>
                         <Picker.Item label={"Seleziona una università"} value="-" />
-                        {universities.map(uni => 
-                            <Picker.Item label={uni} value={uni} />
+                        {universities.map((uni, index) => 
+                            <Picker.Item label={uni} value={uni} key={'pcikerItem'+index} />
                         )}
                     </Picker>
                     </View>
@@ -143,14 +143,14 @@ export default function SignUp() {
                         onChangeText={value => setPassword2(value)}
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={onPressSignUp}>
+                        <TouchableOpacity disabled={buttonDisabled} onPress={onPressSignUp}>
                             <Text style={styles.buttonText}>Registrati</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.signingOptions}>
                     <View>
-                        <TouchableOpacity disabled={buttonDisabled} onPress={() => navigation.navigate('Login')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                             <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
