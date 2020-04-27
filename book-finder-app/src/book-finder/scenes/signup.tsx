@@ -115,9 +115,9 @@ export default function SignUp() {
                      <Text style={styles.label}>Università:</Text>
                      <View style={styles.pickerInput}>
                      <Picker style={styles.picker} selectedValue={university} onValueChange={val => {if(val != '-') setUniversity(val)}}>
-                        <Picker.Item label={"Seleziona una università"} value="-" />
+                        <Picker.Item label={"Seleziona una università"} value="-" key={'pickerItem--'} />
                         {universities.map((uni, index) => 
-                            <Picker.Item label={uni} value={uni} key={'pcikerItem'+index} />
+                            <Picker.Item label={uni} value={uni} key={'pickerItem'+index} />
                         )}
                     </Picker>
                     </View>

@@ -1,6 +1,6 @@
 import firebaseSDK from './firebaseSDK';
 import 'firebase/firestore';
-import { mergeEmails } from '../utils/functions';
+import { mergeEmails, createMessageFromDBData } from '../utils/functions';
 import { makeNoSQLInjectionFree } from '../utils/inputFormatChecks';
 
 const db = firebaseSDK.getFirebase().firestore();
@@ -96,17 +96,8 @@ export function getMessages(inputSender, inputReceiver, setMessages) {
     .then((snapshot) => {
         let messages = [];
         snapshot.forEach((doc) => {
-            const message = doc.data().message;
-            const gcm = {
-                _id: message._id,
-                text: message.text,
-                createdAt: new Date(message.createdAt.seconds * 1000).toISOString(),
-                user: {
-                  _id: message.user._id,
-                  name: message.user.name,
-                }
-              };
-            messages.push(gcm);
+            const message = createMessageFromDBData(doc.data().message);
+            messages.push(message);
         });
         setMessages(messages.sort((a, b) => { return b.createdAt.localeCompare(a.createdAt)}));
     })
@@ -388,12 +379,16 @@ export async function connectWithChat (inputSender, inputReceiver, callback) {
     db.collection('messages')
     .doc(emailsCombination)
     .collection('messages')
-    .orderBy('createdAt.seconds', "asc")
+    .orderBy("createdAt.seconds", 'asc')
+    .limitToLast(1)
     .onSnapshot(snapshot => {
-        console.log("DENTRO CONNECT WITH CHAT")
         snapshot.forEach((doc) => {
-            console.log(doc.data());
+            const message = createMessageFromDBData(doc.data().message);
+            if(message.user._id != sender){
+                callback(message);
+            }
         });
-        //callback(this.parse(snapshot));
     });
   }
+
+  

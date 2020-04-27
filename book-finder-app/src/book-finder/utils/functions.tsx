@@ -70,6 +70,19 @@ export async function searchBookDetails(isbn, setISBN, pressCamera, setScanned, 
     })
 }
 
+export const createMessageFromDBData = (message) => {
+    const messageForGiftedChat = {
+        _id: message._id,
+        text: message.text,
+        createdAt: new Date(message.createdAt.seconds * 1000).toISOString(),
+        user: {
+          _id: message.user._id,
+          name: message.user.name,
+        }
+      };
+      return messageForGiftedChat;
+  }
+
 
 /*
 export async function registerForPushNotificationsAsync(){
