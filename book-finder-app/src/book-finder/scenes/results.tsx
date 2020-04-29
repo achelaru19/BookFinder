@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
@@ -64,7 +64,17 @@ export default function Result(props) {
                 <View style={{flex: 1}}>
                     <NavBar title="Ricerca"/>
                     <View style={{flex: 12}}>
-                        <Text>NESSUN LIBRO TROVATO RICERCA</Text>
+                        <View style={styles.containerNoBookFound}>
+                            <Image style={styles.imageHolder} source={require('../assets/images/book_not_found.png')} />
+                            <Text style={styles.textHolder}>Nessun libro trovato</Text>
+                            <View style={styles.addButton}>
+                                <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                                    <Text style={styles.buttonLabel}>Cerca un altro libro</Text>
+                                </TouchableOpacity>
+                        </View>
+                  </View>
+                </View>
                         
                     </View>
                 </View>
@@ -83,10 +93,40 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center"
     },
+    containerNoBookFound: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     horizontal: {
       flexDirection: "row",
       justifyContent: "space-around",
       padding: 10
-    }
+    },
+    imageHolder: {
+      width: 200,
+      height: 150
+    },
+    textHolder: {
+      fontSize: 20,
+      fontFamily: 'Cardo-Regular',
+      marginTop: 17
+    },
+    buttonLabel: {
+      fontFamily: 'Cardo-Regular',
+      fontSize: 20,
+      color: 'white',
+    },
+    addButton: {
+        backgroundColor: '#90001F',
+        height: 50,
+        width: 180,
+        alignContent: 'space-around',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        borderRadius: 20,
+        marginTop: 17
+    },
   });
   

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -9,6 +9,7 @@ import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
 import { SearchBookType } from '../types/searchBookType';
 import { isSearchValid } from '../utils/inputFormatChecks';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Search() {
 
@@ -50,6 +51,12 @@ export default function Search() {
     return (
       (<View style={{flex: 1}}>
         <NavBar title="Cerca Libro"/>
+        <KeyboardAwareScrollView 
+                style={{ backgroundColor: '#4c69a5' }}
+                contentContainerStyle={styles.container}
+                scrollEnabled={false}
+            >
+                <ScrollView>
         <View style={{flex: 12, flexDirection: "column"}}>
           <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
@@ -110,15 +117,6 @@ export default function Search() {
                   style={styles.inputContainer}
                 />
                 </View>
-                <View style={{flex:1, justifyContent: 'space-around'}}>
-                  <Text style={styles.labelText}>Corso: </Text>
-                <TextInput
-                  onChangeText={handleChange('subject')}
-                  onBlur={handleBlur('subject')}
-                  value={values.subject}
-                  style={styles.inputContainer}
-                />
-                </View>
                 <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
                   <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
                     <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
@@ -129,6 +127,8 @@ export default function Search() {
           </Formik> 
           </View> 
         </View>
+              </ScrollView>
+            </KeyboardAwareScrollView>
       </View>
     ));
 }

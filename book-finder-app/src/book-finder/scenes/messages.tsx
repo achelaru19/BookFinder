@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar from '../components/navBar';
 import Message from '../components/message';
 import { UserContext } from '../consts/context';
 import { getLastMessages } from '../actions/firebaseDB';
 import { SafeAreaView } from 'react-navigation';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { IMessage } from 'react-native-gifted-chat';
 import { LastMessageType } from '../types/lastMessageType';
 import { UserType } from '../types/userType';
@@ -39,7 +39,7 @@ export default function Messages() {
       return (
           <View style={styles.lastMessageBox}>
             <NavBar title="Messaggi" />
-            <View style={styles.messages}>
+            <View style={styles.messages}> 
               <SafeAreaView>
               <ScrollView>
               {messages.map(mess => 
@@ -54,7 +54,10 @@ export default function Messages() {
       return (
         <View style={{flex: 1}}>
           <NavBar title="Messaggi" />
-          <Text> NON CI SONO MESSAGGI</Text>
+          <View style={styles.container}>
+                <Image style={styles.imageHolder} source={require('../assets/images/no_message.png')} />
+                <Text style={styles.textHolder}>Non ci sono messaggi</Text>
+              </View>
         </View>
       );
   }
@@ -87,5 +90,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
 
-  }
+  },
+  imageHolder: {
+    width: 200,
+    height: 150
+  },
+  textHolder: {
+    fontSize: 20,
+    fontFamily: 'Cardo-Regular',
+    marginTop: 17
+  },
 });

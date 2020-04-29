@@ -53,7 +53,7 @@ export default function Login() {
     else 
         return (
             <View style={styles.container}>
-                <View style={styles.titleContainer}>
+               <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
                 <View style={{flex: 2, flexDirection: 'column'}}>

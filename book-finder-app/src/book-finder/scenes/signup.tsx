@@ -9,6 +9,7 @@ import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import {universities, faculties} from '../consts/constants';
 import { isSignupPageValid } from '../utils/inputFormatChecks';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function SignUp() {
     const [email, setEmail] = useState<string>('');
@@ -62,6 +63,11 @@ export default function SignUp() {
         );
     else 
         return (
+            <KeyboardAwareScrollView 
+                style={{ backgroundColor: '#4c69a5' }}
+                contentContainerStyle={styles.container}
+                scrollEnabled={true}
+            >
             <SafeAreaView  style={styles.container}>
                 <ScrollView>
                 <View style={styles.titleContainer}>
@@ -130,18 +136,22 @@ export default function SignUp() {
                                 )}
                             </Picker>
                     </View>
+                    <View>
                     <Text style={styles.label}>Password:</Text>
                     <TextInput
                         style={styles.nameInput}
                         secureTextEntry={true}
                         onChangeText={value => setPassword1(value)}
                     />
+                    </View>
+                    <View>
                     <Text style={styles.label}>Verifica Password:</Text>
                     <TextInput
                         style={styles.nameInput}
                         secureTextEntry={true}
                         onChangeText={value => setPassword2(value)}
                     />
+                    </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity disabled={buttonDisabled} onPress={onPressSignUp}>
                             <Text style={styles.buttonText}>Registrati</Text>
@@ -155,8 +165,9 @@ export default function SignUp() {
                         </TouchableOpacity>
                     </View>
                 </View>
-                </ScrollView>
-            </SafeAreaView>
+              </ScrollView>
+              </SafeAreaView>
+            </KeyboardAwareScrollView>
         );
    
 	

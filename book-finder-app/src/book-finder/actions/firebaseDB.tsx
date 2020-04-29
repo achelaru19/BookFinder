@@ -375,17 +375,25 @@ export async function connectWithChat (inputSender, inputReceiver, callback) {
     const receiver = makeNoSQLInjectionFree(inputReceiver);
 
     const emailsCombination = mergeEmails(sender, receiver);
-
+    console.log("I AM HERE IN THE FUNCTION CONNECTI WITH CHAT BEFORE DB CALL "+ sender)
     db.collection('messages')
     .doc(emailsCombination)
     .collection('messages')
-    .orderBy("createdAt.seconds", 'asc')
-    .limitToLast(1)
-    .onSnapshot(snapshot => {
-        snapshot.forEach((doc) => {
-            const message = createMessageFromDBData(doc.data().message);
-            if(message.user._id != sender){
-                callback(message);
+    .onSnapshot(querySnapshot => {
+        console.log("quesrysnapshot " + sender)
+        querySnapshot.docChanges().forEach(change => {
+            
+            console.log("change " + sender)
+            console.log(change)
+            if (change.type === 'added') {
+                console.log("in connect with chat")
+                const message = createMessageFromDBData(change.doc.data().message);
+                console.log(message)
+                console.log("in connect with chat")
+                console.log(message.user._id + ' and sender ' + sender)
+                if(message.user._id != sender){
+                    callback(message);
+                }
             }
         });
     });
