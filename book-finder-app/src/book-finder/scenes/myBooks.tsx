@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { SwipeableFlatList } from 'react-native-swipeable-flat-list';
 import { AppLoading } from 'expo';
 import NavBar from "../components/navBar";
-import {getSellingBooks} from '../actions/firebaseDB';
+import {getSellingBooks, removeBook} from '../actions/firebaseDB';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { UserContext } from '../consts/context';
 import { BookType } from '../types/bookType';
@@ -24,6 +24,12 @@ export default function MyBooks() {
     useEffect(() => {
         getSellingBooks(user.email, (books) => setMyBooks(books));
     }, []);
+
+    const removeBookFromList = (title, author, editor, isbn) => {
+        removeBook(user.email, title, author, editor, isbn);
+        const newBooks = myBooks.filter(val => !(val.title == title && val.author == author && val.editor == editor && val.isbn == isbn));
+        setMyBooks(newBooks);
+      };
 
     if (!fontLoaded)
         return (
@@ -50,7 +56,7 @@ export default function MyBooks() {
                         <NavBar title="I Miei Libri"/>
                         <View style={styles.container}>
                         <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
-                        <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
+                        <Text style={styles.textHolder}>Non hai aggiunto nessun libro da vendere</Text>
                         <View style={styles.addButton}>
                             <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
                             <TouchableOpacity onPress={() => navigate('AddBook')}>
@@ -81,7 +87,7 @@ export default function MyBooks() {
                                         )}
                                         renderRight={({ item }, index) => (
                                             <View style={styles.deleteButton} key={'delete_' + index}>
-                                                <Icon name="delete" size={30} onPress={() => console.log("cancella libro")} />
+                                                <Icon name="delete" size={30} onPress={() => removeBookFromList(item.title, item.author, item.editor, item.isbn)} />
                                             </View>
                                         )}
                                         backgroundColor={'white'}

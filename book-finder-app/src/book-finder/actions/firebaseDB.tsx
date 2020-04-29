@@ -399,4 +399,22 @@ export async function connectWithChat (inputSender, inputReceiver, callback) {
     });
   }
 
+  export async function removeBook(email, title, author, editor, isbn) {
+    db.collection('books')
+    .where('sellerEmail', '==', email)
+    .get()
+    .then((snapshot) => {
+        snapshot.forEach((doc) => {
+            const book = doc.data();
+            if(book.title === title && book.author === author && book.editor === editor && book.isbn === isbn && book.sold === false){
+                db.collection('books')
+                .doc(doc.id)
+                .update({
+                    sold: true
+                });
+            }
+        });
+    });
+  }
+
   
