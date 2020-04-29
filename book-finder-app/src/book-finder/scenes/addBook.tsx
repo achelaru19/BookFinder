@@ -43,7 +43,7 @@ export default function AddBook() {
 
   return (
     <View style={styles.container}>
-      <NavBar title="Aggiungi un libro"/>
+      <NavBar title="Aggiungi libro"/>
       
       <View
       style={{
@@ -52,10 +52,10 @@ export default function AddBook() {
         justifyContent: 'flex-end',
       }}>
         <View style={{flex:2, flexDirection: 'row', justifyContent: 'space-around', alignContent: 'space-around'}}>
-          <View style={{flex: 4, justifyContent: 'center', alignContent: 'center'}}>
-            <Text style={styles.labelCamera}>Ottieni le informazioni con il codice a barre </Text> 
+          <View style={{flex: 4, flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={styles.labelCamera}>Usa il codice a barre per ottenere le info</Text> 
           </View>
-          <View style={{flex: 1, flexDirection: 'row', alignContent: 'center'}}>
+          <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center' ,alignContent: 'center'}}>
             <Icon name="camera-alt" color={"#009071"} reverse={true} onPress={() => pressCamera(!hasPressedCamera)}/>
           </View>
         </View>
@@ -158,7 +158,9 @@ const styles = StyleSheet.create({
   },
   labelCamera: {
     fontFamily: 'Cardo-Regular',
-    fontSize: 17
+    fontSize: 17,
+    flexDirection: 'column',
+    textAlignVertical: 'center'
   },
   label: {
     fontFamily: 'Cardo-Bold',

@@ -26,7 +26,6 @@ export default function BarcodeScan(props: PropsType) {
     if(type == 32 || type == 10) {
       searchBookDetails(data, d => props.setISBN(d), 
                         () => props.pressCamera(), 
-                        (t) => setScanned(t),
                         (title) => props.setTitle(title),
                         (editor) => props.setEditor(editor),
                         (author) => props.setAuthor(author))
@@ -43,7 +42,14 @@ export default function BarcodeScan(props: PropsType) {
   return (
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
+        style={styles.cameraSquare}
       />
   );
 }
+
+const styles = StyleSheet.create({
+  cameraSquare: {
+    flex: 1,
+  },
+  
+});

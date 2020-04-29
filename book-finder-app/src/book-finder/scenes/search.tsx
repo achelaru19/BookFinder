@@ -49,14 +49,12 @@ export default function Search() {
     );
   else 
     return (
-      (<View style={{flex: 1}}>
+      (<KeyboardAwareScrollView 
+        contentContainerStyle={{flex: 1}}
+        scrollEnabled={false}
+    >
         <NavBar title="Cerca Libro"/>
-        <KeyboardAwareScrollView 
-                style={{ backgroundColor: '#4c69a5' }}
-                contentContainerStyle={styles.container}
-                scrollEnabled={false}
-            >
-                <ScrollView>
+        <ScrollView>
         <View style={{flex: 12, flexDirection: "column"}}>
           <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
@@ -117,7 +115,7 @@ export default function Search() {
                   style={styles.inputContainer}
                 />
                 </View>
-                <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{flex:3, justifyContent: 'center', alignItems: 'center', paddingTop: 40}}>
                   <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
                     <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
                   </TouchableOpacity>
@@ -127,9 +125,8 @@ export default function Search() {
           </Formik> 
           </View> 
         </View>
-              </ScrollView>
-            </KeyboardAwareScrollView>
-      </View>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     ));
 }
 

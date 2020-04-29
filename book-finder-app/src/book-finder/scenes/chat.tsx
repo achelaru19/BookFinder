@@ -31,7 +31,7 @@ export default function Chat() {
         getUser(otherUserEmail, (u) => setOtherUser(u));
         getMessages(user.email, otherUserEmail, messages => setMessages(messages));
         setLastMessageRead(user.email, otherUserEmail);
-        connectWithChat(user.email, otherUserEmail, updateMessagedInChat);
+        //connectWithChat(user.email, otherUserEmail, updateMessagedInChat);
     }, [otherUserEmail])
 
 

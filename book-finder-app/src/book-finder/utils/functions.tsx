@@ -39,32 +39,33 @@ export const mergeEmails = (email1, email2) => {
         return email1 + '_' + email2;
 }
 
-export async function searchBookDetails(isbn, setISBN, pressCamera, setScanned, setTitle, setEditor, setAuthor) {
+export async function searchBookDetails(isbn, setISBN, pressCamera, setTitle, setEditor, setAuthor) {
     const url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + "&key=" + TOKEN_GOOGLE_BOOKS;
     fetch(url)
     .then(response => response.text())
     .then((response) => {
-        const json = JSON.parse(response)
-        const items = json["items"]
-        const fisrtElement = items[0];
-        const volumeInfo = fisrtElement["volumeInfo"]
-        const title = volumeInfo['title'];
-        const publisher = volumeInfo['publisher']
-        const authors = volumeInfo['authors'];
-        let authorString = ''
-        const len = authors.length;
-        for(let i = 0; i < len; i++){
-        if(i != 0)
-            authorString = authorString + ', ' + authors[i];
-        else
-            authorString = authors[i];
+        const json:any = JSON.parse(response)
+        if(json['totalItems'] != 0){
+            const items:any = json["items"]
+            const fisrtElement:any = items[0];
+            const volumeInfo:any = fisrtElement["volumeInfo"]
+            const title:any = volumeInfo['title'];
+            const publisher:any = volumeInfo['publisher']
+            const authors:any = volumeInfo['authors'];
+            let authorString = ''
+            const len = authors.length;
+            for(let i = 0; i < len; i++){
+            if(i != 0)
+                authorString = authorString + ', ' + authors[i];
+            else
+                authorString = authors[i];
+            }
+            if(title != undefined) setTitle(title);
+            if(authors != undefined) setAuthor(authorString);
+            if(publisher != undefined) setEditor(publisher);
+            setISBN(isbn);
         }
-        if(title != undefined) setTitle(title);
-        if(authors != undefined) setAuthor(authorString);
-        if(publisher != undefined) setEditor(publisher);
-        setISBN(isbn);
         pressCamera();
-        setScanned(true);
     }).catch((err) => {
         console.log('fetch', err)
     })

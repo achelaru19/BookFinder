@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
   },
   touchOpacity: {
     height: 70,
-    width: 400
+    width: Math.round(Dimensions.get('window').width)
   },
   messageBar: {
     flex: 10,
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    height: 50
+    height: 60
   },
   textBar: {
     flex: 8,
