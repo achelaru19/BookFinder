@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Picker, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Picker, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import {addUser} from '../actions/firebaseDB';
 import { useNavigation } from 'react-navigation-hooks';
@@ -9,7 +9,6 @@ import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import {universities, faculties} from '../consts/constants';
 import { isSignupPageValid } from '../utils/inputFormatChecks';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function SignUp() {
     const [email, setEmail] = useState<string>('');
@@ -63,11 +62,11 @@ export default function SignUp() {
         );
     else 
         return (
-            <KeyboardAwareScrollView 
-                style={{ backgroundColor: '#4c69a5' }}
-                contentContainerStyle={styles.container}
-                scrollEnabled={true}
-            >
+            <KeyboardAvoidingView
+            behavior={"padding"}
+            style={styles.container}
+          >
+            
             <SafeAreaView  style={styles.container}>
                 <ScrollView>
                 <View style={styles.titleContainer}>
@@ -167,7 +166,7 @@ export default function SignUp() {
                 </View>
               </ScrollView>
               </SafeAreaView>
-            </KeyboardAwareScrollView>
+            </KeyboardAvoidingView>
         );
    
 	
