@@ -88,6 +88,7 @@ export default function AddBookToWishList () {
                             <TextInput
                                 onChangeText={text => setISBN(text)}
                                 value={isbn}
+                                keyboardType={'numeric'}
                             />
                         </View>
                     </View>

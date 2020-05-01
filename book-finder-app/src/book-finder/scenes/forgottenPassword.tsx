@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, KeyboardAvoidingView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -46,7 +46,8 @@ export default function ForgottenPassword() {
         );
     else 
         return (
-            <View style={styles.container}>
+            
+              <View style={styles.container}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
@@ -60,18 +61,23 @@ export default function ForgottenPassword() {
                         <Text style={styles.text3}>Inserisci la tua email e ti invieremo un link per reimpostarla.</Text>
                     </View>
                 </View>
-                <View style={{flex: 2, flexDirection: 'column'}}>
-                    <TextInput
-                        style={styles.emailInput}
-                        placeholder="La tua email"
-                        onChangeText={value => setEmail(value)}
-                    />
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity disabled={!isValidEmail(email)} onPress={onPressResetPassword}>
-                            <Text style={styles.buttonText}>Invia</Text>
-                        </TouchableOpacity>
+                <KeyboardAvoidingView
+                    behavior={"padding"}
+                    style={{flex:1}}
+                >
+                    <View style={{flex: 2, flexDirection: 'column'}}>
+                        <TextInput
+                            style={styles.emailInput}
+                            placeholder="La tua email"
+                            onChangeText={value => setEmail(value)}
+                        />
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity disabled={!isValidEmail(email)} onPress={onPressResetPassword}>
+                                <Text style={styles.buttonText}>Invia</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
+                </KeyboardAvoidingView>
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -79,7 +85,7 @@ export default function ForgottenPassword() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+                </View>
         );
    
 	

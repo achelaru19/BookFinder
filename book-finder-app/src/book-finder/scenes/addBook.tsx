@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
 import {addBook} from '../actions/firebaseDB';
@@ -17,7 +17,7 @@ export default function AddBook() {
   const [author, setAuthor] = useState<string>('');
   const [editor, setEditor] = useState<string>('');
   const [isbn, setISBN] = useState<string>('');
-  const [price, setPrice] = useState<string>('0.0');
+  const [price, setPrice] = useState<string>('');
   const [hasPressedCamera, pressCamera] = useState<boolean>(false);
   const [bookAdded, setBookAdded] = useState<boolean>(false);
   const [buttonDisabled, disableButton] = useState<boolean>(true);
@@ -42,11 +42,16 @@ export default function AddBook() {
   }, [title, author, editor, isbn, price])
 
   return (
-    <View style={styles.container}>
+    
+      <View style={styles.container}>
       <NavBar title="Aggiungi libro"/>
-      
       <KeyboardAvoidingView
-        behavior={"padding"}
+      behavior={"padding"} 
+      style={{flex: 1}}
+    >
+      <SafeAreaView style={styles.container}>
+                <ScrollView>
+      <View
         style={{
           flex: 10,
           flexDirection: 'column',
@@ -62,7 +67,7 @@ export default function AddBook() {
           </View>
         </View>
             {!hasPressedCamera ? 
-            <View style={{flex:9, flexDirection: 'column', justifyContent: 'space-evenly'}}>
+            <View style={{flex:8, flexDirection: 'column', justifyContent: 'space-evenly'}}>
               <View style={{flex:1}}>
                 <Text style={styles.label}>Titolo</Text>
                 <TextInput
@@ -105,10 +110,12 @@ export default function AddBook() {
                   keyboardType={'numeric'}
                 />
               </View>
+              <View style={{flex: 2, flexDirection: 'column', alignContent: 'flex-end'}}>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
                   <Text style={styles.buttonText}>Aggiungi</Text>
                 </TouchableOpacity>
+              </View>
               </View>
               <AwesomeAlert
                     show={bookAdded}
@@ -135,8 +142,11 @@ export default function AddBook() {
               />
             </View>
           }
-        </KeyboardAvoidingView>
-    </View>
+        </View>
+        </ScrollView>
+        </SafeAreaView>
+    </KeyboardAvoidingView>
+        </View>
   );
 }
 

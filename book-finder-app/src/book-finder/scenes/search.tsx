@@ -113,6 +113,7 @@ export default function Search() {
                   onBlur={handleBlur('isbn')}
                   value={isbn}
                   style={styles.inputContainer}
+                  keyboardType={'numeric'}
                 />
                 </View>
                 <View style={{flex:3, justifyContent: 'center', alignItems: 'center', paddingTop: 40}}>
