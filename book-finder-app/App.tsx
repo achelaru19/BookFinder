@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { Text, View, SafeAreaView, ScrollView, Dimensions, Image } from 'react-native';
+import React from 'react';
+import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import {createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import CustomDrawerNavigation from './src/book-finder/components/customDrawerNavigation';
 import HomePage from './src/book-finder/homepage';
 import Messages from './src/book-finder/scenes/messages';
 import Settings from './src/book-finder/scenes/settings';
@@ -16,47 +16,9 @@ import MyBooks from './src/book-finder/scenes/myBooks';
 import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
 import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
-import { UserContext, UserProvider } from './src/book-finder/consts/context';
-import { logout } from './src/book-finder/utils/functions';
-import { useNavigation } from 'react-navigation-hooks';
-import {shortenNameIfTooLong} from './src/book-finder/utils/functions';
+import { UserProvider } from './src/book-finder/consts/context';
+
 const { width } = Dimensions.get("window");
-
-const CustomDrawerNavigation = (props) => {
-  //@ts-ignore
-  const [user] = useContext(UserContext);
-  const navigation = useNavigation();
-
-
-  const loggingOut = () => {
-    logout();
-    navigation.navigate('Login');
-  }
-
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ height: 250, backgroundColor: '#90001F', opacity: 0.9 }}>
-        <View style={{ height: 225, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }} >
-           <Image source={require('./src/book-finder/assets/images/student-logo.png')} style={{ height: 150, width: 150, borderRadius: 60, marginTop: 30 , backgroundColor: '#fff' }} />
-        </View>
-        <View style={{ height: 25, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
-  <Text style={{fontSize: 20, marginBottom: 20, color: 'white'}}>{shortenNameIfTooLong(user.firstname + " " + user.lastname)}</Text>
-        </View>
-      </View>
-      <ScrollView>
-        <DrawerItems {...props} />
-      </ScrollView>
-      <View style={{ alignItems: "center", bottom: 20 }}>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ flexDirection: 'column' }}>
-            <Icon name="arrow-circle-o-right" size={30} onPress={() => loggingOut()} />
-          </View>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-}
-
 console.disableYellowBox = true;
 
 const Drawer = createDrawerNavigator({
