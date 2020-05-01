@@ -44,7 +44,7 @@ export default function WishList () {
     if(booksInWishList === null){
       return(
         <View style={{flex: 1}}>
-          <NavBar title={'Wish List'}/>
+          <NavBar title={'Lista Desideri'}/>
             <View style={[styles.container, styles.horizontal]}>
                 <ActivityIndicator size="large" color="#90001F" />
             </View>

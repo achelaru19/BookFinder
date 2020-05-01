@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
 import {addBook} from '../actions/firebaseDB';
@@ -45,12 +45,14 @@ export default function AddBook() {
     <View style={styles.container}>
       <NavBar title="Aggiungi libro"/>
       
-      <View
-      style={{
-        flex: 10,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}>
+      <KeyboardAvoidingView
+        behavior={"padding"}
+        style={{
+          flex: 10,
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+        }}
+      >
         <View style={{flex:2, flexDirection: 'row', justifyContent: 'space-around', alignContent: 'space-around'}}>
           <View style={{flex: 4, flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
             <Text style={styles.labelCamera}>Usa il codice a barre per ottenere le info</Text> 
@@ -133,7 +135,7 @@ export default function AddBook() {
               />
             </View>
           }
-        </View>
+        </KeyboardAvoidingView>
     </View>
   );
 }
