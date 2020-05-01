@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
-import { UserContext } from '../consts/context';
 import { ListItem } from 'react-native-elements';
 import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
 import { LastMessageType } from '../types/lastMessageType';

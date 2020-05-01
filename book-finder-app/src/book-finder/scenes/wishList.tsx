@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, Dimensions, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';

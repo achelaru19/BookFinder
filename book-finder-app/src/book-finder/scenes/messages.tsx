@@ -7,7 +7,6 @@ import { UserContext } from '../consts/context';
 import { getLastMessages } from '../actions/firebaseDB';
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { IMessage } from 'react-native-gifted-chat';
 import { LastMessageType } from '../types/lastMessageType';
 import { UserType } from '../types/userType';
 
