@@ -57,40 +57,36 @@ export default function AddBookToWishList () {
                 <View style={styles.container}>
                     <View>
                         <Text style={styles.label}>Titolo</Text>
-                        <View style={styles.inputBox}>
                             <TextInput
                                 onChangeText={text => setTitle(text)}
                                 value={title}
+                                style={styles.inputBox}
                             />
-                        </View>
                     </View>
                     <View>
                         <Text style={styles.label}>Autore</Text>
-                        <View style={styles.inputBox}>
                             <TextInput
                                 onChangeText={text => setAuthor(text)}
                                 value={author}
+                                style={styles.inputBox}
                             />
-                        </View>
                     </View>
                     <View>
                         <Text style={styles.label}>Editore</Text>
-                        <View style={styles.inputBox}>
                             <TextInput
                                 onChangeText={text => setEditor(text)}
                                 value={editor}
+                                style={styles.inputBox}
                             />
-                        </View>
                     </View>
                     <View>
                         <Text style={styles.label}>ISBN</Text>
-                        <View style={styles.inputBox}>
                             <TextInput
                                 onChangeText={text => setISBN(text)}
                                 value={isbn}
                                 keyboardType={'numeric'}
+                                style={styles.inputBox}
                             />
-                        </View>
                     </View>
                 </View>
                 <View style={styles.buttonBox}>
@@ -130,24 +126,27 @@ export default function AddBookToWishList () {
     },
     heading: {
         flexDirection: 'row',
-        alignContent: 'center',
-        justifyContent: 'center'
+        alignContent: 'space-between',
+        justifyContent: 'space-between',
+        textAlign: 'center'
     },
     headingText: {
         fontSize: 18,
         fontFamily: "Cardo-Regular",
+        justifyContent: 'center',
+        textAlign: 'center'
     },
     inputBox: {
         borderWidth: 0.5,
         borderColor: 'black',
         borderRadius: 30,
         marginHorizontal: 5,
-        height: 30,
-        paddingLeft: 10
+        height: 40,
+        paddingHorizontal: 10
     },
     label: {
         fontSize: 20,
-        fontFamily: "Cardo-Regular",
+        fontFamily: "Cardo-Bold",
         marginLeft: 12,
         marginTop: 5
     },

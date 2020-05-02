@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Dimensions } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -77,53 +77,49 @@ export default function Search() {
             }
             onSubmit={() => searchForBook()}
           >
-            {({ handleChange, handleBlur, values }) => (
+            {() => (
               <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
-                <View style={{flex:1, justifyContent: 'space-around'}}>
-                <Text style={styles.labelText}>Titolo: </Text>
-                <TextInput
-                  onChangeText={val => setTitle(val)}
-                  onBlur={handleBlur('title')}
-                  value={title}
-                  style={styles.inputContainer}
-                />
+                <View>
+                  <Text style={styles.labelText}>Titolo: </Text>
+                  <TextInput
+                    onChangeText={val => setTitle(val)}
+                    value={title}
+                    style={styles.inputContainer}
+                  />
                 </View>
-                <View style={{flex:1, justifyContent: 'space-around'}}>
+                <View>
                   <Text style={styles.labelText}>Autore: </Text>
-                <TextInput
-                  onChangeText={val => setAuthor(val)}
-                  onBlur={handleBlur('author')}
-                  value={author}
-                  style={styles.inputContainer}
-                />
+                  <TextInput
+                    onChangeText={val => setAuthor(val)}
+                    value={author}
+                    style={styles.inputContainer}
+                  />
                 </View>
-                <View style={{flex:1, justifyContent: 'space-around'}}>
-                <Text style={styles.labelText}>Editore: </Text>
-                <TextInput
-                  onChangeText={val => setEditor(val)}
-                  onBlur={handleBlur('editor')}
-                  value={editor}
-                  style={styles.inputContainer}
-                />
+                <View>
+                  <Text style={styles.labelText}>Editore: </Text>
+                  <TextInput
+                    onChangeText={val => setEditor(val)}
+                    value={editor}
+                    style={styles.inputContainer}
+                  />
                 </View>
-                <View style={{flex:1, justifyContent: 'space-around'}}>
+                <View>
                   <Text style={styles.labelText}>ISBN: </Text>
-                <TextInput
-                  onChangeText={val => setISBN(val)}
-                  onBlur={handleBlur('isbn')}
-                  value={isbn}
-                  style={styles.inputContainer}
-                  keyboardType={'numeric'}
-                />
-                </View>
-                <View style={{flex:3, justifyContent: 'center', alignItems: 'center', paddingTop: 40}}>
-                  <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
-                    <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
-                  </TouchableOpacity>
+                  <TextInput
+                    onChangeText={val => setISBN(val)}
+                    value={isbn}
+                    style={styles.inputContainer}
+                    keyboardType={'numeric'}
+                  />
                 </View>
               </View>
             )}
-          </Formik> 
+          </Formik>  
+          <View style={{ flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 40}}>
+            <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
+              <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
+            </TouchableOpacity>
+          </View>
           </View> 
         </View>
         </ScrollView>
@@ -150,13 +146,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   inputContainer: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: 'black',
     borderRadius: 30,
+    marginHorizontal: 5,
     height: 40,
-    paddingLeft: 15,
-    marginLeft: 3,
-    marginRight: 3
+    paddingHorizontal: 10
   },
   labelText: {
     fontSize: 20,
@@ -169,7 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#90001F',
     maxHeight: 50,
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 280
+    justifyContent: 'flex-end',
+    width: Dimensions.get('window').width * 0.95
   },
 });

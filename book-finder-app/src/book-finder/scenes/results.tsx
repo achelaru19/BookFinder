@@ -20,6 +20,11 @@ export default function Result(props) {
     const navigation = useNavigation();
     const parameters = navigation.getParam("parameters");
 
+    const makeNewSearch = () => {
+        setBooks(null);
+        navigation.navigate('Search');
+    }
+
     useEffect(() => {
         searchBook(user, parameters.title, parameters.author, parameters.editor, parameters.isbn, books => setBooks(books));
     }, [parameters]);
@@ -69,7 +74,7 @@ export default function Result(props) {
                             <Text style={styles.textHolder}>Nessun libro trovato</Text>
                             <View style={styles.addButton}>
                                 <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                                <TouchableOpacity onPress={makeNewSearch}>
                                     <Text style={styles.buttonLabel}>Cerca un altro libro</Text>
                                 </TouchableOpacity>
                         </View>

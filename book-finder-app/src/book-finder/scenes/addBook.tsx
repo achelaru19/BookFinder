@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView, SafeAreaView, Dimensions } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
 import {addBook} from '../actions/firebaseDB';
@@ -43,7 +43,7 @@ export default function AddBook() {
 
   return (
     
-      <View style={styles.container}>
+      <View style={{flex: 1}}>
       <NavBar title="Aggiungi libro"/>
       <KeyboardAvoidingView
       behavior={"padding"} 
@@ -53,7 +53,7 @@ export default function AddBook() {
                 <ScrollView>
       <View
         style={{
-          flex: 10,
+          flex: 1,
           flexDirection: 'column',
           justifyContent: 'flex-end',
         }}
@@ -67,70 +67,72 @@ export default function AddBook() {
           </View>
         </View>
             {!hasPressedCamera ? 
-            <View style={{flex:8, flexDirection: 'column', justifyContent: 'space-evenly'}}>
-              <View style={{flex:1}}>
-                <Text style={styles.label}>Titolo</Text>
-                <TextInput
-                  onChangeText={value => setTitle(value)}
-                  value={title}
-                  style={styles.inputBox}
-                />
-              </View>
-              <View style={{flex:1}}>
-                <Text style={styles.label}>Autore</Text>
-                <TextInput
-                  onChangeText={value => setAuthor(value)}
-                  value={author}
-                  style={styles.inputBox}
-                />
-              </View>
-              <View style={{flex:1}}>
-                <Text style={styles.label}>Editore</Text>
-                <TextInput
-                  onChangeText={value=> setEditor(value)}
-                  value={editor}
-                  style={styles.inputBox}
-                />
-              </View>
-              <View style={{flex:1}}>
-                <Text style={styles.label}>ISBN</Text>
-                <TextInput
-                  onChangeText={value => setISBN(value)}
-                  value={isbn}
-                  style={styles.inputBox}
-                  keyboardType={'numeric'}
-                />
-              </View>
-              <View style={{flex:1}}>
-                <Text style={styles.label}>Prezzo</Text>
-                <TextInput
-                  onChangeText={value => setPrice(value)}
-                  value={price}
-                  style={styles.inputBox}
-                  keyboardType={'numeric'}
-                />
-              </View>
-              <View style={{flex: 2, flexDirection: 'column', alignContent: 'flex-end'}}>
-                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                  <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
-                    <Text style={styles.buttonText}>Aggiungi</Text>
-                  </TouchableOpacity>
+            <View style={styles.container}>
+              <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-evenly'}}>
+                <View style={styles.inputField}>
+                  <Text style={styles.label}>Titolo</Text>
+                  <TextInput
+                    onChangeText={value => setTitle(value)}
+                    value={title}
+                    style={styles.inputBox}
+                  />
                 </View>
+                <View style={styles.inputField}>
+                  <Text style={styles.label}>Autore</Text>
+                  <TextInput
+                    onChangeText={value => setAuthor(value)}
+                    value={author}
+                    style={styles.inputBox}
+                  />
+                </View>
+                <View style={styles.inputField}>
+                  <Text style={styles.label}>Editore</Text>
+                  <TextInput
+                    onChangeText={value=> setEditor(value)}
+                    value={editor}
+                    style={styles.inputBox}
+                  />
+                </View>
+                <View style={styles.inputField}>
+                  <Text style={styles.label}>ISBN</Text>
+                  <TextInput
+                    onChangeText={value => setISBN(value)}
+                    value={isbn}
+                    style={styles.inputBox}
+                    keyboardType={'numeric'}
+                  />
+                </View>
+                <View style={styles.inputField}>
+                  <Text style={styles.label}>Prezzo</Text>
+                  <TextInput
+                    onChangeText={value => setPrice(value)}
+                    value={price}
+                    style={styles.inputBox}
+                    keyboardType={'numeric'}
+                  />
+                </View>
+            </View>
+            <View style={{flex: 1, flexDirection: 'column', justifyContent: "center",}}>
+              <View style={{flex: 1, flexDirection: 'row', alignContent: 'center', justifyContent: 'center'}}>
+              <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
+                <Text style={styles.buttonText}>Aggiungi</Text>
+              </TouchableOpacity>
               </View>
-              <AwesomeAlert
-                    show={bookAdded}
-                    showProgress={false}
-                    title="Libro aggiunto"
-                    message="Il libro da te inserito &egrave; stato inserito tra i tuoi libri in vendita"
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showConfirmButton={true}
-                    confirmText="OK"
-                    confirmButtonColor="#90001F"
-                    onConfirmPressed={() => {
-                        setBookAdded(false);
-                    }}
-                />
+            </View>
+            <AwesomeAlert
+                  show={bookAdded}
+                  showProgress={false}
+                  title="Libro aggiunto"
+                  message="Il libro da te inserito &egrave; stato inserito tra i tuoi libri in vendita"
+                  closeOnTouchOutside={true}
+                  closeOnHardwareBackPress={false}
+                  showConfirmButton={true}
+                  confirmText="OK"
+                  confirmButtonColor="#90001F"
+                  onConfirmPressed={() => {
+                      setBookAdded(false);
+                  }}
+              />
           </View>
           : 
             <View style={{flex: 13}}>
@@ -161,12 +163,16 @@ const styles = StyleSheet.create({
     flex: 1,
   }, 
   inputBox: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: 'black',
     marginHorizontal: 10,
     borderRadius: 30,
     height: 40,
     paddingHorizontal: 15
+  },
+  inputField: {
+    flex: 1,
+    flexDirection: 'column'
   },
   labelCamera: {
     fontFamily: 'Cardo-Regular',
@@ -187,11 +193,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   addButton: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#90001F',
     flexDirection: 'row',
-    width: 390,
-    maxHeight: 38,
+    width: Dimensions.get('screen').width * 0.95,
+    marginTop: 50,
+    height: 40,
     borderRadius: 40,
     alignContent: 'center',
     justifyContent: 'center'
