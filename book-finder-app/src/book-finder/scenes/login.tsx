@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, KeyboardAvoidingView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,6 +56,10 @@ export default function Login() {
                <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
+                <KeyboardAvoidingView
+                    behavior={"padding"}
+                    style={styles.container}
+                >
                 <View style={{flex: 2, flexDirection: 'column'}}>
                     <Text style={styles.label}>Email:</Text>
                     <TextInput
@@ -70,6 +74,7 @@ export default function Login() {
                         onChangeText={value => setPassword(value)}
                     />
                 </View>
+                </KeyboardAvoidingView>
                 <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity onPress={onPressLogin}>

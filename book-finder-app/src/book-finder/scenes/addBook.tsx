@@ -46,19 +46,13 @@ export default function AddBook() {
       <View style={{flex: 1}}>
       <NavBar title="Aggiungi libro"/>
       <KeyboardAvoidingView
-      behavior={"padding"} 
-      style={{flex: 1}}
+      behavior={'height'} 
+      style={{flex: 8}}
     >
       <SafeAreaView style={styles.container}>
-                <ScrollView>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <View style={{flex:2, flexDirection: 'row', justifyContent: 'space-around', alignContent: 'space-around'}}>
+        <ScrollView>
+      <View style={{flex: 8}}>
+        <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-around', alignContent: 'space-around'}}>
           <View style={{flex: 4, flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
             <Text style={styles.labelCamera}>Usa il codice a barre per ottenere le info</Text> 
           </View>
@@ -66,6 +60,7 @@ export default function AddBook() {
             <Icon name="camera-alt" color={"#009071"} reverse={true} onPress={() => pressCamera(!hasPressedCamera)}/>
           </View>
         </View>
+        <View style={{flex:7}}>
             {!hasPressedCamera ? 
             <View style={styles.container}>
               <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-evenly'}}>
@@ -144,6 +139,7 @@ export default function AddBook() {
               />
             </View>
           }
+          </View>
         </View>
         </ScrollView>
         </SafeAreaView>
@@ -178,7 +174,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Cardo-Regular',
     fontSize: 17,
     flexDirection: 'column',
-    textAlignVertical: 'center'
+    textAlignVertical: 'center',
+    textAlign: 'center'
   },
   label: {
     fontFamily: 'Cardo-Bold',
@@ -197,7 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#90001F',
     flexDirection: 'row',
     width: Dimensions.get('screen').width * 0.95,
-    marginTop: 50,
+    marginTop: 20,
     height: 40,
     borderRadius: 40,
     alignContent: 'center',

@@ -59,7 +59,7 @@ export default function Settings() {
     return (
       <View style={{flex: 1}}>
         <NavBar title="Impostazioni" />
-        <View style={{flex: 3, flexDirection: 'column', alignItems: 'stretch'}}>
+        <View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch'}}>
           <View style={styles.box}>
             <Text style={styles.label}>Email</Text>
             <Text style={styles.information}>{email}</Text>
@@ -118,9 +118,9 @@ export default function Settings() {
             modifyPressed ?
               <View style={styles.pickerInput}>
                 <Picker style={styles.picker} selectedValue={universityPlaceholder} onValueChange={val => {if(val != '-') setUniversityPlaceholder(val)}}>
-                  <Picker.Item label={"Seleziona una università"} value="-" />
-                  {universities.map(uni => 
-                      <Picker.Item label={uni} value={uni} />
+                  <Picker.Item label={"Seleziona una università"} value="-" key={'setting-uni--'}/>
+                  {universities.map((uni, index) => 
+                      <Picker.Item label={uni} value={uni} key={'setting-uni-'+index} />
                   )}
                 </Picker>
               </View>
@@ -134,9 +134,9 @@ export default function Settings() {
             modifyPressed ?
               <View style={styles.pickerInput}>
                 <Picker style={styles.picker} selectedValue={facultyPlaceholder} onValueChange={val => {if(val != '-') setFacultyPlaceholder(val)}}> 
-                  <Picker.Item label={"Seleziona una facoltà"} value="-" />
-                  {faculties.map(fac => 
-                      <Picker.Item label={fac} value={fac} />
+                  <Picker.Item label={"Seleziona una facoltà"} value="-" key={'settings-faculty--'} />
+                  {faculties.map((fac, index) => 
+                      <Picker.Item label={fac} value={fac} key={'settings-faculty-'+index}/>
                   )}
                 </Picker>
               </View>
@@ -155,7 +155,6 @@ export default function Settings() {
                   <Text style={{fontFamily: 'Cardo-Regular', color: 'white', fontSize: 20}}>Modifica Informazioni</Text>
                 </TouchableOpacity>
             }
-            
           </View>
         </View>
       </View>

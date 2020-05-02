@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, KeyboardAvoidingView } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -54,7 +54,7 @@ export default function AddBookToWishList () {
                 <View style={styles.heading}>
                     <Text style={styles.headingText}>Aggiungi un libro nella tua Lista Desideri per ricevere una notifica appena qualcuno lo aggiunge</Text>
                 </View>
-                <View style={styles.container}>
+                <KeyboardAvoidingView style={styles.container}>
                     <View>
                         <Text style={styles.label}>Titolo</Text>
                             <TextInput
@@ -88,7 +88,7 @@ export default function AddBookToWishList () {
                                 style={styles.inputBox}
                             />
                     </View>
-                </View>
+                </KeyboardAvoidingView>
                 <View style={styles.buttonBox}>
                     <TouchableOpacity disabled={buttonDisabled} onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
