@@ -107,7 +107,7 @@ export default function AddBookToWishList () {
                     closeOnHardwareBackPress={false}
                     showConfirmButton={true}
                     confirmText="OK"
-                    confirmButtonColor="#009071"
+                    confirmButtonColor="#90001F"
                     onConfirmPressed={() => {
                         setBookAdded(false);
                         navigation.navigate("WishList");

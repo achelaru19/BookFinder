@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { ListItem } from 'react-native-elements';
 import { getInitials, shortenMessageIfTooLong } from '../utils/functions';
 import { LastMessageType } from '../types/lastMessageType';
+import { SafeAreaView } from 'react-navigation';
 
 interface PropsType {
   message: LastMessageType;
@@ -19,30 +20,33 @@ export default function Message(props: PropsType) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
-        style={styles.touchOpacity} 
-        onPress={() => navigation.navigate('Chat', { otherUserEmail: lastMessage.conversationWith})
-      }>
-        { lastMessage.read ?
-          <ListItem
-            leftAvatar={{
-              title: getInitials(lastMessage.name)
-            }}
-            title={lastMessage.name}
-            subtitle={shortenMessageIfTooLong(lastMessage.message)}
-          /> 
-          :
-          <ListItem
-            leftAvatar={{
-              title: getInitials(lastMessage.name)
-            }}
-            title={lastMessage.name}
-            subtitle={shortenMessageIfTooLong(lastMessage.message)}
-            rightIcon={{ name: 'circle', type: 'font-awesome', color: '#90001F'}}
-          /> 
-        }
-      </TouchableOpacity>
-      
+      <SafeAreaView>
+        <ScrollView> 
+          <TouchableOpacity 
+            style={styles.touchOpacity} 
+            onPress={() => navigation.navigate('Chat', { otherUserEmail: lastMessage.conversationWith})
+          }>
+            { lastMessage.read ?
+              <ListItem
+                leftAvatar={{
+                  title: getInitials(lastMessage.name)
+                }}
+                title={lastMessage.name}
+                subtitle={shortenMessageIfTooLong(lastMessage.message)}
+              /> 
+              :
+              <ListItem
+                leftAvatar={{
+                  title: getInitials(lastMessage.name)
+                }}
+                title={lastMessage.name}
+                subtitle={shortenMessageIfTooLong(lastMessage.message)}
+                rightIcon={{ name: 'circle', type: 'font-awesome', color: '#90001F'}}
+              /> 
+            }
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
     </View> 
   );
   

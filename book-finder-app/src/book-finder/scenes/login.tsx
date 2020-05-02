@@ -80,12 +80,12 @@ export default function Login() {
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('ForgottenPassword')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Reset password page")}>Password dimenticata?</Text>
+                            <Text style={styles.smallButtons}>Password dimenticata?</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("SignUp page")}>Registrati</Text>
+                            <Text style={styles.smallButtons}>Registrati</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage, connectWithChat } from '../actions/firebaseDB';
@@ -48,7 +48,10 @@ export default function Chat() {
         return (
         <View style={{flex: 1}}>
             <NavBar title={otherUser.firstname + ' ' + otherUser.lastname}/>
- 
+            <KeyboardAvoidingView
+                behavior={"padding"}
+                style={{flex:1}}
+            >
             <GiftedChat 
                 messages={messages}
                 onSend={c => onSend(c)}
@@ -59,6 +62,7 @@ export default function Chat() {
                 placeholder={"Scrivi un messaggio..."}
                 key={user.email}
             />
+            </KeyboardAvoidingView>
         </View>
         );
     }

@@ -33,7 +33,7 @@ export default function AddBook() {
     setAuthor('');
     setEditor('');
     setISBN('');
-    setPrice('0.0');
+    setPrice('');
   }
 
   useEffect(() => {
@@ -111,11 +111,11 @@ export default function AddBook() {
                 />
               </View>
               <View style={{flex: 2, flexDirection: 'column', alignContent: 'flex-end'}}>
-              <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
-                  <Text style={styles.buttonText}>Aggiungi</Text>
-                </TouchableOpacity>
-              </View>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+                  <TouchableOpacity disabled={buttonDisabled} style={styles.addButton} onPress={addBookFunction}>
+                    <Text style={styles.buttonText}>Aggiungi</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
               <AwesomeAlert
                     show={bookAdded}
@@ -126,7 +126,7 @@ export default function AddBook() {
                     closeOnHardwareBackPress={false}
                     showConfirmButton={true}
                     confirmText="OK"
-                    confirmButtonColor="#009071"
+                    confirmButtonColor="#90001F"
                     onConfirmPressed={() => {
                         setBookAdded(false);
                     }}

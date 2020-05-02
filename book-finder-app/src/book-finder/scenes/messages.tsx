@@ -41,9 +41,9 @@ export default function Messages() {
             <View style={styles.messages}> 
               <SafeAreaView>
               <ScrollView>
-              {messages.map(mess => 
-                <Message message={mess} changeLastMessage={increaseLastMessage} key={'message_' + mess.conversationWith} />
-              )}
+                {messages.map(mess => 
+                  <Message message={mess} changeLastMessage={increaseLastMessage} key={'message_' + mess.conversationWith} />
+                )}
               </ScrollView>
               </SafeAreaView>
             </View>

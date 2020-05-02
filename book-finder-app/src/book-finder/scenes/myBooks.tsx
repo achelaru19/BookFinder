@@ -10,6 +10,7 @@ import { UserContext } from '../consts/context';
 import { BookType } from '../types/bookType';
 import { UserType } from '../types/userType';
 import { useNavigation } from 'react-navigation-hooks';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function MyBooks() {
@@ -74,25 +75,27 @@ export default function MyBooks() {
                         <NavBar title="I Miei Libri" />
                         <View style={{ flex: 11 }}>
                             <SafeAreaView style={{ flex: 1, flexDirection: 'column' }}>
-                                <View>
-                                    <SwipeableFlatList
-                                        data={myBooks}
-                                        keyExtractor={(item, index) => index.toString()}
-                                        renderItem={({ item }, index) => (
-                                            <View style={styles.bookContainer} key={'myBook_' + index}>
-                                                <Text style={styles.label}>{item.title}</Text>
-                                                <Text style={styles.label}>{item.author}</Text>
-                                                <Text style={styles.label}>{item.editor}</Text>
-                                            </View>
-                                        )}
-                                        renderRight={({ item }, index) => (
-                                            <View style={styles.deleteButton} key={'delete_' + index}>
-                                                <Icon name="delete" size={30} onPress={() => removeBookFromList(item.title, item.author, item.editor, item.isbn)} />
-                                            </View>
-                                        )}
-                                        backgroundColor={'white'}
-                                    />
-                                </View>
+                                <ScrollView>
+                                    <View>
+                                        <SwipeableFlatList
+                                            data={myBooks}
+                                            keyExtractor={(item, index) => index.toString()}
+                                            renderItem={({ item }, index) => (
+                                                <View style={styles.bookContainer} key={'myBook_' + index}>
+                                                    <Text style={styles.label}>{item.title}</Text>
+                                                    <Text style={styles.label}>{item.author}</Text>
+                                                    <Text style={styles.label}>{item.editor}</Text>
+                                                </View>
+                                            )}
+                                            renderRight={({ item }, index) => (
+                                                <View style={styles.deleteButton} key={'delete_' + index}>
+                                                    <Icon name="delete" size={30} onPress={() => removeBookFromList(item.title, item.author, item.editor, item.isbn)} />
+                                                </View>
+                                            )}
+                                            backgroundColor={'white'}
+                                        />
+                                    </View>
+                                </ScrollView>
                             </SafeAreaView >
                         </View>
                     </View>

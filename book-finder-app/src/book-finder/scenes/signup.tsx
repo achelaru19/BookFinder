@@ -129,9 +129,9 @@ export default function SignUp() {
                      <Text style={styles.label}>Facoltà:</Text>
                      <View style={styles.pickerInput}>
                             <Picker style={styles.picker} selectedValue={faculty} onValueChange={val => {if(val != '-') setFaculty(val)}}> 
-                                <Picker.Item label={"Seleziona una facoltà"} value="-" />
-                                {faculties.map(fac => 
-                                    <Picker.Item label={fac} value={fac} />
+                                <Picker.Item label={"Seleziona una facoltà"} value="-" key={'facultyPicker--'} />
+                                {faculties.map((fac, index) => 
+                                    <Picker.Item label={fac} value={fac} key={'facultyPicker-'+index} />
                                 )}
                             </Picker>
                     </View>
@@ -160,7 +160,7 @@ export default function SignUp() {
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
+                            <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

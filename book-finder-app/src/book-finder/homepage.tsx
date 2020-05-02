@@ -62,7 +62,6 @@ export default function HomePage() {
     return (
           <View style={{flex: 1,flexDirection: 'column',
           justifyContent: 'center',
-          borderTopWidth: 10,
           alignItems: 'stretch',}}>
             <NavBar title="BookFinder"/>
             <View style={{flex: 12}}>
