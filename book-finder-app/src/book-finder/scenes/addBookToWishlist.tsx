@@ -8,6 +8,8 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { isWishListBookValid } from '../utils/inputFormatChecks';
+import { SafeAreaView } from 'react-navigation';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -55,6 +57,9 @@ export default function AddBookToWishList () {
                     <Text style={styles.headingText}>Aggiungi un libro nella tua Lista Desideri per ricevere una notifica appena qualcuno lo aggiunge</Text>
                 </View>
                 <KeyboardAvoidingView style={styles.container}>
+                    <SafeAreaView>
+                        <ScrollView>
+                            
                     <View>
                         <Text style={styles.label}>Titolo</Text>
                             <TextInput
@@ -88,12 +93,14 @@ export default function AddBookToWishList () {
                                 style={styles.inputBox}
                             />
                     </View>
-                </KeyboardAvoidingView>
                 <View style={styles.buttonBox}>
                     <TouchableOpacity disabled={buttonDisabled} onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
                         <Text style={styles.buttonText}>Aggiungi Libro</Text>
                     </TouchableOpacity>
                 </View>
+                        </ScrollView>
+                    </SafeAreaView>
+                </KeyboardAvoidingView>
                 <AwesomeAlert
                     show={bookAdded}
                     showProgress={false}
@@ -153,7 +160,7 @@ export default function AddBookToWishList () {
     buttonBox: {
         backgroundColor: '#90001F',
         marginHorizontal: 10,
-        marginBottom: 10,
+        marginTop: 30,
         height: 40,
         flexDirection: 'row',
         justifyContent: 'center',

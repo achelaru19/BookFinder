@@ -48,10 +48,7 @@ export default function Chat() {
         return (
         <View style={{flex: 1}}>
             <NavBar title={otherUser.firstname + ' ' + otherUser.lastname}/>
-            <KeyboardAvoidingView
-                behavior={"padding"}
-                style={{flex:1}}
-            >
+            <View style={{flex: 1}}>
             <GiftedChat 
                 messages={messages}
                 onSend={c => onSend(c)}
@@ -61,8 +58,9 @@ export default function Chat() {
                 }}
                 placeholder={"Scrivi un messaggio..."}
                 key={user.email}
+                keyboardShouldPersistTaps='never'
             />
-            </KeyboardAvoidingView>
+            </View>
         </View>
         );
     }
