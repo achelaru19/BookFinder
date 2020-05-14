@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Image, KeyboardAvoidingView } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 import { isValidEmail } from '../utils/inputFormatChecks';
+import { SafeAreaView } from 'react-navigation';
 
 export default function ForgottenPassword() {
     
@@ -47,7 +48,10 @@ export default function ForgottenPassword() {
     else 
         return (
             
-              <View style={styles.container}>
+              <View style={styles.container}> 
+              <KeyboardAvoidingView behavior={"height"} style={{flex:1}}>
+                  <SafeAreaView>
+                  <ScrollView>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
@@ -61,10 +65,7 @@ export default function ForgottenPassword() {
                         <Text style={styles.text3}>Inserisci la tua email e ti invieremo un link per reimpostarla.</Text>
                     </View>
                 </View>
-                <KeyboardAvoidingView
-                    behavior={"padding"}
-                    style={{flex:1}}
-                >
+               
                     <View style={{flex: 2, flexDirection: 'column'}}>
                         <TextInput
                             style={styles.emailInput}
@@ -77,7 +78,6 @@ export default function ForgottenPassword() {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </KeyboardAvoidingView>
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -85,6 +85,9 @@ export default function ForgottenPassword() {
                         </TouchableOpacity>
                     </View>
                 </View>
+                  </ScrollView>
+                  </SafeAreaView>
+                </KeyboardAvoidingView>
                 </View>
         );
    
@@ -149,6 +152,7 @@ const styles = StyleSheet.create({
     smallButtons: {
         fontSize: 16,
         fontFamily: 'Cardo-Bold',
+        marginTop: 80,
         textAlign: 'center',
         textDecorationLine: 'underline'
     },

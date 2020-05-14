@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
     maxHeight: 50,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    width: Dimensions.get('window').width * 0.95
+    width: Dimensions.get('window').width * 0.95,
+    marginTop: 180
   },
 });

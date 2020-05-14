@@ -160,7 +160,7 @@ export default function AddBookToWishList () {
     buttonBox: {
         backgroundColor: '#90001F',
         marginHorizontal: 10,
-        marginTop: 30,
+        marginTop: 190,
         height: 40,
         flexDirection: 'row',
         justifyContent: 'center',

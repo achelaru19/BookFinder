@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
 import { BookType } from '../types/bookType';
+import { convertIntoRealPrice } from '../utils/inputFormatChecks';
 
 interface PropsType {
     book: BookType;
@@ -25,13 +26,13 @@ export default function BookInformation(props: PropsType){
                         <Text style={styles.label}>Titolo: {props.book.title}</Text>
                         <Text style={styles.label}>Autore: {props.book.author}</Text>
                         <Text style={styles.label}>Editore: {props.book.editor}</Text>
-                        <Text style={styles.label}>ISBN: 136545787687645</Text>
-                        <Text style={styles.label}>Universit&agrave;: Politecnico di Milano</Text>
-                        <Text style={styles.label}>Venditore: Marco Rossi</Text>
+                        <Text style={styles.label}>ISBN: {props.book.isbn}</Text>
+                        <Text style={styles.label}>Universit&agrave;: {props.book.sellerUniversity}</Text>
+                        <Text style={styles.label}>Venditore: {props.book.sellerName}</Text>
                         <Button title="Contatta" onPress={() => navigate("Chat", {otherUserEmail: props.book.sellerEmail})}/>
                     </View>
                     <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center'}}>
-                        <Text style={styles.label}>{props.book.price}&euro;</Text>
+                        <Text style={styles.label}>{convertIntoRealPrice(props.book.price)}&euro;</Text>
                     </View>
                 </View>
             </TouchableOpacity> 
@@ -52,7 +53,7 @@ export default function BookInformation(props: PropsType){
                         <Text style={styles.label}>Editore: {props.book.editor}</Text>
                     </View>
                     <View style={{flex: 2, flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'center'}}>
-                        <Text style={styles.label}>{props.book.price}&euro;</Text>
+                        <Text style={styles.label}>{convertIntoRealPrice(props.book.price)}&euro;</Text>
                     </View>
                 </View>
             </TouchableOpacity>

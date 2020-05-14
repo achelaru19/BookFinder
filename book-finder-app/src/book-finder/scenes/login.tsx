@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, KeyboardAvoidingView, Platform } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -51,20 +51,19 @@ export default function Login() {
         />
         );
     else 
-        return (
+        return (<KeyboardAvoidingView
+            style={{ flex: 1}}
+            behavior={undefined}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}
+          >
             <View style={styles.container}>
                <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
-                <KeyboardAvoidingView
-                    behavior={"padding"}
-                    style={styles.container}
-                >
                 <View style={{flex: 2, flexDirection: 'column'}}>
                     <Text style={styles.label}>Email:</Text>
                     <TextInput
                         style={styles.nameInput}
-                        placeholder="test@gmail.com"
                         onChangeText={value => setEmail(value)}
                     />
                     <Text style={styles.label}>Password:</Text>
@@ -74,7 +73,6 @@ export default function Login() {
                         onChangeText={value => setPassword(value)}
                     />
                 </View>
-                </KeyboardAvoidingView>
                 <View style={{flex: 1, flexDirection: 'column'}}>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity onPress={onPressLogin}>
@@ -94,6 +92,7 @@ export default function Login() {
                         </TouchableOpacity>
                     </View>
                 </View>
+                
                 <AwesomeAlert
                     show={wrongCredentials}
                     showProgress={false}
@@ -109,6 +108,7 @@ export default function Login() {
                     }}
                 />
             </View>
+            </KeyboardAvoidingView>
         );
    
 	

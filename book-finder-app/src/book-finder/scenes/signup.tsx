@@ -62,111 +62,112 @@ export default function SignUp() {
         );
     else 
         return (
+            <View style={styles.container}>
             <KeyboardAvoidingView
             behavior={"padding"}
-            style={styles.container}
+            style={{flex:1}}
           >
-            
-            <SafeAreaView  style={styles.container}>
+            <SafeAreaView>
                 <ScrollView>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Book Finder</Text>
-                </View>
-                <View style={{flex: 4, flexDirection: 'column'}}>
-                    <Text style={styles.label}>Nome:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        placeholder="Marco"
-                        onChangeText={value => setFirstname(value)}
-                    />
-                    <Text style={styles.label}>Cognome:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        placeholder="Rossi"
-                        onChangeText={value => setLastname(value)}
-                    />
-                    <Text style={styles.label}>Data di nascita:</Text>
-                    <View style={styles.nameInput}>
-                        <DatePicker
-                            style={{width: 200}}
-                            date={birthdate} //initial date from state
-                            mode="date" //The enum of date, datetime and time
-                            placeholder="Imposta data di nascita"
-                            format="DD-MM-YYYY"
-                            minDate="01-01-1900"
-                            maxDate="01-01-2019"
-                            confirmBtnText="Conferma"
-                            cancelBtnText="Cancella"
-                            customStyles={{
-                            dateIcon: {
-                                position: 'absolute',
-                                left: 0,
-                                top: 4,
-                                marginLeft: 0
-                            },
-                            dateInput: {
-                                marginLeft: 36
-                            }
-                            }}
-                            onDateChange={(date) => {setBirthdate(date)}}
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>Book Finder</Text>
+                    </View>
+                    <View style={{flex: 4, flexDirection: 'column'}}>
+                        <Text style={styles.label}>Nome:</Text>
+                        <TextInput
+                            style={styles.nameInput}
+                            placeholder="Marco"
+                            onChangeText={value => setFirstname(value)}
                         />
+                        <Text style={styles.label}>Cognome:</Text>
+                        <TextInput
+                            style={styles.nameInput}
+                            placeholder="Rossi"
+                            onChangeText={value => setLastname(value)}
+                        />
+                        <Text style={styles.label}>Data di nascita:</Text>
+                        <View style={styles.nameInput}>
+                            <DatePicker
+                                style={{width: 200}}
+                                date={birthdate} //initial date from state
+                                mode="date" //The enum of date, datetime and time
+                                placeholder="Imposta data di nascita"
+                                format="DD-MM-YYYY"
+                                minDate="01-01-1900"
+                                maxDate="01-01-2019"
+                                confirmBtnText="Conferma"
+                                cancelBtnText="Cancella"
+                                customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 4,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    marginLeft: 36
+                                }
+                                }}
+                                onDateChange={(date) => {setBirthdate(date)}}
+                            />
+                        </View>
+                        <Text style={styles.label}>Email:</Text>
+                        <TextInput
+                            style={styles.nameInput}
+                            placeholder="test@gmail.com"
+                            onChangeText={value => setEmail(value)}
+                        />
+                        <Text style={styles.label}>Università:</Text>
+                        <View style={styles.pickerInput}>
+                        <Picker style={styles.picker} selectedValue={university} onValueChange={val => {if(val != '-') setUniversity(val)}}>
+                            <Picker.Item label={"Seleziona una università"} value="-" key={'pickerItem--'} />
+                            {universities.map((uni, index) => 
+                                <Picker.Item label={uni} value={uni} key={'pickerItem'+index} />
+                            )}
+                        </Picker>
+                        </View>
+                        <Text style={styles.label}>Facoltà:</Text>
+                        <View style={styles.pickerInput}>
+                                <Picker style={styles.picker} selectedValue={faculty} onValueChange={val => {if(val != '-') setFaculty(val)}}> 
+                                    <Picker.Item label={"Seleziona una facoltà"} value="-" key={'facultyPicker--'} />
+                                    {faculties.map((fac, index) => 
+                                        <Picker.Item label={fac} value={fac} key={'facultyPicker-'+index} />
+                                    )}
+                                </Picker>
+                        </View>
+                        <View>
+                        <Text style={styles.label}>Password:</Text>
+                        <TextInput
+                            style={styles.nameInput}
+                            secureTextEntry={true}
+                            onChangeText={value => setPassword1(value)}
+                        />
+                        </View>
+                        <View>
+                        <Text style={styles.label}>Verifica Password:</Text>
+                        <TextInput
+                            style={styles.nameInput}
+                            secureTextEntry={true}
+                            onChangeText={value => setPassword2(value)}
+                        />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity disabled={buttonDisabled} onPress={onPressSignUp}>
+                                <Text style={styles.buttonText}>Registrati</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <Text style={styles.label}>Email:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        placeholder="test@gmail.com"
-                        onChangeText={value => setEmail(value)}
-                    />
-                     <Text style={styles.label}>Università:</Text>
-                     <View style={styles.pickerInput}>
-                     <Picker style={styles.picker} selectedValue={university} onValueChange={val => {if(val != '-') setUniversity(val)}}>
-                        <Picker.Item label={"Seleziona una università"} value="-" key={'pickerItem--'} />
-                        {universities.map((uni, index) => 
-                            <Picker.Item label={uni} value={uni} key={'pickerItem'+index} />
-                        )}
-                    </Picker>
+                    <View style={styles.signingOptions}>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                                <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                     <Text style={styles.label}>Facoltà:</Text>
-                     <View style={styles.pickerInput}>
-                            <Picker style={styles.picker} selectedValue={faculty} onValueChange={val => {if(val != '-') setFaculty(val)}}> 
-                                <Picker.Item label={"Seleziona una facoltà"} value="-" key={'facultyPicker--'} />
-                                {faculties.map((fac, index) => 
-                                    <Picker.Item label={fac} value={fac} key={'facultyPicker-'+index} />
-                                )}
-                            </Picker>
-                    </View>
-                    <View>
-                    <Text style={styles.label}>Password:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        secureTextEntry={true}
-                        onChangeText={value => setPassword1(value)}
-                    />
-                    </View>
-                    <View>
-                    <Text style={styles.label}>Verifica Password:</Text>
-                    <TextInput
-                        style={styles.nameInput}
-                        secureTextEntry={true}
-                        onChangeText={value => setPassword2(value)}
-                    />
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity disabled={buttonDisabled} onPress={onPressSignUp}>
-                            <Text style={styles.buttonText}>Registrati</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.signingOptions}>
-                    <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-              </ScrollView>
+                </ScrollView>
               </SafeAreaView>
             </KeyboardAvoidingView>
+            </View>
         );
    
 	

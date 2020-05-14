@@ -45,12 +45,6 @@ export default function AddBook() {
     
       <View style={{flex: 1}}>
       <NavBar title="Aggiungi libro"/>
-      <KeyboardAvoidingView
-      behavior={'height'} 
-      style={{flex: 8}}
-    >
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
       <View style={{flex: 8}}>
         <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-around', alignContent: 'space-around'}}>
           <View style={{flex: 4, flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
@@ -62,6 +56,12 @@ export default function AddBook() {
         </View>
         <View style={{flex:7}}>
             {!hasPressedCamera ? 
+      <KeyboardAvoidingView
+      behavior={'height'} 
+      style={{flex: 8}}
+    >
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
             <View style={styles.container}>
               <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-evenly'}}>
                 <View style={styles.inputField}>
@@ -129,6 +129,9 @@ export default function AddBook() {
                   }}
               />
           </View>
+        </ScrollView>
+        </SafeAreaView>
+    </KeyboardAvoidingView>
           : 
             <View style={{flex: 13}}>
               <BarcodeScan pressCamera={() => pressCamera(!hasPressedCamera)} 
@@ -141,9 +144,6 @@ export default function AddBook() {
           }
           </View>
         </View>
-        </ScrollView>
-        </SafeAreaView>
-    </KeyboardAvoidingView>
         </View>
   );
 }
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#90001F',
     flexDirection: 'row',
     width: Dimensions.get('screen').width * 0.95,
-    marginTop: 20,
+    marginTop: 120,
     height: 40,
     borderRadius: 40,
     alignContent: 'center',

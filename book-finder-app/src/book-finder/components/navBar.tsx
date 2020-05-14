@@ -28,12 +28,11 @@ const NavBar = (props: PropsType) => {
         backgroundColor: '#90001F',
       }}
         leftComponent={<Icon name="menu" color={'white'}  onPress={() => navigation.openDrawer()} />}
-        centerComponent={{ text: props.title, style: { color: '#fff', fontFamily: 'Cardo-Regular', fontSize: 30 } }}
+        centerComponent={{ text: props.title, style: { color: '#fff', fontFamily: 'Cardo-Bold', fontSize: 23 } }}
         rightComponent={<Icon name="search" color={'white'}  onPress={() => navigation.navigate('Search')} />}
       />
   );
 }
-
 
 
 export default withNavigation(NavBar);
