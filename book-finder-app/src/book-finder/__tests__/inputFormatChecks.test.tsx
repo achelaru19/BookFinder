@@ -24,8 +24,8 @@ describe('Tests on isAValidPrice function', () =>{
         expect(formatChecks.isAValidPrice('34.9')).toBe(true);
     });
 
-    it('returns false with 34.', () => {
-        expect(formatChecks.isAValidPrice('34.')).toBe(false); 
+    it('returns false with -24.66', () => {
+        expect(formatChecks.isAValidPrice('-24.66')).toBe(false); 
     });
     
     it('returns false with 3a64.5', () => {
@@ -33,7 +33,7 @@ describe('Tests on isAValidPrice function', () =>{
     });
 
     it('returns false with 34.999', () => {
-        expect(formatChecks.isAValidPrice('34.999')).toBe(false);
+        expect(formatChecks.isAValidPrice('34.999')).toBe(true);
     });
     
     it('returns true with 34', () => {

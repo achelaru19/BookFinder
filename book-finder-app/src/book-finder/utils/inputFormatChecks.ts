@@ -42,7 +42,7 @@ export const isAllDigits = (value) => {
 
 export const isAValidPrice = value => {
     const numericalValue = parseFloat(value);
-    return numericalValue != NaN && numericalValue > 0.0;
+    return numericalValue !== NaN && numericalValue > 0.0 && !isNaN(value);
 }
 
 export const isThirteenDigits = (value) => {
