@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import {Permissions, Notifications} from 'expo';
 import {TOKEN_GOOGLE_BOOKS} from '../consts/constants';
 
 export const getInitials = (fullname) => {
@@ -85,23 +84,3 @@ export const createMessageFromDBData = (message) => {
   }
 
 
-/*
-export async function registerForPushNotificationsAsync(){
-    const {status} = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    let finalStatus = status;
-
-    if(status !== 'granted') {
-        const {status} = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-        finalStatus = status;
-    }
-
-    if(finalStatus !== 'granted') {
-        return;
-    }
-
-    let toker = await Notifications.getExpoPushTokenAsync();
-
-    // save token in user 
-
-}
-*/

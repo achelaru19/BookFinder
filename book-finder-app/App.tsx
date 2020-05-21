@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
@@ -17,6 +17,8 @@ import Login from './src/book-finder/scenes/login';
 import SignUp from './src/book-finder/scenes/signup';
 import ForgottenPassword from './src/book-finder/scenes/forgottenPassword';
 import { UserProvider } from './src/book-finder/consts/context';
+import { registerForPushNotificationsAsync } from './src/book-finder/utils/pushNotificationUtils';
+import { Notifications } from 'expo';
 
 const { width } = Dimensions.get("window");
 console.disableYellowBox = true;
@@ -90,9 +92,18 @@ const Drawer = createDrawerNavigator({
 
 const AppNavigation = createAppContainer(Drawer);
 
-const App = () =>  (
-  <UserProvider>
-    <AppNavigation />
-  </UserProvider>
-);
+const App = () =>  {
+  const [notification, setNotification] = useState<any>({});
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+    Notifications.addListener((notification) => setNotification(notification));
+  }, [])
+
+  return (
+    <UserProvider>
+      <AppNavigation />
+    </UserProvider>
+  )
+}
 export default App;
