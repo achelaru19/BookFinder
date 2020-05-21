@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
-import {getUser, getBooksAroundUser} from './actions/firebaseDB';
+import {getUser, getBooksAroundUser, addToken} from './actions/firebaseDB';
 import NavBar from './components/navBar';
 import BookInformation from './components/bookInformation';
 import { AppLoading } from 'expo';
@@ -10,6 +10,7 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from './u
 import { UserContext } from './consts/context';
 import { BookType } from './types/bookType';
 import { UserType } from './types/userType';
+import { updateToken } from './utils/pushNotificationUtils';
 
 export default function HomePage() {
   const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -35,8 +36,13 @@ export default function HomePage() {
 
   useEffect(() => {
     getBooksAroundUser(user, (b) => setBooksAroundMe(b))
+    if(isUserSet){
+      console.log("dentro ")
+      console.log(user);
+      updateToken(user.email, user.university, (email, token, uni) => addToken(email, token, uni));
+    }
   }, [isUserSet, user])
- 
+
   if(!fontLoaded || !isUserSet){
     if(!fontLoaded)
       return (

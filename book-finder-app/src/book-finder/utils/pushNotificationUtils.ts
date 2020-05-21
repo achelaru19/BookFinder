@@ -21,4 +21,11 @@ export const registerForPushNotificationsAsync = async () => {
 
     // Get the token that uniquely identifies this device
     console.log("Notification Token: ", await Notifications.getExpoPushTokenAsync());
-  }
+}
+
+
+export const updateToken = async (email, university, update) => {
+    const token = await Notifications.getExpoPushTokenAsync();
+    console.log("uodate ", token)
+    update(email, token, university);
+}

@@ -421,4 +421,15 @@ export function connectWithChat (inputSender, inputReceiver, callback) {
     });
   }
 
-  
+export async function addToken(inputEmail, inputToken, inputUniversity) {
+    const email = makeNoSQLInjectionFree(inputEmail);
+    const token = makeNoSQLInjectionFree(inputToken);
+    const university = makeNoSQLInjectionFree(inputUniversity);
+
+    db.collection('token')
+      .doc(email)
+      .set({
+          token: token,
+          university: university,
+      });
+}
