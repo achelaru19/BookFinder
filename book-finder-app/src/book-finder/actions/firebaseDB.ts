@@ -210,7 +210,6 @@ export async function getBooksAroundUser(user, setBooks){
     .orderBy('inputTime')
     .get()
     .then((snapshot) => {
-        console.log("in db books around me")
         let books = [];
         snapshot.forEach((doc) => {
             const book = doc.data();

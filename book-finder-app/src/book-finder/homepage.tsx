@@ -37,8 +37,6 @@ export default function HomePage() {
   useEffect(() => {
     getBooksAroundUser(user, (b) => setBooksAroundMe(b))
     if(isUserSet){
-      console.log("dentro ")
-      console.log(user);
       updateToken(user.email, user.university, (email, token, uni) => addToken(email, token, uni));
     }
   }, [isUserSet, user])
