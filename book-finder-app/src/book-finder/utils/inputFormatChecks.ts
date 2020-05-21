@@ -85,11 +85,5 @@ export const isSearchValid = (title, author, editor, isbn) => {
 }
 
 export const areSettingsValid = (firstname, lastname, birthdate, university, faculty) => {
-    console.log("in are settings valid")
-    console.log(firstname)
-    console.log(lastname)
-    console.log(birthdate)
-    console.log(university)
-    console.log(faculty)
     return isNotEmpty(firstname) && isNotEmpty(lastname) && isNotEmpty(birthdate) && isNotEmpty(faculty) && isNotEmpty(university);
 }

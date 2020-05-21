@@ -29,7 +29,6 @@ export default function ForgottenPassword() {
 
 	const resetSuccess = () => {
         console.log('login successful, navigate to homepage.');
-        
 		navigation.navigate('Login');
 	};
 
@@ -49,9 +48,7 @@ export default function ForgottenPassword() {
         return (
             
               <View style={styles.container}> 
-              <KeyboardAvoidingView behavior={"height"} style={{flex:1}}>
-                  <SafeAreaView>
-                  <ScrollView>
+              <KeyboardAvoidingView behavior={"padding"} style={{flex:1}}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Book Finder</Text>
                 </View>
@@ -81,12 +78,10 @@ export default function ForgottenPassword() {
                 <View style={styles.signingOptions}>
                     <View>
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons} onPress={() => console.log("Login page")}>Accedi con le tue credenziali</Text>
+                            <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                  </ScrollView>
-                  </SafeAreaView>
                 </KeyboardAvoidingView>
                 </View>
         );

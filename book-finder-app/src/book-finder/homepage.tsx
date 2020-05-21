@@ -35,7 +35,6 @@ export default function HomePage() {
 
   useEffect(() => {
     getBooksAroundUser(user, (b) => setBooksAroundMe(b))
-    console.log(booksAroundMe)
   }, [isUserSet, user])
  
   if(!fontLoaded || !isUserSet){
