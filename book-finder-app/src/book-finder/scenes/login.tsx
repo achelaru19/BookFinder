@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, TextInput, View, Button, KeyboardAvoidingView, Platform } from 'react-native';
 import firebaseSDK from '../actions/firebaseSDK';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,6 +8,7 @@ import { AppLoading } from 'expo';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { UserContext } from '../consts/context';
 import { UserType } from '../types/userType';
+import { styles } from '../styles/loginStyle';
 
 export default function Login() {
     const [email, setEmail] = useState<string>('');
@@ -119,67 +120,3 @@ Login.navigationOptions = ({ navigation }) => ({
     drawerLabel: () => null
 });
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 6,
-        flexDirection: 'column',
-        alignContent: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'white',
-    },
-    titleContainer: {
-        flex: 2,
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignContent: 'space-around'
-    },
-    title:{
-        flexDirection: 'row',
-        fontFamily: 'Cardo-Regular',
-        fontSize: 58,
-        alignContent: 'center',
-        textAlign: 'center',
-        color: '#90001F'
-
-    },
-    buttonContainer: {
-        backgroundColor: '#90001F',
-        marginHorizontal: 15,
-        borderRadius: 30,
-        marginTop: 16,
-        height: 40
-    },
-    buttonText: {
-        fontFamily: 'Cardo-Regular',
-		fontSize: 25,
-        textAlign: 'center',
-        color: 'white'
-    },
-	label: {
-        fontFamily: 'Cardo-Bold',
-		marginTop: 5,
-		marginLeft: 16,
-		fontSize: 18
-	},
-	nameInput: {
-		height: 40,
-        marginHorizontal: 15,
-        marginVertical: 10,
-		paddingHorizontal: 16,
-		borderColor: '#111111',
-		borderWidth: 1,
-        fontSize: 16,
-        borderRadius: 30
-    },
-    smallButtons: {
-        fontSize: 16,
-        fontFamily: 'Cardo-Bold',
-        textAlign: 'center',
-        textDecorationLine: 'underline'
-    },
-    signingOptions: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        paddingBottom: 10
-    }
-});

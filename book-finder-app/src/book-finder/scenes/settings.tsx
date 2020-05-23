@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Picker } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, Picker } from 'react-native';
 import { Icon } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
@@ -7,6 +7,7 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import NavBar from "../components/navBar";
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { styles } from '../styles/settingsStyle';
 import { updateUser } from '../actions/firebaseDB';
 import {universities, faculties} from '../consts/constants';
 import { UserType } from '../types/userType';
@@ -168,56 +169,3 @@ Settings.navigationOptions = ({ navigation }) => ({
   )
 });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'stretch',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-    borderBottomWidth: 0.5,
-    borderColor: 'black',
-    paddingLeft: 10,
-    fontFamily: ''
-  },
-  label: {
-    color: '#a9a9a9',
-    fontFamily: 'Cardo-Regular',
-    fontSize: 15
-    
-  },
-  information: {
-    fontSize: 18,
-    fontFamily: 'Cardo-Bold'
-  },
-  buttonBox: {
-    flex: 1,
-    borderRadius: 30,
-    backgroundColor: '#90001F',
-    color: 'white',
-    marginHorizontal: 10,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  pickerInput: {
-    height: 40,
-    marginRight: 10,
-		borderColor: '#111111',
-		borderWidth: 1,
-    paddingHorizontal: 0,
-    fontSize: 16,
-    borderRadius: 10,
-    fontFamily: 'Cardo-Bold'
-  },
-  picker: {
-    paddingBottom: 40,
-    height: 20
-  }
-});

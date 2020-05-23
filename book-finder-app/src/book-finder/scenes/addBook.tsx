@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ScrollView, KeyboardAvoidingView, SafeAreaView, Dimensions } from 'react-native';
+import { View, Text, TextInput, ScrollView, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import NavBar from '../components/navBar';
 import BarcodeScan from '../components/barcodeScan';
 import {addBook} from '../actions/firebaseDB';
@@ -8,6 +8,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { styles } from '../styles/addBookStyle';
 import { UserType } from '../types/userType';
 import { isValidNewBook } from '../utils/inputFormatChecks';
 
@@ -153,51 +154,3 @@ AddBook.navigationOptions = ({ navigation }) => ({
   drawerLabel: () => null
 });
  
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }, 
-  inputBox: {
-    borderWidth: 0.5,
-    borderColor: 'black',
-    marginHorizontal: 10,
-    borderRadius: 30,
-    height: 40,
-    paddingHorizontal: 15
-  },
-  inputField: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  labelCamera: {
-    fontFamily: 'Cardo-Regular',
-    fontSize: 17,
-    flexDirection: 'column',
-    textAlignVertical: 'center',
-    textAlign: 'center'
-  },
-  label: {
-    fontFamily: 'Cardo-Bold',
-    fontSize: 20,
-    paddingLeft: 20
-  },
-  buttonText: {
-    fontFamily: 'Cardo-Bold',
-    fontSize: 20,
-    color: 'white',
-    alignContent: 'center',
-    justifyContent: 'center'
-  },
-  addButton: {
-    flex: 1,
-    backgroundColor: '#90001F',
-    flexDirection: 'row',
-    width: Dimensions.get('screen').width * 0.95,
-    marginTop: 120,
-    height: 40,
-    borderRadius: 40,
-    alignContent: 'center',
-    justifyContent: 'center'
-  }
-});

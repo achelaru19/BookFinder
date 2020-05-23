@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, ActivityIndicator, Text, Image } from 'react-native';
+import { View, ActivityIndicator, Text, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import NavBar from '../components/navBar';
 import Message from '../components/message';
 import { UserContext } from '../consts/context';
 import { getLastMessages } from '../actions/firebaseDB';
 import { SafeAreaView } from 'react-navigation';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
+import { styles } from '../styles/messagesStyle';
 import { LastMessageType } from '../types/lastMessageType';
 import { UserType } from '../types/userType';
 
@@ -68,35 +69,3 @@ Messages.navigationOptions = ({ navigation }) => ({
   )
 });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10
-  },
-  lastMessageBox: {
-    flex:1,
-    height: 20,
-
-  },
-  messages: {
-    flex: 1,
-    flexDirection: 'row',
-
-  },
-  imageHolder: {
-    width: 200,
-    height: 150
-  },
-  textHolder: {
-    fontSize: 20,
-    fontFamily: 'Cardo-Regular',
-    marginTop: 17
-  },
-});

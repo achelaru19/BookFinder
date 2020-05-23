@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, Button, KeyboardAvoidingView } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -8,6 +8,7 @@ import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { isWishListBookValid } from '../utils/inputFormatChecks';
+import { styles } from '../styles/addBookToWishlistStyle';
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -126,50 +127,4 @@ export default function AddBookToWishList () {
   })
 
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-    heading: {
-        flexDirection: 'row',
-        alignContent: 'space-between',
-        justifyContent: 'space-between',
-        textAlign: 'center'
-    },
-    headingText: {
-        fontSize: 18,
-        fontFamily: "Cardo-Regular",
-        justifyContent: 'center',
-        textAlign: 'center'
-    },
-    inputBox: {
-        borderWidth: 0.5,
-        borderColor: 'black',
-        borderRadius: 30,
-        marginHorizontal: 5,
-        height: 40,
-        paddingHorizontal: 10
-    },
-    label: {
-        fontSize: 20,
-        fontFamily: "Cardo-Bold",
-        marginLeft: 12,
-        marginTop: 5
-    },
-    buttonBox: {
-        backgroundColor: '#90001F',
-        marginHorizontal: 10,
-        marginTop: 190,
-        height: 40,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        borderRadius: 20
-    },
-    buttonText: {
-        fontFamily: 'Cardo-Regular',
-        color: 'white',
-        fontSize: 20
-    }
-  });
   

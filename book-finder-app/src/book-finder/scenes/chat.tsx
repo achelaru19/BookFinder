@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
-import { View, ActivityIndicator, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
 import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage, connectWithChat } from '../actions/firebaseDB';
+import { styles } from '../styles/chatStyle';
 import { UserType } from '../types/userType';
 
 export default function Chat() {
@@ -71,15 +72,3 @@ Chat.navigationOptions = ({ navigation }) => ({
     drawerLabel: () => null
 });
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center"
-    },
-    horizontal: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      padding: 10
-    }
-  });
-  

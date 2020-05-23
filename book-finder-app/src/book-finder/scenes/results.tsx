@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
+import { Text, View, ScrollView, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import { AppLoading } from 'expo';
 import BookInformation from '../components/bookInformation';
 import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
+import { styles } from '../styles/resultsStyle';
 import { searchBook } from '../actions/firebaseDB';
 import { BookType } from '../types/bookType';
 import { UserType } from '../types/userType';
@@ -92,46 +93,3 @@ Result.navigationOptions = ({ navigation }) => ({
     title: 'Result',
     drawerLabel: () => null
 });
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center"
-    },
-    containerNoBookFound: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    horizontal: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-      padding: 10
-    },
-    imageHolder: {
-      width: 200,
-      height: 150
-    },
-    textHolder: {
-      fontSize: 20,
-      fontFamily: 'Cardo-Regular',
-      marginTop: 17
-    },
-    buttonLabel: {
-      fontFamily: 'Cardo-Regular',
-      fontSize: 20,
-      color: 'white',
-    },
-    addButton: {
-        backgroundColor: '#90001F',
-        height: 50,
-        width: 180,
-        alignContent: 'space-around',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        borderRadius: 20,
-        marginTop: 17
-    },
-  });
-  
