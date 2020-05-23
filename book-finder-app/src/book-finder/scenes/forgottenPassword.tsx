@@ -8,6 +8,7 @@ import { AppLoading } from 'expo';
 import { isValidEmail } from '../utils/inputFormatChecks';
 import { styles } from '../styles/forgottenPasswordStyle';
 
+
 export default function ForgottenPassword() {
     
     const [email, setEmail] = useState<string>('');
@@ -36,33 +37,32 @@ export default function ForgottenPassword() {
 		alert(`L'indirizzo email inserito non è stato registrato`);
     };
     
-    if(!fontLoaded)
+    if(!fontLoaded) {
         return (
-        <AppLoading
-            startAsync={loadResourcesAsync}
-            onError={handleLoadingError}
-            onFinish={() => handleFinishLoading(setFontLoaded)} 
-        />
+            <AppLoading
+                startAsync={loadResourcesAsync}
+                onError={handleLoadingError}
+                onFinish={() => handleFinishLoading(setFontLoaded)} 
+            />
         );
-    else 
+    }
+    else {
         return (
-            
-              <View style={styles.container}> 
-              <KeyboardAvoidingView behavior={"padding"} style={{flex:1}}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Book Finder</Text>
-                </View>
-                <View style={{flex: 3, flexDirection: 'row', alignContent: 'stretch'}}>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                        <Image style={styles.image} source={require('../assets/images/forgot-password.png')} />
+            <View style={styles.container}> 
+                <KeyboardAvoidingView behavior={"padding"} style={{flex:1}}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>Book Finder</Text>
                     </View>
-                    <View style={{flex: 2, flexDirection: 'column'}}>
-                        <Text style={styles.text1}>Hai dimenticato la password?</Text>
-                        <Text style={styles.text2}>Nessun problema.</Text>
-                        <Text style={styles.text3}>Inserisci la tua email e ti invieremo un link per reimpostarla.</Text>
+                    <View style={{flex: 3, flexDirection: 'row', alignContent: 'stretch'}}>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <Image style={styles.image} source={require('../assets/images/forgot-password.png')} />
+                        </View>
+                        <View style={{flex: 2, flexDirection: 'column'}}>
+                            <Text style={styles.text1}>Hai dimenticato la password?</Text>
+                            <Text style={styles.text2}>Nessun problema.</Text>
+                            <Text style={styles.text3}>Inserisci la tua email e ti invieremo un link per reimpostarla.</Text>
+                        </View>
                     </View>
-                </View>
-               
                     <View style={{flex: 2, flexDirection: 'column'}}>
                         <TextInput
                             style={styles.emailInput}
@@ -75,18 +75,18 @@ export default function ForgottenPassword() {
                             </TouchableOpacity>
                         </View>
                     </View>
-                <View style={styles.signingOptions}>
-                    <View>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
-                        </TouchableOpacity>
+                    <View style={styles.signingOptions}>
+                        <View>
+                            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                                <Text style={styles.smallButtons}>Accedi con le tue credenziali</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
                 </KeyboardAvoidingView>
-                </View>
+            </View>
         );
+    }
    
-	
 }
 
 ForgottenPassword.navigationOptions = ({ navigation }) => ({

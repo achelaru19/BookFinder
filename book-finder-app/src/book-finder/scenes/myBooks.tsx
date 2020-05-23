@@ -31,9 +31,9 @@ export default function MyBooks() {
         removeBook(user.email, title, author, editor, isbn);
         const newBooks = myBooks.filter(val => !(val.title == title && val.author == author && val.editor == editor && val.isbn == isbn));
         setMyBooks(newBooks);
-      };
+    };
 
-    if (!fontLoaded)
+    if (!fontLoaded) {
         return (
             <AppLoading
                 startAsync={loadResourcesAsync}
@@ -41,6 +41,7 @@ export default function MyBooks() {
                 onFinish={() => handleFinishLoading(setLoadedFont)}
             />
         );
+    }
     else {
         if(myBooks === null) {
             return (
@@ -50,27 +51,28 @@ export default function MyBooks() {
                         <ActivityIndicator size="large" color="#90001F" />
                     </View>
                 </View>
-                );
-        } else{
+            );
+        } 
+        else {
             if(myBooks.length === 0) {
-                return(
+                return (
                     <View style={{flex: 1}}>
                         <NavBar title="I Miei Libri"/>
                         <View style={styles.container}>
-                        <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
-                        <Text style={styles.textHolder}>Non hai aggiunto nessun libro da vendere</Text>
-                        <View style={styles.addButton}>
-                            <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                            <TouchableOpacity onPress={() => navigate('AddBook')}>
-                                <Text style={styles.buttonLabel}>Aggiungi libro</Text>
-                            </TouchableOpacity>
+                            <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
+                            <Text style={styles.textHolder}>Non hai aggiunto nessun libro da vendere</Text>
+                            <View style={styles.addButton}>
+                                <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
+                                    <TouchableOpacity onPress={() => navigate('AddBook')}>
+                                        <Text style={styles.buttonLabel}>Aggiungi libro</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                        </View>
                         </View>
                     </View>
                 );
             }
-            else{
+            else {
                 return (
                     <View style={{ flex: 12 }}>
                         <NavBar title="I Miei Libri" />
@@ -104,6 +106,7 @@ export default function MyBooks() {
             }
         }
     }
+
 };
 
 MyBooks.navigationOptions = ({ navigation }) => ({

@@ -9,6 +9,7 @@ interface PropsType {
 }
 
 export default function BookInformation(props: PropsType){
+
     const [expanded, setExpanded] = useState<boolean>(false);
     const {navigate} = useNavigation();
 
@@ -59,6 +60,7 @@ export default function BookInformation(props: PropsType){
             </TouchableOpacity>
         )
     );
+    
 }
 
 const styles = StyleSheet.create({

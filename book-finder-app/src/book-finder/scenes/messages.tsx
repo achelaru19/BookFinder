@@ -13,6 +13,7 @@ import { UserType } from '../types/userType';
 
 
 export default function Messages() {
+  
   const [messages, setMessages] = useState<LastMessageType[] | null>(null);
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);

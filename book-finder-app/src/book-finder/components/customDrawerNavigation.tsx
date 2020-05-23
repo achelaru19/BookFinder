@@ -7,11 +7,12 @@ import { DrawerItems } from "react-navigation-drawer";
 import { UserContext } from '../consts/context';
 import { shortenNameIfTooLong, logout } from "../utils/functions";
 
+
 export default function CustomDrawerNavigation(props: any) {
+  
     //@ts-ignore
     const [user] = useContext(UserContext);
     const navigation = useNavigation();
-  
   
     const loggingOut = () => {
       logout();
@@ -40,4 +41,5 @@ export default function CustomDrawerNavigation(props: any) {
         </View>
       </SafeAreaView>
     );
+
   }

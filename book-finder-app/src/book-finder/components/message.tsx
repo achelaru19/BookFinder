@@ -14,8 +14,8 @@ interface PropsType {
 }
 
 export default function Message(props: PropsType) {
+  
   const lastMessage = props.message;
-
   const navigation = useNavigation();
 
   return (

@@ -5,7 +5,6 @@ import DatePicker from 'react-native-datepicker';
 import { AppLoading } from 'expo';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
 import NavBar from "../components/navBar";
-import { useNavigation } from 'react-navigation-hooks';
 import { UserContext } from '../consts/context';
 import { styles } from '../styles/settingsStyle';
 import { updateUser } from '../actions/firebaseDB';
@@ -13,7 +12,9 @@ import {universities, faculties} from '../consts/constants';
 import { UserType } from '../types/userType';
 import { areSettingsValid } from '../utils/inputFormatChecks';
 
+
 export default function Settings() {
+
   //@ts-ignore
   const [user] = useContext<UserType>(UserContext);
   const [firstname, setFirstname] = useState<string>(user.firstname);
@@ -31,8 +32,6 @@ export default function Settings() {
   const [modifyPressed, pressModify] = useState<boolean>(false);
   const [buttonDisabled, disableButton] = useState<boolean>(true);
 
-  const navigation = useNavigation();
-
   const saveSettings = () => {
     pressModify(false);
     setFirstname(firstnamePlaceholder);
@@ -48,15 +47,16 @@ export default function Settings() {
     disableButton(!notAllCorrect);
   }, [firstnamePlaceholder, lastnamePlaceholder, birthdatePlaceholder, universityPlaceholder, facultyPlaceholder])
 
-  if(!fontLoaded)
+  if(!fontLoaded) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
         onError={handleLoadingError}
         onFinish={() => handleFinishLoading(setFontLoaded)} 
       />
-      );
-  else 
+    );
+  }
+  else {
     return (
       <View style={{flex: 1}}>
         <NavBar title="Impostazioni" />
@@ -159,7 +159,9 @@ export default function Settings() {
           </View>
         </View>
       </View>
-  );
+    );
+  }
+  
 }
 
   

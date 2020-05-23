@@ -11,6 +11,7 @@ import { searchBook } from '../actions/firebaseDB';
 import { BookType } from '../types/bookType';
 import { UserType } from '../types/userType';
 
+
 export default function Result(props) {
 
     const [fontLoaded, setFontLoaded] = useState<boolean>(false);
@@ -35,14 +36,16 @@ export default function Result(props) {
     }, [books])
 
     if(!fontLoaded || books === null){
-        if(!fontLoaded) 
+        if(!fontLoaded) {
             return (
                 <AppLoading
                     startAsync={loadResourcesAsync}
                     onError={handleLoadingError}
                     onFinish={() => handleFinishLoading(setFontLoaded)} 
-                />);
-        else 
+                />
+            );
+        }
+        else {
             return (
                 <View style={{flex: 1}}>
                     <NavBar title="Ricerca"/>
@@ -50,10 +53,11 @@ export default function Result(props) {
                         <ActivityIndicator size="large" color="#90001F" />
                     </View>
                 </View>
-                );
+            );
+        }
     }
     else {
-        if(books.length > 0)
+        if(books.length > 0) {
             return (
                 <View style={{flex: 1}}>
                     <NavBar title="Ricerca"/>
@@ -65,7 +69,8 @@ export default function Result(props) {
                     </View>
                 </View>
             );
-        else
+        }
+        else {
             return (
                 <View style={{flex: 1}}>
                     <NavBar title="Ricerca"/>
@@ -78,13 +83,13 @@ export default function Result(props) {
                                 <TouchableOpacity onPress={makeNewSearch}>
                                     <Text style={styles.buttonLabel}>Cerca un altro libro</Text>
                                 </TouchableOpacity>
-                        </View>
-                  </View>
-                </View>
-                        
+                                </View>
+                            </View>
+                        </View>   
                     </View>
                 </View>
             );
+        }
     }
     
 }

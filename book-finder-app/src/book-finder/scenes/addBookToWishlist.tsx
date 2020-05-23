@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Text, View, TouchableOpacity, TextInput, Button, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 import {addBookToWishList} from '../actions/firebaseDB';
 import { AppLoading } from 'expo';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -13,8 +13,8 @@ import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-
 export default function AddBookToWishList () {
+
     const [fontLoaded, setLoadedFont] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
     const [author, setAuthor] = useState<string>('');
@@ -42,7 +42,7 @@ export default function AddBookToWishList () {
         disableButton(!notAllCorrect);
     }, [title, author, editor, isbn])
 
-    if(!fontLoaded)
+    if(!fontLoaded) {
         return (
             <AppLoading
                 startAsync={loadResourcesAsync}
@@ -50,6 +50,7 @@ export default function AddBookToWishList () {
                 onFinish={() => handleFinishLoading(setLoadedFont)} 
             />
         );
+    }
     else {
         return (
             <View style={{flex: 1}}>
@@ -60,45 +61,44 @@ export default function AddBookToWishList () {
                 <KeyboardAvoidingView style={styles.container}>
                     <SafeAreaView>
                         <ScrollView>
-                            
-                    <View>
-                        <Text style={styles.label}>Titolo</Text>
-                            <TextInput
-                                onChangeText={text => setTitle(text)}
-                                value={title}
-                                style={styles.inputBox}
-                            />
-                    </View>
-                    <View>
-                        <Text style={styles.label}>Autore</Text>
-                            <TextInput
-                                onChangeText={text => setAuthor(text)}
-                                value={author}
-                                style={styles.inputBox}
-                            />
-                    </View>
-                    <View>
-                        <Text style={styles.label}>Editore</Text>
-                            <TextInput
-                                onChangeText={text => setEditor(text)}
-                                value={editor}
-                                style={styles.inputBox}
-                            />
-                    </View>
-                    <View>
-                        <Text style={styles.label}>ISBN</Text>
-                            <TextInput
-                                onChangeText={text => setISBN(text)}
-                                value={isbn}
-                                keyboardType={'numeric'}
-                                style={styles.inputBox}
-                            />
-                    </View>
-                <View style={styles.buttonBox}>
-                    <TouchableOpacity disabled={buttonDisabled} onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
-                        <Text style={styles.buttonText}>Aggiungi Libro</Text>
-                    </TouchableOpacity>
-                </View>
+                            <View>
+                                <Text style={styles.label}>Titolo</Text>
+                                    <TextInput
+                                        onChangeText={text => setTitle(text)}
+                                        value={title}
+                                        style={styles.inputBox}
+                                    />
+                            </View>
+                            <View>
+                                <Text style={styles.label}>Autore</Text>
+                                    <TextInput
+                                        onChangeText={text => setAuthor(text)}
+                                        value={author}
+                                        style={styles.inputBox}
+                                    />
+                            </View>
+                            <View>
+                                <Text style={styles.label}>Editore</Text>
+                                    <TextInput
+                                        onChangeText={text => setEditor(text)}
+                                        value={editor}
+                                        style={styles.inputBox}
+                                    />
+                            </View>
+                            <View>
+                                <Text style={styles.label}>ISBN</Text>
+                                    <TextInput
+                                        onChangeText={text => setISBN(text)}
+                                        value={isbn}
+                                        keyboardType={'numeric'}
+                                        style={styles.inputBox}
+                                    />
+                            </View>
+                            <View style={styles.buttonBox}>
+                                <TouchableOpacity disabled={buttonDisabled} onPress={() => addBookFunction(user.email, title, author, isbn, editor)}>
+                                    <Text style={styles.buttonText}>Aggiungi Libro</Text>
+                                </TouchableOpacity>
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                 </KeyboardAvoidingView>
@@ -120,6 +120,7 @@ export default function AddBookToWishList () {
             </View>
         );
     }
+
   }
   
   AddBookToWishList.navigationOptions = ({ navigation }) => ({

@@ -8,7 +8,9 @@ import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage
 import { styles } from '../styles/chatStyle';
 import { UserType } from '../types/userType';
 
+
 export default function Chat() {
+    
     const navigation  = useNavigation();
 
     const otherUserEmail: string = navigation.getParam('otherUserEmail');
@@ -16,7 +18,7 @@ export default function Chat() {
     //@ts-ignore
     const [user] = useContext<UserType>(UserContext);
     const [otherUser, setOtherUser] = useState<UserType | null>(null);
-
+    
     const onSend = (chatMessage) => {
         addMessage(user, otherUser, chatMessage[0]);
         updateLastMessage(user, otherUser, chatMessage[0].text); 
@@ -35,8 +37,7 @@ export default function Chat() {
         //connectWithChat(user.email, otherUserEmail, updateMessagedInChat);
     }, [otherUserEmail])
 
-
-    if(otherUser == null)
+    if(otherUser === null) {
         return (
             <View style={{flex: 1}}>
                 <NavBar title={'Chat'}/>
@@ -44,27 +45,29 @@ export default function Chat() {
                     <ActivityIndicator size="large" color="#90001F" />
                 </View>
             </View>
-            );
-    else {
-        return (
-        <View style={{flex: 1}}>
-            <NavBar title={otherUser.firstname + ' ' + otherUser.lastname}/>
-            <View style={{flex: 1}}>
-            <GiftedChat 
-                messages={messages}
-                onSend={c => onSend(c)}
-                user={{
-                    _id: user.email,
-                    name: user.firstname + ' ' + user.lastname
-                }}
-                placeholder={"Scrivi un messaggio..."}
-                key={user.email}
-                keyboardShouldPersistTaps='never'
-            />
-            </View>
-        </View>
         );
     }
+    else {
+        return (
+            <View style={{flex: 1}}>
+                <NavBar title={otherUser.firstname + ' ' + otherUser.lastname}/>
+                <View style={{flex: 1}}>
+                    <GiftedChat 
+                        messages={messages}
+                        onSend={c => onSend(c)}
+                        user={{
+                            _id: user.email,
+                            name: user.firstname + ' ' + user.lastname
+                        }}
+                        placeholder={"Scrivi un messaggio..."}
+                        key={user.email}
+                        keyboardShouldPersistTaps='never'
+                    />
+                </View>
+            </View>
+        );
+    }
+
 }
 
 Chat.navigationOptions = ({ navigation }) => ({

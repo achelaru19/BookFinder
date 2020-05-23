@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, Image, SafeAreaView, Dimensions, ActivityIndicator } from 'react-native';
+import { Text, View, Image, SafeAreaView, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { AppLoading } from 'expo';
 import {getWishList, removeFromWishList} from '../actions/firebaseDB';
@@ -13,7 +13,9 @@ import { styles } from '../styles/wishlistStyle';
 import { WishListBookType } from '../types/wishlistBookType';
 import { UserType } from '../types/userType';
 
+
 export default function WishList () {
+
   const [fontLoaded, setLoadedFont] = useState<boolean>(false);
   const [booksInWishList, setWishList] = useState<WishListBookType[] | null>(null);
   const [counter, setCounter] = useState<number>(0);
@@ -77,7 +79,7 @@ export default function WishList () {
                   backgroundColor={'white'}
                 />
               </View>
-          </SafeAreaView >
+            </SafeAreaView >
             <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 3}}>
               <View style={styles.buttonWithElements}>
                 <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
@@ -91,23 +93,24 @@ export default function WishList () {
         );
       else
         return (
-            <View style={{flex: 1}}>
-                <NavBar title="Lista Desideri"/>
-                <View style={styles.container}>
-                  <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
-                  <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
-                  <View style={styles.addButton}>
-                    <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
-                      <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': () => increaseCounter()})}>
-                        <Text style={styles.buttonLabel}>Aggiungi libro</Text>
-                      </TouchableOpacity>
-                    </View>
+          <View style={{flex: 1}}>
+              <NavBar title="Lista Desideri"/>
+              <View style={styles.container}>
+                <Image style={styles.imageHolder} source={require('../assets/images/wish-book.png')} />
+                <Text style={styles.textHolder}>Non ci sono libri nella tua lista desideri</Text>
+                <View style={styles.addButton}>
+                  <View style={{flexDirection: 'column', justifyContent: 'space-around' }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('AddBookToWishList', { 'addBook': () => increaseCounter()})}>
+                      <Text style={styles.buttonLabel}>Aggiungi libro</Text>
+                    </TouchableOpacity>
                   </View>
                 </View>
-            </View>
+              </View>
+          </View>
         ); 
     }
   }
+  
 }
   
 WishList.navigationOptions = ({ navigation }) => ({

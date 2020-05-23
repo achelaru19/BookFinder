@@ -12,6 +12,7 @@ interface PropsType {
 }
 
 export default function BarcodeScan(props: PropsType) {
+
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
 
@@ -40,11 +41,12 @@ export default function BarcodeScan(props: PropsType) {
   }
 
   return (
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={styles.cameraSquare}
-      />
+    <BarCodeScanner
+      onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+      style={styles.cameraSquare}
+    />
   );
+
 }
 
 const styles = StyleSheet.create({

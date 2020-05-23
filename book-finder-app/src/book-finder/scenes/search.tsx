@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Text, View, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import NavBar from '../components/navBar';
 import { loadResourcesAsync, handleLoadingError, handleFinishLoading } from '../utils/fontLoader';
@@ -11,6 +11,7 @@ import { UserType } from '../types/userType';
 import { SearchBookType } from '../types/searchBookType';
 import { isSearchValid } from '../utils/inputFormatChecks';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 export default function Search() {
 
@@ -40,7 +41,7 @@ export default function Search() {
     disableButton(!notAllCorrect);
   }, [title, author, editor, isbn])
 
-  if(!fontLoaded)
+  if(!fontLoaded) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -48,84 +49,87 @@ export default function Search() {
         onFinish={() => handleFinishLoading(setFontLoaded)} 
       />
     );
-  else 
+  }
+  else {
     return (
-      (<KeyboardAwareScrollView 
+      <KeyboardAwareScrollView 
         contentContainerStyle={{flex: 1}}
         scrollEnabled={false}
-    >
+      >
         <NavBar title="Cerca Libro"/>
         <ScrollView>
-        <View style={{flex: 12, flexDirection: "column"}}>
-          <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
-              Aggiungi pi&ugrave; informazioni
-            </Text>
-            <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
-              per una ricerca migliore
-            </Text>
-          </View>
-          <View style={{flex: 11}}>
-          <Formik
-            initialValues={
-              { title: '',
-                author: '',
-                editor: '',
-                isbn: '',
-                subject: ''
+          <View style={{flex: 12, flexDirection: "column"}}>
+            <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
+                Aggiungi pi&ugrave; informazioni
+              </Text>
+              <Text style={{fontSize: 17, borderRadius: 30, fontFamily: 'Cardo-Regular',justifyContent: 'space-around'}}>
+                per una ricerca migliore
+              </Text>
+            </View>
+            <View style={{flex: 11}}>
+              <Formik
+                initialValues={
+                  { title: '',
+                    author: '',
+                    editor: '',
+                    isbn: '',
+                    subject: ''
 
-            }
-            }
-            onSubmit={() => searchForBook()}
-          >
-            {() => (
-              <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
-                <View>
-                  <Text style={styles.labelText}>Titolo: </Text>
-                  <TextInput
-                    onChangeText={val => setTitle(val)}
-                    value={title}
-                    style={styles.inputContainer}
-                  />
-                </View>
-                <View>
-                  <Text style={styles.labelText}>Autore: </Text>
-                  <TextInput
-                    onChangeText={val => setAuthor(val)}
-                    value={author}
-                    style={styles.inputContainer}
-                  />
-                </View>
-                <View>
-                  <Text style={styles.labelText}>Editore: </Text>
-                  <TextInput
-                    onChangeText={val => setEditor(val)}
-                    value={editor}
-                    style={styles.inputContainer}
-                  />
-                </View>
-                <View>
-                  <Text style={styles.labelText}>ISBN: </Text>
-                  <TextInput
-                    onChangeText={val => setISBN(val)}
-                    value={isbn}
-                    style={styles.inputContainer}
-                    keyboardType={'numeric'}
-                  />
-                </View>
+                }
+                }
+                onSubmit={() => searchForBook()}
+              >
+                {() => (
+                  <View style={{flex:6, flexDirection: 'column', justifyContent: 'space-between'}}>
+                    <View>
+                      <Text style={styles.labelText}>Titolo: </Text>
+                      <TextInput
+                        onChangeText={val => setTitle(val)}
+                        value={title}
+                        style={styles.inputContainer}
+                      />
+                    </View>
+                    <View>
+                      <Text style={styles.labelText}>Autore: </Text>
+                      <TextInput
+                        onChangeText={val => setAuthor(val)}
+                        value={author}
+                        style={styles.inputContainer}
+                      />
+                    </View>
+                    <View>
+                      <Text style={styles.labelText}>Editore: </Text>
+                      <TextInput
+                        onChangeText={val => setEditor(val)}
+                        value={editor}
+                        style={styles.inputContainer}
+                      />
+                    </View>
+                    <View>
+                      <Text style={styles.labelText}>ISBN: </Text>
+                      <TextInput
+                        onChangeText={val => setISBN(val)}
+                        value={isbn}
+                        style={styles.inputContainer}
+                        keyboardType={'numeric'}
+                      />
+                    </View>
+                  </View>
+                )}
+              </Formik>  
+              <View style={{ flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 40}}>
+                <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
+                  <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
+                </TouchableOpacity>
               </View>
-            )}
-          </Formik>  
-          <View style={{ flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 40}}>
-            <TouchableOpacity disabled={buttonDisabled} style={styles.searchButton} onPress={() => searchForBook()}>
-              <Text style={{color: 'white', fontFamily: 'Cardo-Regular', fontSize: 25}}>Cerca</Text>
-            </TouchableOpacity>
+            </View> 
           </View>
-          </View> 
-        </View>
         </ScrollView>
       </KeyboardAwareScrollView>
-    ));
+    );
+  }
+  
 }
 
 
@@ -133,8 +137,3 @@ Search.navigationOptions = ({ navigation }) => ({
   title: 'Search',
   drawerLabel: () => null
 });
-
-Search.screenProps = {
-  firstname: 'Gianni',
-  lastname: 'Rossi'
-}
