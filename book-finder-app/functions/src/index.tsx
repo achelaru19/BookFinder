@@ -24,8 +24,8 @@ exports.sendPushNotifications = functions.firestore
 
       const payload = {
           notification: {
-              title: 'Good news!',
-              body: 'Someone added a book that was in your WishList!'
+              title: 'Ottime notizie!',
+              body: 'Qualcuno ha aggiunto un libro che hai nella tua Wish List!'
           }
       };
 

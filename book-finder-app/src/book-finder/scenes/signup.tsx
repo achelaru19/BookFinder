@@ -46,8 +46,8 @@ export default function SignUp() {
 		navigation.navigate('Login');
 	};
 
-	const signUpFailure = () => {
-		alert('Email già esistente');
+	const signUpFailure = errorMessage => {
+		alert(errorMessage);
     };
 
     useEffect(() => {

@@ -36,6 +36,7 @@ export default function BarcodeScan(props: PropsType) {
   if (hasPermission === null) {
     return <Text>Richiesta accesso alla fotocamera</Text>;
   }
+  
   if (hasPermission === false) {
     return <Text>Accesso alla fotocamera negato</Text>;
   }

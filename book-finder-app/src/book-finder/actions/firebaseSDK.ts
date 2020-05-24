@@ -35,7 +35,11 @@ class FirebaseSDK {
     await firebase
       .auth()
       .sendPasswordResetEmail(user.email)
-      .then(success_callback, failed_callback);
+      .then(success_callback)
+      .catch(error => {
+        const errorMessage = error.includes('at least 6 characters') ? 'La password deve essere lunga almeno 6 caratteri' : 'Email già esistente';
+        failed_callback(errorMessage);
+      });
   }
 
   getFirebase = () => firebase;
