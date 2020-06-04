@@ -369,40 +369,9 @@ export async function removeFromWishList(inputEmail, inputTitle, inputAuthor, in
     });
 }
 
-export function connectWithChat (inputSender, inputReceiver, callback) {
-    const sender = makeNoSQLInjectionFree(inputSender);
-    const receiver = makeNoSQLInjectionFree(inputReceiver);
 
-    const emailsCombination = mergeEmails(sender, receiver);
-    console.log("I AM HERE IN THE FUNCTION CONNECTI WITH CHAT BEFORE DB CALL "+ sender)
-    console.log(receiver)
-    db.collection('messages')
-    .doc(emailsCombination)
-    .collection('messages')
-    .onSnapshot(querySnapshot => {
-        console.log("quesrysnapshot " + receiver)
-        querySnapshot.docChanges().forEach(change => {
-            
-            console.log("change " + sender)
-            console.log(change)
-            console.log(change.doc.data())
-            /*
-            if (change.type === 'added') {
-                console.log("in connect with chat")
-                const message = createMessageFromDBData(change.doc.data().message);
-                console.log(message)
-                console.log("in connect with chat")
-                console.log(message.user._id + ' and sender ' + sender)
-                if(message.user._id != sender){
-                    callback(message);
-                }
-            } */
-        });
-    });
-    
-}
 
-  export async function removeBook(email, title, author, editor, isbn) {
+export async function removeBook(email, title, author, editor, isbn) {
     db.collection('books')
     .where('sellerEmail', '==', email)
     .get()
@@ -418,7 +387,7 @@ export function connectWithChat (inputSender, inputReceiver, callback) {
             }
         });
     });
-  }
+}
 
 export async function addToken(inputEmail, inputToken, inputUniversity) {
     const email = makeNoSQLInjectionFree(inputEmail);
