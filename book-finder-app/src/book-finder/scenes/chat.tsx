@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import NavBar from '../components/navBar';
 import { View, ActivityIndicator } from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { UserContext } from '../consts/context';
 import { useNavigation } from 'react-navigation-hooks';
-import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage, connectWithChat } from '../actions/firebaseDB';
+import { getUser, getMessages, addMessage, setLastMessageRead, updateLastMessage } from '../actions/firebaseDB';
 import { styles } from '../styles/chatStyle';
 import { UserType } from '../types/userType';
 
@@ -63,6 +64,7 @@ export default function Chat() {
                         key={user.email}
                         keyboardShouldPersistTaps='never'
                     />
+                    <KeyboardSpacer/>
                 </View>
             </View>
         );
