@@ -7,6 +7,7 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
+*.log
 web-build/
 web-report/
 
@@ -17,4 +18,3 @@ web-report/
 ./.firebaserc
 ./firebase.json
 ./storage.rules
-./yarn-error.log
