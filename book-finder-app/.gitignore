@@ -13,4 +13,8 @@ web-report/
 # macOS
 .DS_Store
 
-./src/book-finder/consts/constants.tsx
+./src/book-finder/consts/constants.ts
+./.firebaserc
+./firebase.json
+./storage.rules
+./yarn-error.log
